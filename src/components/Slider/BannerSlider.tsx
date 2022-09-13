@@ -1,5 +1,4 @@
 import { Item } from 'models';
-import { AiFillStar } from 'react-icons/ai';
 import { BsFillPlayFill } from 'react-icons/bs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
