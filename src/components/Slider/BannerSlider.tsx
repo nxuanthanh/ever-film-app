@@ -25,7 +25,7 @@ function BannerSlider({ films, dataDetail }: BannerSliderProps) {
         loop={true}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         slidesPerView={1}
-        className="!absolute !top-0 !left-0 !w-full !h-full  !rounded-lg"
+        className="!absolute !top-0 !left-0 !w-full !h-full"
       >
         {films?.map((film, index) => (
           <SwiperSlide key={film.id}>
@@ -39,10 +39,10 @@ function BannerSlider({ films, dataDetail }: BannerSliderProps) {
                 effect="blur"
               />
               <div className="absolute top-0 left-0 w-full h-full rounded-lg pointer-events-none tw-black-backdrop group-hover:bg-[#00000026] transition duration-7000"></div>
-              <div className="absolute top-[5%] right-[3%] bg-primary px-3 py-1 rounded-full text-white flex items-center gap-1">
+              {/* <div className="absolute top-[5%] right-[3%] bg-primary px-3 py-1 rounded-full text-white flex items-center gap-1">
                 <span>{film.vote_average.toFixed(1)}</span>
                 <AiFillStar size={15} />
-              </div>
+              </div> */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  w-16 h-16 rounded-full bg-gradient-to-br from-primary to-orange-600 tw-flex-center z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-700">
                 <BsFillPlayFill size={35} className="text-white" />
               </div>
