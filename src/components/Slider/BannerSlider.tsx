@@ -15,7 +15,6 @@ interface BannerSliderProps {
 }
 
 function BannerSlider({ films, dataDetail }: BannerSliderProps) {
-  console.log(films, dataDetail);
   return (
     <div className="relative h-0 pb-[45%] tw-banner-slider">
       <Swiper

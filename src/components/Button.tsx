@@ -47,7 +47,7 @@ function Button({
 
   return (
     <button
-      className={`${className} inline-flex items-center justify-center hover:opacity-80 transition text-white text-base font-normal py-2 px-4 rounded`}
+      className={`${className} inline-flex items-center justify-center hover:opacity-80 transition-all duration-200 text-white text-base font-normal py-2 px-4 rounded  cursor-pointer`}
       title={title}
       onClick={onClick}
       disabled={disabled}

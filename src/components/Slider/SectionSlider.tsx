@@ -9,7 +9,6 @@ interface SectionSliderProps {
 }
 
 function SectionSlider({ films }: SectionSliderProps) {
-  console.log(films);
   return (
     <div className="mt-2">
       <Swiper
@@ -17,7 +16,7 @@ function SectionSlider({ films }: SectionSliderProps) {
         slidesPerGroupAuto
         spaceBetween={16}
         loop
-        className="container tw-section-slider"
+        className="tw-section-slider"
       >
         {films.map((film) => (
           <SwiperSlide key={film.id} className="">

@@ -1,5 +1,3 @@
-// interface Props {}
-
 function Footer() {
   return <div>Footer</div>;
 }
