@@ -29,6 +29,9 @@ module.exports = {
         DEFAULT: '1px',
         3: '3px',
       },
+      listStyleType: {
+        circle: 'circle',
+      },
     },
   },
   plugins: [],

@@ -59,11 +59,11 @@ function Header() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 flex items-center justify-between z-10 h-[52px] transition-colors duration-500"
+      className="fixed top-0 left-0 right-0 flex items-center justify-between z-10 h-14 transition-colors duration-500"
       ref={headerRef}
     >
       <div className="flex">
-        <div className="h-[52px] w-fit py-2 px-3 flex items-center justify-center">
+        <div className="h-14 w-fit py-2 px-3 flex items-center justify-center">
           <Link to="/" className="leading-3">
             <LazyLoadImage src={images.logo} effect="blur" alt="Logo" className="w-28 h-7" />
           </Link>
@@ -75,7 +75,7 @@ function Header() {
       <div>
         {isUser ? (
           <Menu items={userMenu}>
-            <div className="h-[52px] hover:bg-[#102c48] hover:text-[#428bca] inline-flex items-center justify-center transition-all duration-200 text-white text-base font-normal py-2 pl-4 pr-3 cursor-pointer">
+            <div className="h-14 hover:bg-[#102c48] hover:text-[#428bca] inline-flex items-center justify-center transition-all duration-200 text-white text-base font-normal py-2 pl-4 pr-3 cursor-pointer">
               <span>Thành Xuân</span>
               <span>
                 <GoChevronDown size={20} className="text-[#428bca] mt-1 ml-[6px]" />

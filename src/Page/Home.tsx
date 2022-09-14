@@ -34,15 +34,14 @@ export function Home() {
 
   return (
     <div className="">
-      <Header />
       <div className="container">
         <FilterSection />
         <div className="flex-grow min-h-screen">
           {/* <BannerSlider films={data.Trending} dataDetail={dataDetail} /> */}
 
-          <ul className="flex flex-col gap-10">
+          <ul className="flex flex-col gap-8">
             {Object.entries(data)
-              .filter((section) => section[0] !== 'Trending')
+              // .filter((section) => section[0] !== 'Trending')
               .map((section, index) => (
                 <li key={index}>
                   <h2 className="text-2xl font-oswald pb-[3.2px] border-b border-solid border-[#1b3c5d] font-medium tracking-wider text-[#b1a21e] uppercase">

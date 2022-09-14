@@ -1,4 +1,5 @@
 import { useState } from 'react';
+// import './section.css';
 function FilterSection() {
   const [filter, setFilter] = useState([]);
 
@@ -43,10 +44,10 @@ function FilterSection() {
           <select
             name={filter.label}
             id={filter.label}
-            className="w-full py-2] pl-[11px] pr-10 h-10 rounded text-[#363636] text-base flex items-center appearance-none after:border-3"
+            className="relative w-full py-2 pl-[11px] pr-10 h-10 rounded text-[#363636] text-base flex items-center appearance-none after:content-['2'] after:w-10 after:h-10 after:bg-red-700"
           >
             {filter.options.map((option, index) => (
-              <option key={index} value={option.value} className="">
+              <option key={index} value={option.value}>
                 {option.name}
               </option>
             ))}
