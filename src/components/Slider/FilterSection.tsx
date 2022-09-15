@@ -35,7 +35,7 @@ function FilterSection() {
   ];
 
   return (
-    <div className="flex items-center justify-between mt-[88px] bg-[#0e274073] mb-3 ml-[-12px] mr-[-12px] box-border pl-3 pr-3 rounded-md">
+    <div className="flex items-center justify-between bg-[#0e274073] mb-3 ml-[-12px] mr-[-12px] box-border pl-3 pr-3 rounded-md">
       {filterList.map((filter, idx) => (
         <div key={idx} className="flex flex-col items-start justify-center p-3 w-full">
           <label htmlFor={filter.label} className="mb-2 text-base text-white font-bold">

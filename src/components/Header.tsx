@@ -8,17 +8,22 @@ import { Link, NavLink } from 'react-router-dom';
 import Button from './Button';
 import Menu from './Popper/Menu';
 
-function Header() {
+interface HeaderProps {
+  currentTab: string;
+  onChange: Function;
+}
+
+function Header({ currentTab, onChange }: HeaderProps) {
   const headerRef = useRef<HTMLDivElement>(null);
   let isUser: boolean = true;
 
   const headerItems = [
-    { title: 'Tìm kiếm', to: '/search', icon: <IoMdSearch size={20} /> },
-    { title: 'Phim Hot', to: '/top' },
-    { title: 'Phim Lẻ', to: '/type/movie' },
-    { title: 'Phim Bộ', to: '/type/show' },
-    { title: 'Phim Mới', to: '/browse' },
-    { title: 'FAQ', to: '/faq' },
+    { title: 'Tìm kiếm', tab: 'search', to: '/search', icon: <IoMdSearch size={20} /> },
+    { title: 'Phim Hot', tab: '', to: '/top' },
+    { title: 'Phim Lẻ', tab: '', to: '/type/movie' },
+    { title: 'Phim Bộ', tab: '', to: '/type/show' },
+    { title: 'Phim Mới', tab: '', to: '/browse' },
+    { title: 'FAQ', tab: '', to: '/faq' },
   ];
 
   const userMenu = [
@@ -37,11 +42,18 @@ function Header() {
     }
   };
 
+  const handleOnHeaderItemClick = (tab: string) => {
+    onChange(tab);
+  };
+
   const renderHeaderItem = () => {
     return headerItems.map((item, idx) => (
       <NavLink
         to={item.to}
         key={idx}
+        onClick={() => {
+          handleOnHeaderItemClick(item.tab);
+        }}
         className="flex items-center text-base font-normal text-white justify-center py-2 px-3 hover:bg-[#102c48] hover:text-[#428bca] active:bg-[#102c48] active:text-[#428bca] transition-all duration-200 cursor-pointer"
       >
         {item.icon && <span>{item.icon}</span>}

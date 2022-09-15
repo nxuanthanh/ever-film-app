@@ -17,7 +17,7 @@ function FAQ() {
             <li className=" text-base list-disc">
               Hãy thử xem phim trên một thiết bị khác (máy tính / điện thoại / TV...). Nếu đổi sang
               thiết bị khác phim lại chạy mượt ={'>'} do thiết bị cũ của bạn. Nếu đó là TV, hãy kiểm
-              tra thiết lập TV và <i>tắt giao thức kết nối mạng IPv6</i>. Nếu đó là một thiết bị
+              tra thiết lập TV và tắt <i>giao thức kết nối mạng IPv6</i>. Nếu đó là một thiết bị
               chạy iOS, thì hãy <i>thử dùng một trình duyệt khác</i> (chẳng hạn Chrome) thay vì
               trình duyệt Safari mặc định, nhưng nói chung player trên iOS rất hay có vấn đề với
               phim bitrate cao + âm thanh 5.1.
@@ -30,21 +30,23 @@ function FAQ() {
                 bị nghẽn vào giờ cao điểm hoặc đứt cáp...). Có 2 cách giải quyết: 1. Gọi điện phản
                 ánh với nhà mạng; 2. Sử dụng một VPN (mạng riêng ảo) để tăng tốc độ cho mạng của
                 bạn. Chúng tôi <b>đề xuất bạn dùng ứng dụng WARP</b> ={'>'}{' '}
-                <Link
-                  to="https://1.1.1.1/"
+                <a
+                  href="https://1.1.1.1/"
                   target="_blank"
                   className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
+                  rel="noreferrer"
                 >
                   download tại đây
-                </Link>{' '}
+                </a>{' '}
                 ( hoặc tải WARP+{' '}
-                <Link
-                  to="https://apkcombo.com/vi/vpn/"
+                <a
+                  href="https://apkcombo.com/vi/vpn/"
                   target="_blank"
                   className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
+                  rel="noreferrer"
                 >
                   tại đây
-                </Link>
+                </a>
                 ).
               </p>
               <p className="mb-4">
@@ -81,13 +83,14 @@ function FAQ() {
               <p>
                 Nếu xem trên điện thoại: Lỗi âm thanh là do trình duyệt của bạn (thường là Chrome).
                 Hãy{' '}
-                <Link
-                  to="https://play.google.com/store/apps/details?id=org.mozilla.firefox"
+                <a
+                  href="https://play.google.com/store/apps/details?id=org.mozilla.firefox"
                   target="_blank"
                   className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
+                  rel="noreferrer"
                 >
                   cài & dùng trình duyệt Firefox
-                </Link>
+                </a>
                 !
               </p>
             </li>
@@ -100,13 +103,14 @@ function FAQ() {
               mất tiếng.
               <br />
               Ví dụ đây là phần chọn các chế độ âm thanh của Realtek HD Audio Manager:{' '}
-              <Link
-                to="https://imgur.com/a/D6nPGcl"
+              <a
+                href="https://imgur.com/a/D6nPGcl"
                 target="_blank"
                 className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
+                rel="noreferrer"
               >
                 click vào đây
-              </Link>
+              </a>
             </li>
           </ul>
           <h3 className="text-[#ffe08a] font-semibold leading-[1.125] text-2xl mb-[0.6666em] mt-[1.3333em]">

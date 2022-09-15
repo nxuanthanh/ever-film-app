@@ -7,14 +7,14 @@ module.exports = {
     extend: {
       colors: {
         'black-lighten': '#06121e',
-        primary: '#5179ff',
+        primary: '#dd003f',
         secondary: '#cf2122',
         'gray-lighten': '#989898',
-        // primary: "#bd0000",
         gray: '#989898',
         'gray-darken': '#3a3939',
         dark: '#1C1C1E',
         'dark-darken': '#19191b',
+        'dark-lighten': '#333335',
       },
       fontFamily: {
         sans: ['BlinkMacSystemFont', '-apple-system', 'Segoe UI', 'Roboto', 'Oxygen', 'sans-serif'],

@@ -10,7 +10,7 @@ export interface Item {
   vote_average: number;
 
   // Additional props
-  media_type: "movie" | "tv";
+  media_type: 'movie' | 'tv';
 
   // Movie items
   release_date?: string;
@@ -28,5 +28,9 @@ export interface Item {
 
 // Type for async function's returned value
 export interface HomeMovies {
+  [key: string]: Item[];
+}
+
+export interface HomeFilms {
   [key: string]: Item[];
 }

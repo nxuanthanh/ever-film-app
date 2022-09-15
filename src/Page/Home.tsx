@@ -1,60 +1,83 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { Footer, Header, Loading } from 'components';
-import { FilterSection, SectionSlider } from 'components/Slider';
-import { HomeMovies, Item } from 'models';
-import { getDetailMovies, getHomeMovies } from 'services';
+import MainHomeFilms from 'components/MainHomeFilm';
+import RecommendGenres from 'components/Search/RecommendGenres';
+import TrendingNow from 'components/Search/TrendingNow';
+import { FilterSection } from 'components/Slider';
+import { HomeFilms, Item } from 'models';
+import { getDetailMovies, getDetailTvs, getHomeMovies, getHomeTVs } from 'services';
+interface HomeProps {
+  currentTab: string;
+}
 
-export function Home() {
-  // const [currentTab, setCurrentTab] = useState('movie');
+export function Home({ currentTab }: HomeProps) {
+  const {
+    data: dataMovie,
+    isLoading: isLoadingMovie,
+    isError: isErrorMovie,
+    error: errorMovie,
+  } = useQuery<HomeFilms, Error>(['home-movies'], getHomeMovies);
 
-  const { data, isLoading, isError, error } = useQuery<HomeMovies, Error>(
-    ['home-movies'],
-    getHomeMovies
+  const {
+    data: dataMovieDetail,
+    isLoading: isLoadingMovieDetail,
+    isError: isErrorMovieDetail,
+    error: errorMovieDetail,
+  } = useQuery<any, Error>(
+    ['detailMovies', dataMovie?.Trending],
+    () => getDetailMovies(dataMovie?.Trending as Item[]),
+    { enabled: !!dataMovie?.Trending }
   );
 
   const {
-    data: dataDetail,
-    isLoading: isLoadingDetail,
-    isError: isErrorDetail,
-    error: errorDetail,
+    data: dataTV,
+    isLoading: isLoadingTV,
+    isError: isErrorTV,
+    error: errorTV,
+  } = useQuery<HomeFilms, Error>(['home-tvs'], getHomeTVs);
+
+  const {
+    data: dataTVDetail,
+    isLoading: isLoadingTVDetail,
+    isError: isErrorTVDetail,
+    error: errorTVDetail,
   } = useQuery<any, Error>(
-    ['detailMovies', data?.Trending],
-    () => getDetailMovies(data?.Trending as Item[]),
-    { enabled: !!data?.Trending }
+    ['detailTvs', dataTV?.Trending],
+    () => getDetailTvs(dataTV?.Trending as Item[]),
+    { enabled: !!dataTV?.Trending }
   );
 
-  if (isError) return <p>ERROR: ${error.message}</p>;
+  // MOVIE
+  if (isErrorMovie) return <p>ERROR: ${errorMovie.message}</p>;
 
-  if (isLoading) return <Loading />;
+  if (isLoadingMovie) return <p>Loading...</p>;
 
-  if (isErrorDetail) return <p>ERROR: ${errorDetail.message}</p>;
+  if (isErrorMovieDetail) return <p>ERROR: ${errorMovieDetail.message}</p>;
 
-  if (isLoadingDetail) return <Loading />;
+  if (isLoadingMovieDetail) return <p>Loading...</p>;
+
+  // TV
+
+  if (isErrorTV) return <p>ERROR: ${errorTV.message}</p>;
+
+  if (isLoadingTV) return <p>Loading...</p>;
+
+  if (isErrorTVDetail) return <p>ERROR: ${errorTVDetail.message}</p>;
+
+  if (isLoadingTVDetail) return <p>Loading...</p>;
 
   return (
-    <div className="">
-      <div className="container">
+    <div className="container">
+      <div className="mt-[88px]">
         <FilterSection />
-        <div className="flex-grow min-h-screen">
-          {/* <BannerSlider films={data.Trending} dataDetail={dataDetail} /> */}
-
-          <ul className="flex flex-col gap-8">
-            {Object.entries(data)
-              // .filter((section) => section[0] !== 'Trending')
-              .map((section, index) => (
-                <li key={index}>
-                  <h2 className="text-2xl font-oswald pb-[3.2px] border-b border-solid border-[#1b3c5d] font-medium tracking-wider text-[#b1a21e] uppercase">
-                    <span>{section[0]}</span>
-                  </h2>
-
-                  <SectionSlider films={section[1]} />
-                </li>
-              ))}
-          </ul>
-        </div>
       </div>
-      <Footer />
+      <div className="flex-grow min-h-screen">
+        <MainHomeFilms data={dataMovie} dataDetail={dataMovieDetail} />
+      </div>
+      <div className="shrink-0 max-w-[310px] w-full hidden md:block px-6 top-0 sticky ">
+        <RecommendGenres />
+        <TrendingNow />
+      </div>
     </div>
   );
 }

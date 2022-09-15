@@ -5,7 +5,7 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap"); */
 
 body {
-    @apply bg-black-lighten text-gray font-sans text-sm scroll-smooth;
+    @apply bg-black-lighten text-gray font-sans text-base scroll-smooth;
 }
 /* 
 html ::-webkit-scrollbar {
