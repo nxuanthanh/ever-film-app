@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { FilterSection } from 'components/Slider';
 import { Item } from 'models';
-import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import { getDiscoverMovie, getTrendingNow } from 'services';
+import { getDiscoverMovie } from 'services';
 import { resizeImage } from 'utils';
 
 interface MoviesProps {}
@@ -15,13 +14,14 @@ function Movies({}: MoviesProps) {
   console.log(data);
   if (isError) return <div>ERROR: ${error.message}</div>;
   if (isLoading) return <div>Loading...</div>;
+  console.log(data);
 
   return (
     <div className="mt-[100px]">
       <div className="container">
         <h1 className="text-white text-[2rem] font-semibold leading-[1.125]">Phim lẻ</h1>
         <div className="mb-3 mt-3">
-          <FilterSection />
+          <FilterSection hasSortType={true} />
         </div>
 
         <div>

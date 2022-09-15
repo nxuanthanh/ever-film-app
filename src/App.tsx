@@ -18,7 +18,7 @@ function App() {
           <Route path="top" element={<HotMovies />} />
           <Route path="type/movie" element={<Movies />} />
           <Route path="type/show" element={<SeriesMovie />} />
-          <Route path="browser" element={<NewMovies />} />
+          <Route path="browse" element={<NewMovies />} />
           <Route path="FAQ" element={<FAQ />} />
         </Routes>
       </div>

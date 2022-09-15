@@ -19,7 +19,7 @@ function SeriesMovie({}: SeriesMovieProps) {
         <div className="container">
           <h1 className="text-white text-[2rem] font-semibold leading-[1.125]">Phim bộ</h1>
           <div className="mb-3 mt-3">
-            <FilterSection />
+            <FilterSection hasSortType={true} />
           </div>
 
           <div>

@@ -66,6 +66,10 @@ export const getDiscoverMovie = async (): Promise<any> => {
   return (await axiosClient.get('/discover/movie')).data.results;
 };
 
+export const getMovieUpcoming = async (): Promise<any> => {
+  return (await axiosClient.get('/movie/upcoming')).data.results;
+};
+
 export const getDiscoverTV = async (): Promise<any> => {
   return (await axiosClient.get('/discover/tv')).data.results;
 };
