@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { Loading } from 'components';
 
 import MainHomeFilms from 'components/MainHomeFilm';
 import RecommendGenres from 'components/Search/RecommendGenres';
@@ -50,21 +51,21 @@ export function Home({ currentTab }: HomeProps) {
   // MOVIE
   if (isErrorMovie) return <p>ERROR: ${errorMovie.message}</p>;
 
-  if (isLoadingMovie) return <p>Loading...</p>;
+  if (isLoadingMovie) return <Loading />;
 
   if (isErrorMovieDetail) return <p>ERROR: ${errorMovieDetail.message}</p>;
 
-  if (isLoadingMovieDetail) return <p>Loading...</p>;
+  if (isLoadingMovieDetail) return <Loading />;
 
   // TV
 
   if (isErrorTV) return <p>ERROR: ${errorTV.message}</p>;
 
-  if (isLoadingTV) return <p>Loading...</p>;
+  if (isLoadingTV) return <Loading />;
 
   if (isErrorTVDetail) return <p>ERROR: ${errorTVDetail.message}</p>;
 
-  if (isLoadingTVDetail) return <p>Loading...</p>;
+  if (isLoadingTVDetail) return <Loading />;
 
   return (
     <div className="container">

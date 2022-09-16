@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { Loading } from 'components';
 import { FilterSection } from 'components/Slider';
 import { Item } from 'models';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -12,7 +13,7 @@ function SeriesMovie({}: SeriesMovieProps) {
   const { data, isLoading, isError, error } = useQuery<Item[], Error>(['tv'], getDiscoverTV);
 
   if (isError) return <div>ERROR: ${error.message}</div>;
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
   return (
     <div>
       <div className="mt-[100px]">
@@ -26,7 +27,7 @@ function SeriesMovie({}: SeriesMovieProps) {
             <ul className="grid grid-cols-5 gap-x-4 gap-y-6 row-g">
               {data.map((item: Item, idx) => (
                 <li key={idx} className="">
-                  <Link to={item.media_type === 'movie' ? `movie/${item.id}` : `tv/${item.id}`}>
+                  <Link to={`/tv/${item.id}`}>
                     <div className="flex flex-col justify-between shadow-sm pb-2 overflow-hidden hover:brightness-110 transition duration-300 relative group min-h-full">
                       <LazyLoadImage
                         src={resizeImage(item.poster_path)}

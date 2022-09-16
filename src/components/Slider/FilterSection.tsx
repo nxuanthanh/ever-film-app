@@ -1,30 +1,132 @@
+import { useQuery } from '@tanstack/react-query';
 import { Grid, List } from 'assets/icons';
+import { Loading } from 'components';
 import { useState } from 'react';
+import { getRegions } from 'services';
 
 interface FilterSectionProps {
   hasSortType?: boolean;
+}
+
+interface RegionsProps {
+  iso_3166_1: string;
+  english_name: string;
+  native_name: string;
 }
 
 function FilterSection({ hasSortType = false }: FilterSectionProps) {
   const [filter, setFilter] = useState([]);
   const [sortType, setSortType] = useState('grid');
 
+  const { data, isLoading, isError, error } = useQuery<RegionsProps[], Error>(
+    ['regions'],
+    getRegions
+  );
+
+  if (isError) return <div>ERROR: ${error.message}</div>;
+  if (isLoading) return <Loading />;
+
   const filterList = [
     {
       label: 'Loại phim:',
       options: [
-        { value: 'ath', name: '- Tất cả -' },
-        { value: 'ath', name: 'Phim Lẻ' },
-        { value: 'ath', name: 'Phim Bộ' },
+        { value: '', name: '- Tất cả -' },
+        { value: 'movie', name: 'Phim Lẻ' },
+        { value: 'show', name: 'Phim Bộ' },
       ],
     },
     {
       label: 'Thể loại:',
-      options: [{ value: 'ath', name: '- Tất cả -' }],
+      options: [
+        { value: '', name: '- Tất cả -' },
+        { value: 'am-nhac', name: 'Âm nhạc' },
+        { value: 'bi-an', name: 'Bí ẩn' },
+        { value: 'chien-tranh', name: 'Chiến tranh' },
+        { value: 'chien-tranh-chinh-tri', name: 'Chiến tranh' },
+        { value: 'chinh-kich', name: 'Chính kịch' },
+        { value: 'gia-dinh', name: 'Gia đình' },
+        { value: 'giat-gan', name: 'Giật gân' },
+        { value: 'hai', name: 'Hài' },
+        { value: 'hanh-dong', name: 'Hành động' },
+        { value: 'hanh-dong-phieu-luu', name: 'Hành động' },
+        { value: 'hoat-hinh', name: 'Hoạt hình' },
+        { value: 'kinh-di', name: 'Kinh dị' },
+        { value: 'ky-ao', name: 'Kỳ ảo' },
+        { value: 'lang-man', name: 'Lãng mạn' },
+        { value: 'lich-su', name: 'Lịch sử' },
+        { value: 'noi-chuyen', name: 'Nói chuyện' },
+        { value: 'phieu-luu', name: 'Phiêu lưu' },
+        { value: 'phim-dai-ky', name: 'Phim dài kỳ' },
+        { value: 'tai-lieu', name: 'Tài liệu' },
+        { value: 'thuc-te', name: 'Thực tế' },
+        { value: 'tin-tuc', name: 'Tin tức' },
+        { value: 'toi-pham', name: 'Tội phạm' },
+        { value: 'tre-em', name: 'Trẻ em' },
+        { value: 'truyen-hinh', name: 'Truyền hình' },
+        { value: 'vien-tay', name: 'Viễn Tây' },
+        { value: 'vien-tuong', name: 'Viễn tưởng' },
+        { value: 'vien-tuong-than-thoai', name: 'Viễn tưởng' },
+      ],
     },
     {
       label: 'Quốc gia:',
-      options: [{ value: 'ath', name: '- Tất cả -' }],
+      // options: [
+      //   { value: '', name: '- Tất cả -' },
+      //   { value: 'US', name: 'Mỹ' },
+      //   { value: 'KR', name: 'Hàn Quốc' },
+      //   { value: 'GB', name: 'Anh' },
+      //   { value: 'FR', name: 'Pháp' },
+      //   { value: 'CA', name: 'Canada' },
+      //   { value: 'HK', name: 'Hồng Kông' },
+      //   { value: 'JP', name: 'Nhật Bản' },
+      //   { value: 'CN', name: 'Trung Quốc' },
+      //   { value: 'TW', name: 'Đài Loan' },
+      //   { value: 'IN', name: 'Ấn Độ' },
+      //   { value: 'TH', name: 'Thái Lan' },
+      //   { value: 'AU', name: 'Úc' },
+      //   { value: 'VN', name: 'Việt Nam' },
+      //   { value: 'DE', name: 'Đức' },
+      //   { value: 'SE', name: 'Thụy Điển' },
+      //   { value: 'IT', name: 'Ý' },
+      //   { value: 'HU', name: 'Hungary' },
+      //   { value: 'IE', name: 'Ai-len' },
+      //   { value: 'MT', name: 'Malta' },
+      //   { value: 'NZ', name: 'New Zealand' },
+      //   { value: 'RU', name: 'Nga' },
+      //   { value: 'IS', name: 'Iceland' },
+      //   { value: 'FI', name: 'Phần Lan' },
+      //   { value: 'MW', name: 'Ma - la - uy' },
+      //   { value: 'CO', name: 'Colombia' },
+      //   { value: 'DK', name: 'Đan Mạch' },
+      //   { value: 'BE', name: 'Bỉ' },
+      //   { value: 'ES', name: 'Tây Ban Nha' },
+      //   { value: 'AR', name: 'Argentina' },
+      //   { value: 'NL', name: 'Hà Lan' },
+      //   { value: 'NO', name: 'Na Uy' },
+      //   { value: 'SG', name: 'Singapore' },
+      //   { value: 'PL', name: 'Ba Lan' },
+      //   { value: 'MY', name: 'Malaysia' },
+      //   { value: 'ID', name: 'Indonesia' },
+      //   { value: 'IR', name: 'Iran' },
+      //   { value: 'PR', name: 'Puerto Rico' },
+      //   { value: 'NP', name: 'Nepal' },
+      //   { value: 'BG', name: 'Bulgaria' },
+      //   { value: 'KH', name: 'Campuchia' },
+      //   { value: 'PH', name: 'Philippines' },
+      //   { value: 'TR', name: 'Thổ Nhĩ Kỳ,' },
+      //   { value: 'MA', name: 'Morocco' },
+      //   { value: 'BR', name: 'Brazil' },
+      //   { value: 'MX', name: 'Mexico' },
+      //   { value: 'CZ', name: 'Séc' },
+      //   { value: 'RO', name: 'Rumani' },
+      //   { value: 'PS', name: 'Palestine' },
+      //   { value: 'KZ', name: 'Kazakhstan' },
+      //   { value: 'ZA', name: 'Nam Phi' },
+      // ],
+      options: [
+        { value: '', name: '- Tất cả -' },
+        ...data.map((item: any) => ({ value: item.iso_3166_1, name: item.english_name })),
+      ],
     },
     {
       label: 'Năm:',
@@ -48,13 +150,13 @@ function FilterSection({ hasSortType = false }: FilterSectionProps) {
       label: 'Thời lượng:',
       options: [
         { value: 'all', name: '- Tất cả -' },
-        { value: 'less_30m', name: 'Dưới 30 phút' },
-        { value: '30m to 1h', name: "30' - 1 tiếng" },
-        { value: '1h to 1.5h', name: '1 - 1.5 tiếng' },
-        { value: '1.5 to 2h', name: '1.5 - 2 tiếng' },
-        { value: '2h to 2.5h', name: '2 - 2.5 tiếng' },
-        { value: '2.5 to 3h', name: '2.5 - 3 tiếng' },
-        { value: 'more than 3h', name: 'Trên 3 tiếng' },
+        { value: '0-30', name: 'Dưới 30 phút' },
+        { value: '30-60', name: "30' - 1 tiếng" },
+        { value: '60-90', name: '1 - 1.5 tiếng' },
+        { value: '90-120', name: '1.5 - 2 tiếng' },
+        { value: '120-150', name: '2 - 2.5 tiếng' },
+        { value: '150-180', name: '2.5 - 3 tiếng' },
+        { value: '180-0', name: 'Trên 3 tiếng' },
       ],
     },
     {
@@ -62,8 +164,8 @@ function FilterSection({ hasSortType = false }: FilterSectionProps) {
       options: [
         { value: 'all', name: '- Tất cả -' },
         { value: 'update_date', name: 'Ngày cập nhật' },
-        { value: 'release_date', name: 'Ngày phát hành' },
-        { value: 'point_rated', name: 'Điểm đánh giá' },
+        { value: 'publishDate', name: 'Ngày phát hành' },
+        { value: 'rating', name: 'Điểm đánh giá' },
       ],
     },
   ];

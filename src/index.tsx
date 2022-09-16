@@ -19,10 +19,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route path="/*" element={<App />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <App />
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>
