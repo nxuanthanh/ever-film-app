@@ -1,7 +1,7 @@
 import { Item } from 'models';
 import { FormEvent, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { getSearchMovie } from 'services';
 import { resizeImage } from 'utils';
 
@@ -10,6 +10,7 @@ interface SearchProps {
 }
 
 function Search({ autoFocus = false }: SearchProps) {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchResult, setSearchResult] = useState<Item[]>([]);
   const [searchValue, setSearchValue] = useState(' ');
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <div className="bg-[url(/src/assets/images/footer-bg.jpg)] h-[418px] px-6 pt-12 pb-24 mt-12">
+    <div className="bg-[url(/src/assets/images/footer-bg.jpg)] h-[418px] px-6 pt-12 pb-24">
       <div className="container">
         <h3 className="text-base font-semibold text-white leading-[1.125rem]">
           Phim chất lượng cao online của{' '}

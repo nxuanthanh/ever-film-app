@@ -72,12 +72,8 @@ export function Home({ currentTab }: HomeProps) {
       <div className="mt-[88px]">
         <FilterSection />
       </div>
-      <div className="flex-grow min-h-screen">
+      <div className="flex-grow min-h-screen mb-14">
         <MainHomeFilms data={dataMovie} dataDetail={dataMovieDetail} />
-      </div>
-      <div className="shrink-0 max-w-[310px] w-full hidden md:block px-6 top-0 sticky ">
-        <RecommendGenres />
-        <TrendingNow />
       </div>
     </div>
   );

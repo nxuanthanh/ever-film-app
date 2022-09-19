@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { IoMdSearch } from 'react-icons/io';
 import { GoChevronDown } from 'react-icons/go';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Button from './Button';
 import Menu from './Popper/Menu';
 
@@ -14,8 +14,9 @@ interface HeaderProps {
 }
 
 function Header({ currentTab, onChange }: HeaderProps) {
+  const navigation = useNavigate();
   const headerRef = useRef<HTMLDivElement>(null);
-  let isUser: boolean = true;
+  let isUser: boolean = false;
 
   const headerItems = [
     { title: 'Tìm kiếm', tab: 'search', to: '/search', icon: <IoMdSearch size={20} /> },
@@ -62,6 +63,10 @@ function Header({ currentTab, onChange }: HeaderProps) {
     ));
   };
 
+  const handleOnSignInClick = () => {
+    navigation('/login');
+  };
+
   useEffect(() => {
     window.addEventListener('scroll', handleOnScroll);
     return () => {
@@ -97,8 +102,9 @@ function Header({ currentTab, onChange }: HeaderProps) {
         ) : (
           <div className="py-2 px-3 h-14">
             <Button
+              to="login"
               title="Đăng nhâp"
-              onClick={() => console.log('first')}
+              onClick={handleOnSignInClick}
               className="bg-secondary h-full"
             />
           </div>
