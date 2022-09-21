@@ -1,12 +1,13 @@
 import { FacebookAuthProvider, signInWithPopup } from 'firebase/auth';
 import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
 import { auth, db } from 'models';
-import { convertErrorCodeToMessage, notifyError } from 'utils';
+import { convertErrorCodeToMessage, notifyError, notifySuccess } from 'utils';
 
 export const signInWithProvider = (provider: any, type: string) => {
   signInWithPopup(auth, provider)
     .then(async (result) => {
       const user = result.user;
+      notifySuccess('Đăng nhập thành công!');
 
       // Check if user info is already stored in Firestore before
       let isStored = false;

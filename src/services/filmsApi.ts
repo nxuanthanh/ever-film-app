@@ -1,4 +1,4 @@
-import { Item } from 'models';
+import { DetailMovie, DetailTV, Item } from 'models';
 import axiosClient from './axiosClient';
 
 export const getTrendingNow = async (): Promise<Item[]> => {
@@ -21,6 +21,10 @@ export const getRegions = async (): Promise<any> => {
   return (await axiosClient.get('/watch/providers/regions')).data.results;
 };
 
-export const getDetail = async (pathname: string): Promise<any> => {
-  return (await axiosClient.get(pathname)).data;
+export const getDetailMovie = async (params: string): Promise<DetailMovie> => {
+  return (await axiosClient.get(`movie/${params}`)).data;
+};
+
+export const getDetailTV = async (params: string): Promise<DetailTV> => {
+  return (await axiosClient.get(`tv/${params}`)).data;
 };

@@ -5,14 +5,10 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { getSearchMovie } from 'services';
 import { resizeImage } from 'utils';
 
-interface SearchProps {
-  autoFocus?: boolean;
-}
-
-function Search({ autoFocus = false }: SearchProps) {
+function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchResult, setSearchResult] = useState<Item[]>([]);
-  const [searchValue, setSearchValue] = useState(' ');
+  const [searchValue, setSearchValue] = useState('');
 
   const navigate = useNavigate();
 
@@ -52,7 +48,7 @@ function Search({ autoFocus = false }: SearchProps) {
             onChange={(e) => {
               handleOnInputChange(e);
             }}
-            autoFocus={autoFocus}
+            autoFocus={true}
           />
         </form>
 

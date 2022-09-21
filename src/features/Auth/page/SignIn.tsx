@@ -1,7 +1,7 @@
 import { Google } from 'assets/icons';
 import { Button } from 'components';
-import { GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from 'models';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, googleProvider } from 'models';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -66,7 +66,7 @@ function SignIn() {
   //       const token = credential?.accessToken;
   //       // The signed-in user info.
   //       const user = result.user;
-  //       notifySuccess();
+  //       notifySuccess('Đăng nhập thành công!');
   //       setTimeout(() => {
   //         navigate('/');
   //       }, 3000);
@@ -107,7 +107,7 @@ function SignIn() {
               />
               <label
                 htmlFor="remember"
-                className="mb-3 hover:text-[#ffe08a] cursor-pointer text-[#7a7a7a] block"
+                className="mb-3 hover:text-[#ffe08a] cursor-pointer text-[#7a7a7a] inline-block"
               >
                 <input {...register('remember')} type="checkbox" id="remember" className="" /> Ghi
                 nhớ
@@ -128,7 +128,8 @@ function SignIn() {
               iconLeft={<Google />}
               className="bg-secondary w-full py-3 px-6 text-2xl gap-4 h-[60px]"
               title=" Đăng nhập với Google"
-              onClick={() => signInWithProvider(new GoogleAuthProvider(), 'google')}
+              onClick={() => signInWithProvider(googleProvider, 'google')}
+              // onClick={handleSignInGoogle}
             />
           </div>
           {/* Login with google */}

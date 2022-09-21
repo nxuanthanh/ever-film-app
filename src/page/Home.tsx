@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from 'components';
-
 import MainHomeFilms from 'components/MainHomeFilm';
 import { FilterSection } from 'components/Slider';
 import { HomeFilms, Item } from 'models';
-import { getDetailMovies, getDetailTvs, getHomeMovies, getHomeTVs } from 'services';
+import { getDetailMovies, getHomeMovies } from 'services';
+
 interface HomeProps {
   currentTab: string;
 }

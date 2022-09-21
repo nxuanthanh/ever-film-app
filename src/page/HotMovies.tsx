@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 import { getTrendingNow } from 'services';
 import { resizeImage } from 'utils';
 
-interface HotMoviesProps {}
+// interface HotMoviesProps {}
 
-function HotMovies({}: HotMoviesProps) {
+function HotMovies() {
   const [moviesTab, setMovieTab] = useState('day');
 
   const { data, isLoading, isError, error } = useQuery<Item[], Error>(['trending'], getTrendingNow);

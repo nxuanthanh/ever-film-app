@@ -22,29 +22,6 @@ function Button({
   disabled,
   ...passProps
 }: ButtonProps) {
-  // let Comp = 'button';
-
-  //   const _props: ButtonProps = {
-  //     onClick,
-  //     ...passProps,
-  //   };
-
-  //   if (disabled) {
-  //     Object.keys(_props).forEach((key) => {
-  //       if (key.startsWith('on') && typeof _props[key] !== 'undefined') {
-  //         delete _props[key];
-  //       }
-  //     });
-  //   }
-
-  //   if (to) {
-  //     _props.to = to;
-  //     Comp = Link;
-  //   } else if (href) {
-  //     _props.href = href;
-  //     Comp = 'a';
-  //   }
-
   return (
     <button
       className={`${className} inline-flex items-center justify-center hover:opacity-80 transition-all duration-200 text-white text-base font-normal py-2 px-4 rounded cursor-pointer`}

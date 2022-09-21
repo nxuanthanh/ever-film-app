@@ -7,9 +7,7 @@ import { Link } from 'react-router-dom';
 import { getDiscoverTV } from 'services';
 import { resizeImage } from 'utils';
 
-interface SeriesMovieProps {}
-
-function SeriesMovie({}: SeriesMovieProps) {
+function SeriesMovie() {
   const { data, isLoading, isError, error } = useQuery<Item[], Error>(['tv'], getDiscoverTV);
 
   if (isError) return <div>ERROR: ${error.message}</div>;

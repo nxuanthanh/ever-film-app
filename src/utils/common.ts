@@ -60,7 +60,7 @@ export const getRandomAvatar = (): string => {
 };
 
 export const notifySuccess = (message: string) => {
-  toast.success('Đăng ký thành công!', {
+  toast.success(message, {
     position: 'top-center',
     autoClose: 5000,
     hideProgressBar: false,

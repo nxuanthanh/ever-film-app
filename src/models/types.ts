@@ -265,3 +265,9 @@ export interface User {
   photoURL: string | null;
   uid: string;
 }
+
+export interface getWatchReturnedType {
+  detail?: DetailTV | DetailMovie | undefined;
+  recommendations?: Item[] | undefined;
+  detailSeasons?: DetailSeason[] | undefined;
+}

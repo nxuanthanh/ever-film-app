@@ -51,7 +51,7 @@ function SignUp() {
           recentlyWatch: [],
           timeStamp: serverTimestamp(),
         });
-        notifySuccess('Đăng nhập thành công');
+        notifySuccess('Đăng ký thành công');
 
         setTimeout(() => {
           navigate('/');

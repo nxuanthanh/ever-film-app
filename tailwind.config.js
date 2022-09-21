@@ -33,6 +33,9 @@ module.exports = {
       listStyleType: {
         circle: 'circle',
       },
+      boxShadow: {
+        img: '0 0 0 2px #cc7b19',
+      },
     },
   },
   plugins: [],

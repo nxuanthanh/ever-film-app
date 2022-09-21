@@ -42,7 +42,7 @@ function Footer() {
           <Link
             to="/contact"
             title="Liên hệ"
-            className="flex items-center justify-center mr-6 w-12 h-12 border border-solid border-[#ffffff5c] bg-[#071334] text-white rounded-full"
+            className="flex items-center justify-center mr-6 w-12 h-12 border border-solid border-[#ffffff5c] bg-[#071334] hover:bg-[#2f0a61] text-white rounded-full"
           >
             <Message />
           </Link>
@@ -51,7 +51,7 @@ function Footer() {
             to="https://fb.com/Xemphim.Original"
             target="_blank"
             title="Facebook Page"
-            className="flex items-center justify-center mr-6 w-12 h-12 border border-solid border-[#ffffff5c] bg-[#071334] text-white rounded-full"
+            className="flex items-center justify-center mr-6 w-12 h-12 border border-solid border-[#ffffff5c] bg-[#071334] hover:bg-[#2f0a61] text-white rounded-full"
           >
             <Facebook />
           </Link>
@@ -60,7 +60,7 @@ function Footer() {
             to="https://t.me/xemphim_official"
             target="_blank"
             title="Telegam Channel"
-            className="flex items-center justify-center mr-6 w-12 h-12 border border-solid border-[#ffffff5c] bg-[#071334] text-white rounded-full"
+            className="flex items-center justify-center mr-6 w-12 h-12 border border-solid border-[#ffffff5c] bg-[#071334] hover:bg-[#2f0a61] text-white rounded-full"
           >
             <Telegram />
           </Link>

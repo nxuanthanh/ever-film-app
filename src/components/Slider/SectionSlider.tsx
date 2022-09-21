@@ -11,16 +11,10 @@ interface SectionSliderProps {
 function SectionSlider({ films }: SectionSliderProps) {
   return (
     <div className="mt-2">
-      <Swiper
-        slidesPerView={5}
-        slidesPerGroupAuto
-        spaceBetween={16}
-        loop
-        className="tw-section-slider"
-      >
+      <Swiper slidesPerView={5} spaceBetween={16} loop className="tw-section-slider">
         {films.map((film) => (
           <SwiperSlide key={film.id} className="">
-            <Link to={film.media_type === 'movie' ? `movie/${film.id}` : `tv/${film.id}`}>
+            <Link to={film.media_type === 'movie' ? `/movie/${film.id}` : `/tv/${film.id}`}>
               <div className="shadow-sm pb-2 overflow-hidden hover:scale-105 hover:brightness-110 transition duration-300 relative group">
                 <LazyLoadImage
                   src={resizeImage(film.poster_path)}
