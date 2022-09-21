@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from 'components';
 import { Item } from 'models';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { getTrendingNow } from 'services';
@@ -14,7 +14,6 @@ function HotMovies({}: HotMoviesProps) {
 
   const { data, isLoading, isError, error } = useQuery<Item[], Error>(['trending'], getTrendingNow);
 
-  console.log(data);
   if (isError) return <div>ERROR: ${error.message}</div>;
   if (isLoading) return <Loading />;
 
@@ -25,7 +24,7 @@ function HotMovies({}: HotMoviesProps) {
   // useEffect(() => {}, [moviesTab]);
 
   return (
-    <div className="mt-[100px]">
+    <div className="mt-[100px] mb-12">
       <div className="container">
         <h1 className="text-white text-[32px] mb-6 font-semibold text-center leading-[1.125]">
           Top phim được xem nhiều nhất

@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+
+export const provider = new GoogleAuthProvider();
 
 // const app = initializeApp({
 //   apiKey: process.env.REACT_APP_apiKey,
@@ -12,12 +14,13 @@ import { getFirestore } from 'firebase/firestore';
 // });
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBiO4NTttc68zMHFkRFXyK5qLsU9zXsJmg',
-  authDomain: 'moonlight-40ecf.firebaseapp.com',
-  projectId: 'moonlight-40ecf',
-  storageBucket: 'moonlight-40ecf.appspot.com',
-  messagingSenderId: '1043878072437',
-  appId: '1:1043878072437:web:0fd78f6e64f3cfbe2d283c',
+  apiKey: 'AIzaSyA8Wd8XBRc4ghiam5srMFbhtw4n9RZ39xk',
+  authDomain: 'ever-film-app.firebaseapp.com',
+  projectId: 'ever-film-app',
+  storageBucket: 'ever-film-app.appspot.com',
+  messagingSenderId: '575013669625',
+  appId: '1:575013669625:web:5d7bc41c332df40123b028',
+  measurementId: 'G-XDGP8LZWBP',
 };
 
 const app = initializeApp(firebaseConfig);

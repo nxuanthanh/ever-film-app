@@ -1,8 +1,11 @@
 import { Chat, Collection, Donate, Logout, User } from 'assets/icons';
 import images from 'assets/images';
+import { signOut } from 'firebase/auth';
+import { useAppSelector } from 'hooks/useRedux';
+import { auth } from 'models';
 import { useEffect, useRef } from 'react';
-import { IoMdSearch } from 'react-icons/io';
 import { GoChevronDown } from 'react-icons/go';
+import { IoMdSearch } from 'react-icons/io';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Button from './Button';
@@ -14,9 +17,20 @@ interface HeaderProps {
 }
 
 function Header({ currentTab, onChange }: HeaderProps) {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const headerRef = useRef<HTMLDivElement>(null);
-  let isUser: boolean = false;
+  const currentUser = useAppSelector((state) => state.auth.user);
+
+  const handleOnLogout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        navigate('/');
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
 
   const headerItems = [
     { title: 'Tìm kiếm', tab: 'search', to: '/search', icon: <IoMdSearch size={20} /> },
@@ -28,11 +42,21 @@ function Header({ currentTab, onChange }: HeaderProps) {
   ];
 
   const userMenu = [
-    { title: 'Tài khoản', to: '/settings', icon: <User /> },
-    { title: 'Donate', to: '/donate', icon: <Donate /> },
-    { title: 'Bộ sưu tập', to: '/collection', icon: <Collection /> },
-    { title: 'Cặp câu song ngữ', to: '/pairs', icon: <Chat /> },
-    { title: 'Thoát', to: '/logout', icon: <Logout /> },
+    { title: 'Tài khoản', to: '/settings', icon: <User />, onClick: () => console.log('first') },
+    { title: 'Donate', to: '/donate', icon: <Donate />, onClick: handleOnLogout },
+    {
+      title: 'Bộ sưu tập',
+      to: '/collection',
+      icon: <Collection />,
+      onClick: () => console.log('first'),
+    },
+    {
+      title: 'Cặp câu song ngữ',
+      to: '/pairs',
+      icon: <Chat />,
+      onClick: () => console.log('first'),
+    },
+    { title: 'Thoát', to: '/logout', icon: <Logout />, onClick: handleOnLogout },
   ];
 
   const handleOnScroll = () => {
@@ -64,7 +88,7 @@ function Header({ currentTab, onChange }: HeaderProps) {
   };
 
   const handleOnSignInClick = () => {
-    navigation('/login');
+    navigate('/login');
   };
 
   useEffect(() => {
@@ -90,10 +114,10 @@ function Header({ currentTab, onChange }: HeaderProps) {
       </div>
 
       <div>
-        {isUser ? (
+        {currentUser ? (
           <Menu items={userMenu}>
             <div className="h-14 hover:bg-[#102c48] hover:text-[#428bca] inline-flex items-center justify-center transition-all duration-200 text-white text-base font-normal py-2 pl-4 pr-3 cursor-pointer">
-              <span>Thành Xuân</span>
+              <span>{currentUser.displayName}</span>
               <span>
                 <GoChevronDown size={20} className="text-[#428bca] mt-1 ml-[6px]" />
               </span>

@@ -2,8 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { Loading } from 'components';
 
 import MainHomeFilms from 'components/MainHomeFilm';
-import RecommendGenres from 'components/Search/RecommendGenres';
-import TrendingNow from 'components/Search/TrendingNow';
 import { FilterSection } from 'components/Slider';
 import { HomeFilms, Item } from 'models';
 import { getDetailMovies, getDetailTvs, getHomeMovies, getHomeTVs } from 'services';
@@ -30,24 +28,6 @@ export function Home({ currentTab }: HomeProps) {
     { enabled: !!dataMovie?.Trending }
   );
 
-  const {
-    data: dataTV,
-    isLoading: isLoadingTV,
-    isError: isErrorTV,
-    error: errorTV,
-  } = useQuery<HomeFilms, Error>(['home-tvs'], getHomeTVs);
-
-  const {
-    data: dataTVDetail,
-    isLoading: isLoadingTVDetail,
-    isError: isErrorTVDetail,
-    error: errorTVDetail,
-  } = useQuery<any, Error>(
-    ['detailTvs', dataTV?.Trending],
-    () => getDetailTvs(dataTV?.Trending as Item[]),
-    { enabled: !!dataTV?.Trending }
-  );
-
   // MOVIE
   if (isErrorMovie) return <p>ERROR: ${errorMovie.message}</p>;
 
@@ -56,16 +36,6 @@ export function Home({ currentTab }: HomeProps) {
   if (isErrorMovieDetail) return <p>ERROR: ${errorMovieDetail.message}</p>;
 
   if (isLoadingMovieDetail) return <Loading />;
-
-  // TV
-
-  if (isErrorTV) return <p>ERROR: ${errorTV.message}</p>;
-
-  if (isLoadingTV) return <Loading />;
-
-  if (isErrorTVDetail) return <p>ERROR: ${errorTVDetail.message}</p>;
-
-  if (isLoadingTVDetail) return <Loading />;
 
   return (
     <div className="container">

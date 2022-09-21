@@ -8,3 +8,4 @@ export { default as Facebook } from './Facebook';
 export { default as Telegram } from './Telegram';
 export { default as Grid } from './Grid';
 export { default as List } from './List';
+export { default as Google } from './Google';

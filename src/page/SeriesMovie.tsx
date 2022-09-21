@@ -16,7 +16,7 @@ function SeriesMovie({}: SeriesMovieProps) {
   if (isLoading) return <Loading />;
   return (
     <div>
-      <div className="mt-[100px]">
+      <div className="mt-[100px] mb-12">
         <div className="container">
           <h1 className="text-white text-[2rem] font-semibold leading-[1.125]">Phim bộ</h1>
           <div className="mb-3 mt-3">

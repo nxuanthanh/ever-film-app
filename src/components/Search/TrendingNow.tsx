@@ -11,7 +11,6 @@ import { resizeImage } from 'utils';
 const TrendingNow: FC = () => {
   const { isLoading, data, isError, error } = useQuery<Item[], Error>(['trending'], getTrendingNow);
 
-  console.log(data);
   if (isError) return <div>ERROR: ${error.message}</div>;
   if (isLoading) return <div>Loading...</div>;
   return (

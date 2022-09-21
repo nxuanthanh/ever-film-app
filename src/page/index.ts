@@ -6,5 +6,3 @@ export { default as SeriesMovie } from './SeriesMovie';
 export { default as FilmDetail } from './FilmDetail';
 export { default as FAQ } from './FAQ';
 export { default as Search } from './Search';
-export { default as Profile } from './Profile';
-export { default as BookMarked } from './BookMarked';

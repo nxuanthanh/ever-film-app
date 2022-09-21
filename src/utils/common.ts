@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 export const resizeImage = (imageUrl: string, width: string = 'original'): string =>
   `${process.env.REACT_APP_IMAGE_URL}/${width}${imageUrl}`;
 
@@ -38,4 +40,45 @@ export const convertErrorCodeToMessage = (errorCode: string) => {
   else if (errorCode === 'auth/user-not-found') return 'Your email may be incorrect.';
   else if (errorCode === 'auth/wrong-password') return 'Your password is incorrect.';
   else return 'Something weird happened.';
+};
+
+export const getRandomAvatar = (): string => {
+  const avatars = [
+    'https://i.ibb.co/zrXfKsJ/catface-7.jpg',
+    'https://i.ibb.co/CJqGvY6/satthudatinh.jpg',
+    'https://i.ibb.co/rd3PGq5/catface-9.png',
+    'https://i.ibb.co/Htq4LWJ/catface-8.png',
+    'https://i.ibb.co/9mPr2ds/catface-3.jpg',
+    'https://i.ibb.co/b6TT6Y4/catface-6.jpg',
+    'https://i.ibb.co/0pNx0nv/catface-4.jpg',
+    'https://i.ibb.co/StzXrVH/catface.jpg',
+    'https://i.ibb.co/KDdd4zN/catface-2.jpg',
+    'https://i.ibb.co/stB42Nb/catface-5.jpg',
+  ];
+
+  return avatars[Math.floor(Math.random() * avatars.length)];
+};
+
+export const notifySuccess = (message: string) => {
+  toast.success('Đăng ký thành công!', {
+    position: 'top-center',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
+
+export const notifyError = (message: string) => {
+  toast.error(message, {
+    position: 'top-center',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 };

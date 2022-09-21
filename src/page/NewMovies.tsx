@@ -4,12 +4,12 @@ import { FilterSection } from 'components/Slider';
 import { Item } from 'models';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import { getDiscoverMovie, getMovieUpcoming } from 'services';
+import { getMovieUpcoming } from 'services';
 import { resizeImage } from 'utils';
 
-interface NewMoviesProps {}
+// interface NewMoviesProps {}
 
-function NewMovies({}: NewMoviesProps) {
+function NewMovies() {
   const { data, isLoading, isError, error } = useQuery<Item[], Error>(
     ['upcoming'],
     getMovieUpcoming
@@ -19,7 +19,7 @@ function NewMovies({}: NewMoviesProps) {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="mt-[100px]">
+    <div className="mt-[100px] mb-12">
       <div className="container">
         <div className="mb-3 mt-3">
           <FilterSection hasSortType={true} />

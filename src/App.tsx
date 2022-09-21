@@ -1,49 +1,62 @@
 import { setCurrentUser } from 'app/authSlice';
 import { Footer, Header } from 'components';
-import { SignIn, SignUp } from 'features/Auth';
+import { Forgot, SignIn, SignUp } from 'features/Auth/page';
+
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { useAppDispatch } from 'hooks/useRedux';
 import { auth, db } from 'models';
 import { FAQ, FilmDetail, Home, HotMovies, Movies, NewMovies, Search, SeriesMovie } from 'page';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [tab, setTab] = useState('movie');
   const dispatch = useAppDispatch();
 
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      dispatch(setCurrentUser(null));
-      return;
-    }
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        dispatch(setCurrentUser(null));
+        console.log('user is not logged in');
+        return;
+      }
 
-    if (user.providerId === 'google.com' || user.providerId === 'facebook.com') {
-      dispatch(
-        setCurrentUser({
-          displayName: user.displayName,
-          email: user.email,
-          emailVerified: user.emailVerified,
-          photoURL: user.photoURL,
-          uid: user.uid,
-        })
-      );
-    } else {
-      onSnapshot(doc(db, 'users', user.uid), (doc) => {
-        console.log(doc.data());
-        dispatch(
-          setCurrentUser({
-            displayName: doc.data()?.lastName + ' ' + doc.data()?.firstName || '',
-            photoURL: doc.data()?.photoUrl || '',
-            email: user.email,
-            emailVerified: user.emailVerified,
-            uid: user.uid,
-          })
-        );
-      });
-    }
-  });
+      if (
+        user.providerData[0].providerId === 'google.com' ||
+        user.providerData[0].providerId === 'facebook.com'
+      ) {
+        onSnapshot(doc(db, 'users', user.uid), (doc) => {
+          dispatch(
+            setCurrentUser({
+              uid: user.uid,
+              displayName: user.displayName,
+              email: user.email,
+              emailVerified: user.emailVerified,
+              photoURL: user.photoURL || '',
+              // user.photoURL + "?access_token=" + doc.data()?.token || "",
+              // doc.data()?.photoUrl.startsWith("https://i.ibb.co") ?
+            })
+          );
+        });
+      } else {
+        onSnapshot(doc(db, 'users', user.uid), (doc) => {
+          dispatch(
+            setCurrentUser({
+              uid: user.uid,
+              displayName: doc.data()?.displayName,
+              photoURL: doc.data()?.photoUrl || '',
+              email: user.email,
+              emailVerified: user.emailVerified,
+            })
+          );
+        });
+      }
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
@@ -62,6 +75,7 @@ function App() {
         <Route path="tv/:filmId" element={<FilmDetail />} />
         <Route path="login" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="forgot" element={<Forgot />} />
         <Route path="FAQ" element={<FAQ />} />
       </Routes>
 

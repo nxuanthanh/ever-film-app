@@ -15,7 +15,6 @@ function Search({ autoFocus = false }: SearchProps) {
   const [searchValue, setSearchValue] = useState(' ');
 
   const navigate = useNavigate();
-  console.log(searchResult);
 
   const searchSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
@@ -28,8 +27,6 @@ function Search({ autoFocus = false }: SearchProps) {
   const handleOnInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value);
   };
-
-  console.log(searchResult);
 
   useEffect(() => {
     (async () => {
@@ -45,7 +42,7 @@ function Search({ autoFocus = false }: SearchProps) {
 
   return (
     <div className="container">
-      <div className="mt-[100px] w-full">
+      <div className="mt-[100px] w-full mb-12">
         <form className="bg-white rounded mb-6" onSubmit={searchSubmitHandler}>
           <input
             className="w-full py-[11px] px-[14px] text-xl bg-transparent placeholder-gray-500 placeholder:font-light text-[#363636] outline-[#428bca]"

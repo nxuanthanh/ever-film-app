@@ -1,8 +1,6 @@
-import { Link } from 'react-router-dom';
-
 function FAQ() {
   return (
-    <div className="mt-[100px]">
+    <div className="mt-[100px] mb-12">
       <div className="container text-[#dbdbdb] text-base">
         <h1 className="text-[2.5rem] text-white font-semibold mb-6 text-center  leading-[1.125]">
           Câu hỏi thường gặp

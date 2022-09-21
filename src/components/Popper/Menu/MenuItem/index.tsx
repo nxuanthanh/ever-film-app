@@ -1,8 +1,9 @@
 import { MenuItemModel } from 'models';
+import { MouseEventHandler } from 'react';
 
 export interface MenuItemProps {
   data: MenuItemModel;
-  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 function MenuItem({ data, onClick }: MenuItemProps) {

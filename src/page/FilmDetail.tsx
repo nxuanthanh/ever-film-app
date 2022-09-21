@@ -12,8 +12,6 @@ function DetailFilm() {
     getDetail(pathname)
   );
 
-  console.log(data);
-
   if (isError) return <div>ERROR: ${error.message}</div>;
   if (isLoading) return <Loading />;
 

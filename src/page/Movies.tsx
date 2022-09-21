@@ -7,17 +7,16 @@ import { Link } from 'react-router-dom';
 import { getDiscoverMovie } from 'services';
 import { resizeImage } from 'utils';
 
-interface MoviesProps {}
+// interface MoviesProps {}
 
-function Movies({}: MoviesProps) {
+function Movies() {
   const { data, isLoading, isError, error } = useQuery<Item[], Error>(['movie'], getDiscoverMovie);
 
   if (isError) return <div>ERROR: ${error.message}</div>;
   if (isLoading) return <Loading />;
-  console.log(data);
 
   return (
-    <div className="mt-[100px]">
+    <div className="mt-[100px] mb-12">
       <div className="container">
         <h1 className="text-white text-[2rem] font-semibold leading-[1.125]">Phim lẻ</h1>
         <div className="mb-3 mt-3">
