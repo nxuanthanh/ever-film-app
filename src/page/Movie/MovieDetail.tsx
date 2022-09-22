@@ -4,25 +4,26 @@ import { Button, Loading } from 'components';
 import Modal from 'components/Modal';
 import { ModalContent } from 'components/Modal/ModalContent';
 import { Slide } from 'components/Slider';
-import { Cast, DetailMovie, DetailTV, Item, Video } from 'models';
+import { Cast, DetailMovie, FilmInfo, Item, Video } from 'models';
 import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useParams } from 'react-router-dom';
-import { getTVFullDetail } from 'services';
+import { getMovieDetail } from 'services';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { resizeImage } from 'utils';
 
-function ShowDetail() {
-  const { tvId } = useParams();
+function MovieDetail() {
+  const { movieId } = useParams();
   const [videoKey, setVideoKey] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  const { data, isLoading, isError, error } = useQuery<any, Error>(['detailTV'], () =>
-    getTVFullDetail(tvId as string)
+  const { data, isLoading, isError, error } = useQuery<FilmInfo, Error>(
+    ['movieDetail', movieId],
+    () => getMovieDetail(Number(movieId as string))
   );
 
-  const detail = data?.detail as DetailTV;
+  const detail = data?.detail as DetailMovie;
   const credits = data?.credits as Cast[];
   const videos = data?.videos as Video[];
   const similar = data?.similar as Item[];
@@ -72,7 +73,7 @@ function ShowDetail() {
                 />
                 <div className="mt-9">
                   <Button
-                    className="w-full py-[10px] px-5 gap-4 bg-primary hover:bg-[#f03a5f] hover:opacity-100 uppercase text-xl"
+                    className="w-full py-[10px] px-5 gap-4 bg-primary hover:bg-[#f03a5f] hover:opacity-100 uppercase text-xl border-transparent"
                     title="Xem phim"
                     iconLeft={<Play />}
                     onClick={() => console.log('heh')}
@@ -81,24 +82,24 @@ function ShowDetail() {
               </div>
               <div className="flex-1 px-8 pt-[28.8px] pb-3">
                 <h1 className="font-merriweather text-[2.5rem] leading-[1.125] mb-[0.7em] text-white font-normal">
-                  {detail.original_name}
+                  {detail.original_title}
                 </h1>
                 <h2 className="-mt-5 mb-[1.5em] leading-[1.25] text-2xl text-[#b5b5b5]">
                   <span>
-                    {detail.original_name} (
+                    {detail.original_title} (
                     <Link
-                      to={`/year/${new Date(detail.first_air_date).getFullYear()}`}
+                      to={`/year/${new Date(detail.release_date).getFullYear()}`}
                       className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
                     >
-                      {new Date(detail.first_air_date).getFullYear()}
+                      {new Date(detail.release_date).getFullYear()}
                     </Link>
                     )
                   </span>
                 </h2>
                 <div className="mb-4 text-white">
-                  {/* <span className="text-base mr-[18px]">{`${Math.trunc(detail. / 60)} giờ ${
+                  <span className="text-base mr-[18px]">{`${Math.trunc(detail.runtime / 60)} giờ ${
                     detail.runtime % 60
-                  } phút`}</span> */}
+                  } phút`}</span>
                   <span className="font-bold text-xs text-white px-[9px] bg-[#363636] h-6 inline-flex items-center rounded cursor-help">
                     R
                   </span>
@@ -112,7 +113,7 @@ function ShowDetail() {
                 <div className="flex items-center justify-between mb-14">
                   <div className="flex items-center">
                     <Button
-                      className="bg-[#485fc7] px-4 py-[7px] mr-3 gap-[14.4px] rounded"
+                      className="bg-[#485fc7] px-4 py-[7px] mr-3 gap-[14.4px] rounded border-transparent"
                       onClick={() => console.log('first')}
                       iconLeft={<FacebookShare />}
                       title="Chia sẻ"
@@ -161,9 +162,9 @@ function ShowDetail() {
                     <span className="text-[#7a7a7a] uppercase mb-1 w-[120px]">Khởi chiếu</span>
                     <a
                       href={`/person/`}
-                      className="text-[#dbdbdb] font-normal hover:underline cursor-pointer text-base"
+                      className="text-[#dbdbdb] font-normal cursor-text text-base"
                     >
-                      {new Intl.DateTimeFormat('en').format(new Date(detail.first_air_date))}
+                      {new Intl.DateTimeFormat('en').format(new Date(detail.release_date))}
                     </a>
                   </div>
                 </div>
@@ -263,4 +264,4 @@ function ShowDetail() {
   );
 }
 
-export default ShowDetail;
+export default MovieDetail;

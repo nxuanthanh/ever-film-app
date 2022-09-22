@@ -68,3 +68,43 @@ export const getWatchTV = async (id: number): Promise<getWatchReturnedType> => {
 
   return { ...data, detailSeasons };
 };
+
+export const getTVDetailSeasons = async (
+  tv_id: string,
+  season_number: string
+): Promise<FilmInfo> => {
+  const response = await Promise.all([
+    axiosClient.get(`/tv/${tv_id}`),
+    axiosClient.get(`/tv/${tv_id}/season/${season_number}`),
+    axiosClient.get(`/tv/${tv_id}/season/${season_number}/credits`),
+    axiosClient.get(`/tv/${tv_id}/season/${season_number}/videos`),
+  ]);
+
+  const TVDetailSeasonsInfo = response.reduce((final, current, index) => {
+    switch (index) {
+      case 0:
+        final.detail = { ...current.data, media_type: 'tv' };
+        break;
+
+      case 1:
+        final.detailSeason = { ...current.data, media_type: 'tv' };
+        break;
+
+      case 2:
+        final.credits = current.data.cast;
+        break;
+      case 3:
+        final.videos = current.data.results;
+        // .filter((item: Video) => item.site === 'YouTube')
+        // .reduce((acc: any, current: Video) => {
+        //   if (current.type === 'Trailer') return [current, ...acc];
+        //   else return [...acc, current];
+        // }, [] as Video[]);
+        break;
+    }
+
+    return final;
+  }, {} as FilmInfo);
+
+  return TVDetailSeasonsInfo;
+};

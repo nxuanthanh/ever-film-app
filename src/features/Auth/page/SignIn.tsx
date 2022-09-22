@@ -135,7 +135,7 @@ function SignIn() {
             ></div>
             <Button
               iconLeft={<Google />}
-              className="bg-secondary w-full py-3 px-6 text-2xl gap-4 h-[60px]"
+              className="bg-secondary w-full py-3 px-6 text-2xl gap-4 h-[60px] border-transparent"
               title=" Đăng nhập với Google"
               onClick={() => signInWithProvider(googleProvider, 'google')}
               // onClick={handleSignInGoogle}

@@ -1,9 +1,13 @@
 export { default as Home } from './Home';
 export { default as HotMovies } from './HotMovies';
-export { default as Movies } from './Movies';
 export { default as NewMovies } from './NewMovies';
-export { default as SeriesMovie } from './SeriesMovie';
-export { default as ShowDetail } from './ShowDetail';
-export { default as MovieDetail } from './MovieDetail';
+export { default as SeriesMovie } from './TV/SeriesMovie';
+export { default as TVDetail } from './TV/TVDetail';
+export { default as SeasonList } from './TV/SeasonLists';
+export { default as TVSeasonDetail } from './TV/TVSeasonDetail';
+export { default as Movies } from './Movie/Movies';
+export { default as MovieDetail } from './Movie/MovieDetail';
 export { default as FAQ } from './FAQ';
 export { default as Search } from './Search';
+export { default as WatchFilm } from './WatchFilm';
+export { default as PeopleDetail } from './PeopleDetail';

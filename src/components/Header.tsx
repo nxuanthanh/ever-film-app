@@ -139,7 +139,7 @@ function Header({ currentTab, onChange }: HeaderProps) {
               to="login"
               title="Đăng nhâp"
               onClick={handleOnSignInClick}
-              className="bg-secondary h-full"
+              className="bg-secondary h-full border-transparent"
             />
           </div>
         )}

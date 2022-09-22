@@ -3,29 +3,30 @@ import { Add, FacebookShare, Imdb, Play } from 'assets/icons';
 import { Button, Loading } from 'components';
 import Modal from 'components/Modal';
 import { ModalContent } from 'components/Modal/ModalContent';
-import { Slide } from 'components/Slider';
-import { Cast, DetailMovie, FilmInfo, Item, Video } from 'models';
+import { Cast, DetailTV, Video } from 'models';
 import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useParams } from 'react-router-dom';
-import { getMovieDetail } from 'services';
+import { getTVFullDetail } from 'services';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { resizeImage } from 'utils';
+import SeasonLists from './SeasonLists';
 
-function MovieDetail() {
-  const params = useParams();
+function TVDetail() {
+  const { tvId } = useParams();
   const [videoKey, setVideoKey] = useState('');
-  const [showModal, setShowModal] = useState(false);
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [showSeasonModal, setShowSeasonModal] = useState(false);
 
-  const { data, isLoading, isError, error } = useQuery<FilmInfo, Error>(['detail'], () =>
-    getMovieDetail(Number(params.movieId as string))
+  const { data, isLoading, isError, error } = useQuery<any, Error>(['detailTV', tvId], () =>
+    getTVFullDetail(tvId as string)
   );
 
-  const detail = data?.detail as DetailMovie;
+  const detail = data?.detail as DetailTV;
   const credits = data?.credits as Cast[];
   const videos = data?.videos as Video[];
-  const similar = data?.similar as Item[];
+  // const similar = data?.similar as Item[];
 
   console.log(data);
 
@@ -34,11 +35,19 @@ function MovieDetail() {
 
   const handleOnVideoClick = (key: string) => {
     setVideoKey(key);
-    setShowModal(true);
+    setShowVideoModal(true);
   };
 
   const handleCloseModal = (key: string): any => {
-    setShowModal(false);
+    setShowVideoModal(false);
+  };
+
+  const handleWacthButtonClick = () => {
+    setShowSeasonModal(true);
+  };
+
+  const handleCloseSeasonModal = (key: string): any => {
+    setShowSeasonModal(false);
   };
 
   return (
@@ -51,8 +60,8 @@ function MovieDetail() {
           }}
         ></div>
         <section className="p-12 pb-0 mt-[-360px]">
-          {showModal && (
-            <Modal id={`modal_${detail.id}`} onClose={handleCloseModal}>
+          {showVideoModal && (
+            <Modal id={`modal_video${detail.id}`} onClose={handleCloseModal}>
               <ModalContent onClose={handleCloseModal}>
                 <iframe
                   width="1000px"
@@ -60,6 +69,53 @@ function MovieDetail() {
                   title="trailer"
                   src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&mute=0`}
                 ></iframe>
+              </ModalContent>
+            </Modal>
+          )}
+          {showSeasonModal && (
+            <Modal id={`modal_season${detail.id}`} onClose={handleCloseSeasonModal}>
+              <ModalContent onClose={handleCloseSeasonModal}>
+                <div className="max-h-[calc(100vh-40px)] min-w-[420px] bg-[#363636] rounded-md p-5 overflow-y-auto">
+                  <h4 className="text-2xl text-white mb-6 font-semibold leading-[1.125] text-center">
+                    Chọn một phần để xem:
+                  </h4>
+                  <ul className="flex flex-col">
+                    {detail.seasons
+                      .filter((season) => season.name.startsWith('Season'))
+                      .map((season, index) => (
+                        <li key={season.id}>
+                          {index > 0 && (
+                            <div className="border-t-[1px] border-t-[#dbdbdb80] mt-4 pb-4"></div>
+                          )}
+                          <div className="flex gap-4 items-start">
+                            <Link
+                              to={`/tv/${tvId}/season/${season.season_number}`}
+                              className="shrink-0 max-w-[130px] w-full"
+                            >
+                              <LazyLoadImage
+                                src={resizeImage(season.poster_path)}
+                                alt=""
+                                effect="opacity"
+                                className="object-cover w-full h-full cursor-default"
+                              />
+                            </Link>
+                            <div className="flex-grow">
+                              <p className="text-[#b5b5b5] font-normal">
+                                <Link
+                                  to={`/tv/${tvId}/season/${season.season_number}`}
+                                  className="text-[#428bca] hover:text-[#dcf836] cursor-pointer"
+                                >
+                                  {season.name.replace('Season', 'Phần')}{' '}
+                                </Link>
+                                <span>({Number(new Date(season.air_date).getFullYear())})</span>
+                              </p>
+                              <p className="text-base">{season.episode_count} tập</p>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
               </ModalContent>
             </Modal>
           )}
@@ -72,36 +128,35 @@ function MovieDetail() {
                 />
                 <div className="mt-9">
                   <Button
-                    className="w-full py-[10px] px-5 gap-4 bg-primary hover:bg-[#f03a5f] hover:opacity-100 uppercase text-xl"
+                    className="w-full py-[10px] px-5 gap-4 bg-primary hover:bg-[#f03a5f] hover:opacity-100 uppercase text-xl border-transparent"
                     title="Xem phim"
                     iconLeft={<Play />}
-                    onClick={() => console.log('heh')}
+                    onClick={handleWacthButtonClick}
                   />
                 </div>
               </div>
               <div className="flex-1 px-8 pt-[28.8px] pb-3">
                 <h1 className="font-merriweather text-[2.5rem] leading-[1.125] mb-[0.7em] text-white font-normal">
-                  {detail.original_title}
+                  {detail.original_name}
                 </h1>
                 <h2 className="-mt-5 mb-[1.5em] leading-[1.25] text-2xl text-[#b5b5b5]">
                   <span>
-                    {detail.original_title} (
+                    {detail.original_name} (
                     <Link
-                      to={`/year/${new Date(detail.release_date).getFullYear()}`}
+                      to={`/year/${new Date(detail.first_air_date).getFullYear()}`}
                       className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
                     >
-                      {new Date(detail.release_date).getFullYear()}
+                      {new Date(detail.first_air_date).getFullYear()}
                     </Link>
                     )
                   </span>
                 </h2>
                 <div className="mb-4 text-white">
-                  <span className="text-base mr-[18px]">{`${Math.trunc(detail.runtime / 60)} giờ ${
-                    detail.runtime % 60
-                  } phút`}</span>
-                  <span className="font-bold text-xs text-white px-[9px] bg-[#363636] h-6 inline-flex items-center rounded cursor-help">
-                    R
-                  </span>
+                  {detail.adult && (
+                    <span className="font-bold text-xs text-white px-[9px] bg-[#363636] h-6 inline-flex items-center rounded cursor-help">
+                      TV-MA
+                    </span>
+                  )}
                 </div>
                 <div className="mb-4 flex items-center h-[35.2px]">
                   <span className="w-[40px] mr-[0.6rem] ">
@@ -112,7 +167,7 @@ function MovieDetail() {
                 <div className="flex items-center justify-between mb-14">
                   <div className="flex items-center">
                     <Button
-                      className="bg-[#485fc7] px-4 py-[7px] mr-3 gap-[14.4px] rounded"
+                      className="bg-[#485fc7] px-4 py-[7px] mr-3 gap-[14.4px] rounded border-transparent"
                       onClick={() => console.log('first')}
                       iconLeft={<FacebookShare />}
                       title="Chia sẻ"
@@ -154,16 +209,13 @@ function MovieDetail() {
                       href={`/person/`}
                       className="text-[#dbdbdb] font-bold hover:underline cursor-pointer text-base"
                     >
-                      {detail.production_countries[0].name}
+                      {detail.production_countries[0]?.name}
                     </a>
                   </div>
                   <div className="flex">
                     <span className="text-[#7a7a7a] uppercase mb-1 w-[120px]">Khởi chiếu</span>
-                    <a
-                      href={`/person/`}
-                      className="text-[#dbdbdb] font-normal hover:underline cursor-pointer text-base"
-                    >
-                      {new Intl.DateTimeFormat('en').format(new Date(detail.release_date))}
+                    <a href={`/person/`} className="text-[#dbdbdb] font-normal  text-base">
+                      {new Intl.DateTimeFormat('en').format(new Date(detail.first_air_date))}
                     </a>
                   </div>
                 </div>
@@ -243,17 +295,58 @@ function MovieDetail() {
                     </Swiper>
                   </>
                 )}
-
-                {similar.length > 0 && (
-                  <>
-                    <h3 className="text-white uppercase font-bold mt-[2em] mb-[1.2em] text-[.9em]">
-                      Phim tương tự
-                    </h3>
-                    <div>
-                      <Slide data={similar} />
-                    </div>
-                  </>
-                )}
+                <>
+                  <h3 className="text-white uppercase font-bold mt-[2em] mb-[1.2em] text-[.9em]">
+                    Season
+                  </h3>
+                  <div>
+                    <ul className="flex flex-col">
+                      {detail.seasons
+                        .filter((season) => season.name.startsWith('Season'))
+                        .map((season, index) => (
+                          <li key={season.id}>
+                            {index > 0 && (
+                              <>
+                                <div className="border-t-[1px] border-t-[#dbdbdb80] mt-4 pb-4"></div>
+                              </>
+                            )}
+                            <div className="flex gap-4 items-start">
+                              <Link
+                                to={`/tv/${tvId}/season/${season.season_number}`}
+                                className="shrink-0 max-w-[130px] w-full cursor-pointer"
+                              >
+                                <LazyLoadImage
+                                  src={resizeImage(season.poster_path)}
+                                  alt=""
+                                  effect="opacity"
+                                  className="object-cover w-full h-full"
+                                />
+                              </Link>
+                              <div className="flex-grow">
+                                <Link to={`/tv/${tvId}/season/${season.season_number}`}>
+                                  <p className="mb-[0.7em] text-[#428bca] hover:text-[#dcf836] font-normal font-merriweather cursor-pointer leading-[18px]">
+                                    {season.name.replace('Season', 'Phần')}
+                                  </p>
+                                </Link>
+                                <p className="text-base">
+                                  <span>{Number(new Date(season.air_date).getFullYear())}</span>
+                                  <span> - </span>
+                                  <span>{season.episode_count} Tập</span>
+                                </p>
+                                <p className="text-base leading-5">
+                                  {`Phần ${
+                                    season.season_number
+                                  } của Game of Thrones được khởi chiếu vào ngày ${new Intl.DateTimeFormat(
+                                    'vi'
+                                  ).format(new Date(season.air_date))}`}
+                                </p>
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                </>
               </div>
             </div>
           </div>
@@ -263,4 +356,4 @@ function MovieDetail() {
   );
 }
 
-export default MovieDetail;
+export default TVDetail;

@@ -60,6 +60,7 @@ export interface DetailMovie {
 }
 
 export interface DetailTV {
+  adult: boolean;
   backdrop_path: string;
   created_by: {
     id: number;
@@ -202,6 +203,7 @@ export interface HomeFilms {
 
 export interface FilmInfo {
   detail: DetailMovie | DetailTV;
+  detailSeason: DetailSeason;
   credits: Cast[];
   images: Image;
   reviews: Reviews[];
@@ -248,7 +250,7 @@ export interface Episode {
   }[];
 }
 export interface DetailSeason {
-  _id: string;
+  // _id: string;
   air_date: string;
   episodes: Episode[];
   name: string;
@@ -266,8 +268,54 @@ export interface User {
   uid: string;
 }
 
+export interface People {
+  birthday: string | null;
+  known_for_department: string;
+  deathday: null | string;
+
+  id: number;
+  name: string;
+  also_known_as: string[];
+  gender: number;
+
+  biography: string;
+  popularity: number;
+  place_of_birth: string | null;
+  profile_path: string | null;
+  adult: boolean;
+  imdb_id: string;
+  homepage: null | string;
+}
+
+export interface CommentDataType {
+  user: User;
+  value: string;
+  reactions: { [key: string]: string };
+  createdAt: {
+    seconds: number;
+    nanoseconds: number;
+  };
+  isEdited: boolean;
+}
+
 export interface getWatchReturnedType {
   detail?: DetailTV | DetailMovie | undefined;
   recommendations?: Item[] | undefined;
   detailSeasons?: DetailSeason[] | undefined;
+}
+
+export interface ConfigType {
+  [key: string]: string | number;
+}
+
+export interface ItemsPage {
+  page: number;
+  results: Item[];
+  total_results: number;
+  total_pages: number;
+}
+
+export interface getRecommendGenres2Type {
+  movieGenres: { id: number; name: string }[];
+  tvGenres: { id: number; name: string }[];
 }

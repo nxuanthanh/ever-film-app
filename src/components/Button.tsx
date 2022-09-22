@@ -1,14 +1,15 @@
-import React from 'react';
+import { MouseEvent, ReactElement, ReactNode } from 'react';
 
 interface ButtonProps {
   to?: string;
   href?: string;
   title: string;
-  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+  onClick: (event: MouseEvent<HTMLElement>) => void;
   className: string;
-  iconLeft?: React.ReactNode;
-  iconRight?: React.ReactNode;
+  iconLeft?: ReactNode;
+  iconRight?: ReactNode;
   disabled?: boolean;
+  children?: ReactElement;
 }
 
 function Button({
@@ -20,11 +21,12 @@ function Button({
   iconLeft,
   iconRight,
   disabled,
+  children,
   ...passProps
 }: ButtonProps) {
   return (
     <button
-      className={`${className} inline-flex items-center justify-center hover:opacity-80 transition-all duration-200 text-white text-base font-normal py-2 px-4 rounded cursor-pointer`}
+      className={`inline-flex items-center justify-center hover:opacity-80 transition-all duration-200 text-white text-base font-normal py-2 px-4 rounded border-[1px] cursor-pointer ${className}`}
       title={title}
       onClick={onClick}
       disabled={disabled}
