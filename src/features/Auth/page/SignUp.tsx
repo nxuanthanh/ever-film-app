@@ -4,6 +4,7 @@ import { Button } from 'components';
 import { createUserWithEmailAndPassword, GoogleAuthProvider } from 'firebase/auth';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { auth, db } from 'models';
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -92,6 +93,14 @@ function SignUp() {
     resolver: yupResolver(schema),
   });
   const onSubmit: SubmitHandler<FormInput> = (data) => handleSignUpSubmut(data);
+
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem('current_user') as string);
+    if (currentUser) {
+      navigate('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section className="p-12 mt-14">

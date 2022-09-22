@@ -12,9 +12,12 @@ import {
   MovieDetail,
   Movies,
   NewMovies,
+  PeopleDetail,
   Search,
   SeriesMovie,
-  ShowDetail,
+  TVDetail,
+  TVSeasonDetail,
+  WatchFilm,
 } from 'page';
 import { useEffect, useState } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
@@ -73,6 +76,8 @@ function App() {
 
       <Outlet />
       <Routes>
+        <Route path="login" element={<SignIn />} />
+        <Route path="signup" element={<SignUp />} />
         <Route index element={<Home currentTab={tab} />} />
         <Route path="FAQ" element={<FAQ />} />
         <Route path="search" element={<Search />} />
@@ -81,9 +86,10 @@ function App() {
         <Route path="type/show" element={<SeriesMovie />} />
         <Route path="browse" element={<NewMovies />} />
         <Route path="movie/:movieId" element={<MovieDetail />} />
-        <Route path="tv/:tvId" element={<ShowDetail />} />
-        <Route path="login" element={<SignIn />} />
-        <Route path="signup" element={<SignUp />} />
+        <Route path="tv/:tvId" element={<TVDetail />} />
+        <Route path="tv/:tv_id/season/:season_number" element={<TVSeasonDetail />} />
+        <Route path="watch/:filmId" element={<WatchFilm />} />
+        <Route path="person/:personId" element={<PeopleDetail />} />
         <Route path="forgot" element={<Forgot />} />
         <Route path="FAQ" element={<FAQ />} />
       </Routes>

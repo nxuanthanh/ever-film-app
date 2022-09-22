@@ -2,6 +2,7 @@ import { Google } from 'assets/icons';
 import { Button } from 'components';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, googleProvider } from 'models';
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -57,6 +58,14 @@ function SignIn() {
         notifyError(convertErrorCodeToMessage(errorCode));
       });
   };
+
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem('current_user') as string);
+    if (currentUser) {
+      navigate('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // const handleSignInGoogle = () => {
   //   signInWithPopup(auth, provider)
