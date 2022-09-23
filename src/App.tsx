@@ -1,6 +1,8 @@
 import { setCurrentUser } from 'app/authSlice';
 import { Footer, Header } from 'components';
+import { Protected } from 'components/common';
 import { Forgot, SignIn, SignUp } from 'features/Auth/page';
+import { Bookmarked } from 'features/Bookmark';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { useAppDispatch } from 'hooks/useRedux';
@@ -17,7 +19,8 @@ import {
   SeriesMovie,
   TVDetail,
   TVSeasonDetail,
-  WatchFilm,
+  WatchMovie,
+  WatchTV,
 } from 'page';
 import { useEffect, useState } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
@@ -78,20 +81,31 @@ function App() {
       <Routes>
         <Route path="login" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
-        <Route index element={<Home currentTab={tab} />} />
-        <Route path="FAQ" element={<FAQ />} />
+        <Route index element={<Home />} />
+        <Route path="faq" element={<FAQ />} />
         <Route path="search" element={<Search />} />
         <Route path="top" element={<HotMovies />} />
-        <Route path="type/movie" element={<Movies />} />
-        <Route path="type/show" element={<SeriesMovie />} />
         <Route path="browse" element={<NewMovies />} />
+
+        <Route path="type/movie" element={<Movies />} />
         <Route path="movie/:movieId" element={<MovieDetail />} />
+        <Route path="movie/watch/:filmId" element={<WatchMovie />} />
+
+        <Route path="type/show" element={<SeriesMovie />} />
         <Route path="tv/:tvId" element={<TVDetail />} />
-        <Route path="tv/:tv_id/season/:season_number" element={<TVSeasonDetail />} />
-        <Route path="watch/:filmId" element={<WatchFilm />} />
+        <Route path="tv/:tvId/season/:season_number" element={<TVSeasonDetail />} />
+        <Route path="tv/watch/:filmId" element={<WatchTV />} />
+
         <Route path="person/:personId" element={<PeopleDetail />} />
         <Route path="forgot" element={<Forgot />} />
-        <Route path="FAQ" element={<FAQ />} />
+        <Route
+          path="bookmarked"
+          element={
+            <Protected isSignedIn={true}>
+              <Bookmarked />
+            </Protected>
+          }
+        />
       </Routes>
 
       <Footer />

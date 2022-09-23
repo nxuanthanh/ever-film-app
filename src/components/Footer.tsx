@@ -1,4 +1,4 @@
-import { Facebook, Message, Telegram } from 'assets/icons';
+import { Facebook, Mail, Telegram } from 'assets/icons';
 import { Link } from 'react-router-dom';
 
 function Footer() {
@@ -7,7 +7,7 @@ function Footer() {
       <div className="container">
         <h3 className="text-base font-semibold text-white leading-[1.125rem]">
           Phim chất lượng cao online của{' '}
-          <Link to="/" className="text-[#428bca]">
+          <Link to="/" className="text-Link">
             XemPhim
           </Link>{' '}
           khác gì so với các trang phim khác?
@@ -44,7 +44,7 @@ function Footer() {
             title="Liên hệ"
             className="flex items-center justify-center mr-6 w-12 h-12 border border-solid border-[#ffffff5c] bg-[#071334] hover:bg-[#2f0a61] text-white rounded-full"
           >
-            <Message />
+            <Mail />
           </Link>
 
           <Link

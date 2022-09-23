@@ -9,5 +9,7 @@ export { default as Movies } from './Movie/Movies';
 export { default as MovieDetail } from './Movie/MovieDetail';
 export { default as FAQ } from './FAQ';
 export { default as Search } from './Search';
-export { default as WatchFilm } from './WatchFilm';
+export { default as WatchTV } from './TV/WatchTV';
+export { default as WatchMovie } from './Movie/WatchMovie';
+export { default as WatchFilm } from '../features/WatchFilm';
 export { default as PeopleDetail } from './PeopleDetail';

@@ -7,7 +7,7 @@ const routes = {
   new: 'browse',
   detailMovie: 'movie/:filmId',
   DetailTV: 'tv/:filmId',
-  FAQ: 'FAQ',
+  FAQ: 'faq',
 };
 
 export default routes;

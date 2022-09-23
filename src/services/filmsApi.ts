@@ -28,3 +28,15 @@ export const getDetailMovie = async (params: string): Promise<DetailMovie> => {
 export const getDetailTV = async (params: string): Promise<DetailTV> => {
   return (await axiosClient.get(`tv/${params}`)).data;
 };
+
+// export const getAccount = async (): Promise<any> => {
+//   return (await axiosClient.get(`/authentication/token/new`)).data;
+// };
+
+// export const getPermission = async (): Promise<any> => {
+//   return (await axiosClient.get(`/authenticate/${process.env.REACT_APP_REQUEST_TOKEN}`)).data;
+// };
+
+// export const createSession = async (): Promise<any> => {
+//   return (await axiosClient.post(`/authentication/session/new`)).data;
+// };

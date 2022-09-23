@@ -7,7 +7,7 @@ import { Slide } from 'components/Slider';
 import { Cast, DetailMovie, FilmInfo, Item, Video } from 'models';
 import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getMovieDetail } from 'services';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -17,6 +17,7 @@ function MovieDetail() {
   const { movieId } = useParams();
   const [videoKey, setVideoKey] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const { data, isLoading, isError, error } = useQuery<FilmInfo, Error>(
     ['movieDetail', movieId],
@@ -27,8 +28,6 @@ function MovieDetail() {
   const credits = data?.credits as Cast[];
   const videos = data?.videos as Video[];
   const similar = data?.similar as Item[];
-
-  console.log(data);
 
   if (isError) return <div>ERROR: ${error.message}</div>;
   if (isLoading) return <Loading />;
@@ -76,7 +75,7 @@ function MovieDetail() {
                     className="w-full py-[10px] px-5 gap-4 bg-primary hover:bg-[#f03a5f] hover:opacity-100 uppercase text-xl border-transparent"
                     title="Xem phim"
                     iconLeft={<Play />}
-                    onClick={() => console.log('heh')}
+                    onClick={() => navigate(`/movie/watch/${movieId}`)}
                   />
                 </div>
               </div>
@@ -89,7 +88,7 @@ function MovieDetail() {
                     {detail.original_title} (
                     <Link
                       to={`/year/${new Date(detail.release_date).getFullYear()}`}
-                      className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
+                      className="text-Link cursor-pointer hover:text-hover-link transition-all duration-150"
                     >
                       {new Date(detail.release_date).getFullYear()}
                     </Link>
@@ -120,7 +119,7 @@ function MovieDetail() {
                     />
 
                     <Button
-                      className="bg-transparent border-[#3e8ed0] px-4 py-[7px] gap-2 text-[#3e8ed0] rounded mr-0 hover:bg-[#3e8ed0] hover:text-white"
+                      className="bg-transparent border-lam px-4 py-[7px] gap-2 text-lam rounded mr-0 hover:bg-lam hover:text-white"
                       onClick={() => console.log('first')}
                       iconLeft={<Add className="text-white" />}
                       title="Bộ sưu tập"

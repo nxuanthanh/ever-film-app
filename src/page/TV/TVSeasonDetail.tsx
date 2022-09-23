@@ -11,11 +11,11 @@ import { resizeImage } from 'utils';
 
 function TVSeasonDetail() {
   const navigate = useNavigate();
-  const { tv_id, season_number } = useParams();
+  const { tvId, season_number } = useParams();
 
   const { data, isLoading, isError, error } = useQuery<any, Error>(
     ['detailTV', season_number],
-    () => getTVDetailSeasons(tv_id as string, season_number as string)
+    () => getTVDetailSeasons(tvId as string, season_number as string)
   );
 
   const detail = data?.detail as DetailTV;
@@ -50,7 +50,7 @@ function TVSeasonDetail() {
                     className="w-full py-[10px] px-5 gap-4 bg-primary hover:bg-[#f03a5f] hover:opacity-100 uppercase text-xl border-transparent"
                     title="Xem phim"
                     iconLeft={<Play />}
-                    onClick={() => navigate(`/watch/${detailSeason.episodes[0]?.id}`)}
+                    onClick={() => navigate(`/tv/watch/${tvId}`)}
                   />
                 </div>
               </div>
@@ -63,7 +63,7 @@ function TVSeasonDetail() {
                     {`${detail.original_name} (${detailSeason.name.toLowerCase()})`} (
                     <Link
                       to={`/year/${new Date(detail.first_air_date).getFullYear()}`}
-                      className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
+                      className="text-Link cursor-pointer hover:text-hover-link transition-all duration-150"
                     >
                       {new Date(detail.first_air_date).getFullYear()}
                     </Link>
@@ -92,7 +92,7 @@ function TVSeasonDetail() {
                     />
 
                     <Button
-                      className="bg-transparent border-[#3e8ed0] px-4 py-[7px] gap-2 text-[#3e8ed0] rounded mr-0 hover:bg-[#3e8ed0] hover:text-white"
+                      className="bg-transparent border-lam px-4 py-[7px] gap-2 text-lam rounded mr-0 hover:bg-lam hover:text-white"
                       onClick={() => console.log('first')}
                       iconLeft={<Add className="text-white" />}
                       title="Bộ sưu tập"
@@ -189,13 +189,11 @@ function TVSeasonDetail() {
                     {detailSeason.episodes.map((season, index) => (
                       <li key={season.id}>
                         {index > 0 && (
-                          <>
-                            <div className="border-t-[1px] border-t-[#dbdbdb80] mt-4 pb-4"></div>
-                          </>
+                          <div className="border-t-[1px] border-t-[#dbdbdb80] mt-4 pb-4"></div>
                         )}
                         <div className="flex gap-4 items-start">
                           <Link
-                            to={`/tv/${tv_id}/season/${season.season_number}`}
+                            to={`/tv/${tvId}/season/${season.season_number}`}
                             className="shrink-0 max-w-[154px] w-full"
                           >
                             <LazyLoadImage

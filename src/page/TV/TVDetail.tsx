@@ -11,7 +11,6 @@ import { getTVFullDetail } from 'services';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { resizeImage } from 'utils';
-import SeasonLists from './SeasonLists';
 
 function TVDetail() {
   const { tvId } = useParams();
@@ -96,14 +95,14 @@ function TVDetail() {
                                 src={resizeImage(season.poster_path)}
                                 alt=""
                                 effect="opacity"
-                                className="object-cover w-full h-full cursor-default"
+                                className="object-cover w-full h-full"
                               />
                             </Link>
                             <div className="flex-grow">
                               <p className="text-[#b5b5b5] font-normal">
                                 <Link
                                   to={`/tv/${tvId}/season/${season.season_number}`}
-                                  className="text-[#428bca] hover:text-[#dcf836] cursor-pointer"
+                                  className="text-Link hover:text-hover-link cursor-pointer"
                                 >
                                   {season.name.replace('Season', 'Phần')}{' '}
                                 </Link>
@@ -144,7 +143,7 @@ function TVDetail() {
                     {detail.original_name} (
                     <Link
                       to={`/year/${new Date(detail.first_air_date).getFullYear()}`}
-                      className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
+                      className="text-Link cursor-pointer hover:text-hover-link transition-all duration-150"
                     >
                       {new Date(detail.first_air_date).getFullYear()}
                     </Link>
@@ -174,7 +173,7 @@ function TVDetail() {
                     />
 
                     <Button
-                      className="bg-transparent border-[#3e8ed0] px-4 py-[7px] gap-2 text-[#3e8ed0] rounded mr-0 hover:bg-[#3e8ed0] hover:text-white"
+                      className="bg-transparent border-lam px-4 py-[7px] gap-2 text-lam rounded mr-0 hover:bg-lam hover:text-white"
                       onClick={() => console.log('first')}
                       iconLeft={<Add className="text-white" />}
                       title="Bộ sưu tập"
@@ -324,7 +323,7 @@ function TVDetail() {
                               </Link>
                               <div className="flex-grow">
                                 <Link to={`/tv/${tvId}/season/${season.season_number}`}>
-                                  <p className="mb-[0.7em] text-[#428bca] hover:text-[#dcf836] font-normal font-merriweather cursor-pointer leading-[18px]">
+                                  <p className="mb-[0.7em] text-Link hover:text-hover-link font-normal font-merriweather cursor-pointer leading-[18px]">
                                     {season.name.replace('Season', 'Phần')}
                                   </p>
                                 </Link>

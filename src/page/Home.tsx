@@ -5,11 +5,11 @@ import { FilterSection } from 'components/Slider';
 import { HomeFilms, Item } from 'models';
 import { getDetailMovies, getHomeMovies } from 'services';
 
-interface HomeProps {
-  currentTab: string;
-}
+// interface HomeProps {
+//   currentTab: string;
+// }
 
-export function Home({ currentTab }: HomeProps) {
+export function Home() {
   const {
     data: dataMovie,
     isLoading: isLoadingMovie,

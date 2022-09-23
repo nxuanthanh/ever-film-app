@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { resizeImage } from 'utils';
 
 function Slide({ data }: any) {
-  console.log(data);
   return (
     <Swiper slidesPerView={5} spaceBetween={16} loop className="tw-section-slider w-[992px]">
       {data.map((film: any) => (

@@ -41,7 +41,7 @@ function Search() {
       <div className="mt-[100px] w-full mb-12">
         <form className="bg-white rounded mb-6" onSubmit={searchSubmitHandler}>
           <input
-            className="w-full py-[11px] px-[14px] text-xl bg-transparent placeholder-gray-500 placeholder:font-light text-[#363636] outline-[#428bca]"
+            className="w-full py-[11px] px-[14px] text-xl bg-transparent placeholder-gray-500 placeholder:font-light text-[#363636] outline-link"
             type="text"
             placeholder="Nhập tên phim..."
             value={searchValue}
@@ -57,7 +57,7 @@ function Search() {
             <span className="text-white">Nếu không thấy phim cần tìm, hãy thử </span>
             <a
               href={`https://www.google.com/search?q=${encodeURI(searchValue)}xemphim.fun`}
-              className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150 underline"
+              className="text-Link cursor-pointer hover:text-hover-link transition-all duration-150 underline"
             >
               tìm với Google
             </a>

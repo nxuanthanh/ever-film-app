@@ -144,7 +144,7 @@ function SignUp() {
               </div>
               <button
                 type="submit"
-                className="py-2 px-4 bg-[#3e8ed0] rounded text-white w-full text-2xl h-[60px] hover:bg-[#3488ce]"
+                className="py-2 px-4 bg-lam rounded text-white w-full text-2xl h-[60px] hover:bg-[#3488ce]"
               >
                 Đăng ký
               </button>
@@ -159,8 +159,8 @@ function SignUp() {
                 onClick={() => () => signInWithProvider(new GoogleAuthProvider(), 'google')}
               />
             </div>
-            <p className="text-right text-[#428bca]">
-              <Link to="/login" className="hover:text-[#dcf836]">
+            <p className="text-right text-Link">
+              <Link to="/login" className="hover:text-hover-link">
                 Đăng nhập
               </Link>
             </p>

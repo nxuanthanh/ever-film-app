@@ -123,7 +123,7 @@ function SignIn() {
               </label>
               <button
                 type="submit"
-                className="py-2 px-4 bg-[#3e8ed0] rounded text-white w-full text-2xl h-[60px] hover:bg-[#3488ce]"
+                className="py-2 px-4 bg-lam rounded text-white w-full text-2xl h-[60px] hover:bg-[#3488ce]"
               >
                 Đăng nhập
               </button>
@@ -142,12 +142,12 @@ function SignIn() {
             />
           </div>
           {/* Login with google */}
-          <p className="text-right text-[#428bca]">
-            <Link to="/signup" className="hover:text-[#dcf836]">
+          <p className="text-right text-Link">
+            <Link to="/signup" className="hover:text-hover-link">
               Đăng ký
             </Link>
             &nbsp;·&nbsp;&nbsp;
-            <Link to="/forgot" className="hover:text-[#dcf836]">
+            <Link to="/forgot" className="hover:text-hover-link">
               Quên mật khẩu
             </Link>
           </p>

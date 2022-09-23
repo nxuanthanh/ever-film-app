@@ -27,7 +27,7 @@ function Forgot({ email, password, remember }: FormInput) {
 
               <button
                 type="submit"
-                className="py-2 px-4 bg-[#3e8ed0] rounded text-white w-full text-2xl h-[60px] hover:bg-[#3488ce]"
+                className="py-2 px-4 bg-lam rounded text-white w-full text-2xl h-[60px] hover:bg-[#3488ce]"
               >
                 Gửi
               </button>

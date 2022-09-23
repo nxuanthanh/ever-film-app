@@ -31,7 +31,7 @@ function FAQ() {
                 <a
                   href="https://1.1.1.1/"
                   target="_blank"
-                  className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
+                  className="text-Link cursor-pointer hover:text-hover-link transition-all duration-150"
                   rel="noreferrer"
                 >
                   download tại đây
@@ -40,7 +40,7 @@ function FAQ() {
                 <a
                   href="https://apkcombo.com/vi/vpn/"
                   target="_blank"
-                  className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
+                  className="text-Link cursor-pointer hover:text-hover-link transition-all duration-150"
                   rel="noreferrer"
                 >
                   tại đây
@@ -84,7 +84,7 @@ function FAQ() {
                 <a
                   href="https://play.google.com/store/apps/details?id=org.mozilla.firefox"
                   target="_blank"
-                  className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
+                  className="text-Link cursor-pointer hover:text-hover-link transition-all duration-150"
                   rel="noreferrer"
                 >
                   cài & dùng trình duyệt Firefox
@@ -104,7 +104,7 @@ function FAQ() {
               <a
                 href="https://imgur.com/a/D6nPGcl"
                 target="_blank"
-                className="text-[#428bca] cursor-pointer hover:text-[#dcf836] transition-all duration-150"
+                className="text-Link cursor-pointer hover:text-hover-link transition-all duration-150"
                 rel="noreferrer"
               >
                 click vào đây

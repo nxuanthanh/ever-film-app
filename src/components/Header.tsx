@@ -79,7 +79,7 @@ function Header({ currentTab, onChange }: HeaderProps) {
         onClick={() => {
           handleOnHeaderItemClick(item.tab);
         }}
-        className="flex items-center text-base font-normal text-white justify-center py-2 px-3 hover:bg-[#102c48] hover:text-[#428bca] active:bg-[#102c48] active:text-[#428bca] transition-all duration-200 cursor-pointer"
+        className="flex items-center text-base font-normal text-white justify-center py-2 px-3 hover:bg-[#102c48] hover:text-Link active:bg-[#102c48] active:text-Link transition-all duration-200 cursor-pointer"
       >
         {item.icon && <span>{item.icon}</span>}
         <span>{item.title}</span>
@@ -125,11 +125,11 @@ function Header({ currentTab, onChange }: HeaderProps) {
             <div
               className={`${
                 currentUser ? 'h-[52px]' : 'h-14'
-              } hover:bg-[#102c48] hover:text-[#428bca] inline-flex items-center justify-center transition-all duration-200 text-white text-base font-normal py-2 pl-4 pr-3 cursor-pointer`}
+              } hover:bg-[#102c48] hover:text-Link inline-flex items-center justify-center transition-all duration-200 text-white text-base font-normal py-2 pl-4 pr-3 cursor-pointer`}
             >
               <span>Thành Xuân</span>
               <span>
-                <GoChevronDown size={20} className="text-[#428bca] mt-1 ml-[6px]" />
+                <GoChevronDown size={20} className="text-Link mt-1 ml-[6px]" />
               </span>
             </div>
           </Menu>

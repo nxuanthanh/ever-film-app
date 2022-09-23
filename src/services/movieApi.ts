@@ -1,4 +1,4 @@
-import { FilmInfo, HomeFilms, Item, Video } from 'models';
+import { FilmInfo, getWatchReturnedType, HomeFilms, Item, Video } from 'models';
 import axiosClient from './axiosClient';
 
 export const getHomeMovies = async (): Promise<HomeFilms> => {
@@ -105,4 +105,16 @@ export const getMovieDetail = async (id: number): Promise<FilmInfo> => {
   }, {} as FilmInfo);
 
   return movieInfo;
+};
+
+export const getWatchMovie = async (id: number): Promise<getWatchReturnedType> => {
+  const res = await Promise.all([
+    axiosClient.get(`/movie/${id}`),
+    axiosClient.get(`/movie/${id}/recommendations`),
+  ]);
+
+  return {
+    detail: res[0].data,
+    recommendations: res[1].data.results.filter((item: Item) => item.poster_path),
+  };
 };

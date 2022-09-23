@@ -29,6 +29,12 @@ html {
     text-size-adjust: 100%;
 }
 
+/* CUSTOM SLIDER */
+:root {
+    --swiper-theme-color: white !important;
+    --swiper-navigation-size: 1rem !important;
+}
+
 /* CUSTOM UTILITIES */
 .tw-flex-center {
     @apply flex justify-center items-center;
