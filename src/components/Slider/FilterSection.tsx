@@ -181,7 +181,7 @@ function FilterSection({ hasSortType = false }: FilterSectionProps) {
             <select
               name={filter.label}
               id={filter.label}
-              className="relative w-full py-2 pl-[11px] pr-10 h-10 rounded text-[#363636] text-base flex items-center appearance-none after:content-['2'] after:w-10 after:h-10 after:bg-red-700"
+              className="relative w-full py-2 pl-[11px] pr-10 h-10 rounded text-[#363636] text-base flex items-center appearance-none after:content-[''] after:w-10 after:h-10 after:bg-red-700"
             >
               {filter.options?.map((option, index) => (
                 <option key={index} value={option.value}>

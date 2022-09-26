@@ -4,7 +4,6 @@ import {
   Collection,
   FacebookShare,
   Like,
-  Message,
   Subtitle,
   Tick,
   UnLike,
@@ -25,6 +24,7 @@ import {
 } from 'models';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { embedMovie, embedTV } from 'utils';
 import { Comment } from './Comment';
 
 interface WatchFilmProps {
@@ -47,9 +47,6 @@ function WatchFilm({
 }: WatchFilmProps & getWatchReturnedType) {
   const currentUser = useAppSelector((state) => state.auth.user);
   // const { isMobile } = useMediaQueryService();
-
-  console.log(detail);
-  console.log(recommendations);
 
   useEffect(() => {
     if (!currentUser) return;
@@ -183,14 +180,14 @@ function WatchFilm({
               </div>
               <div className="flex-1 p-3 flex flex-col items-end">
                 <Button
-                  className="px-5 py-2 gap-[14.4px] rounded-full border-lam text-lam w-fit mt-4"
+                  className="px-5 py-2 gap-[14.4px] rounded-full border-lam text-lam w-fit mt-4 hover:bg-lam hover:text-white hover:opacity-100"
                   onClick={() => console.log('first')}
                   title="Tab Song ngữ"
                 />
 
                 <div className="flex w-fit text-white mt-4">
                   <ArrowShare className="mr-[6px]" />
-                  <Link to={`/tv/${''}`} className="text-Link">
+                  <Link to={`/tv/${''}`} className="text-Link hover:text-hover-link">
                     Về trang giới thiệu phim
                   </Link>
                 </div>
@@ -297,26 +294,9 @@ function WatchFilm({
                 title="Kích hoạt VIP mode"
               />
             </div>
-            <div className="border-t-[#4a4a4a] border-t-solid border-t max-w-[600px]">
-              <div className="flex pl-10 gap-3 pt-5 text-xl font-merriweather">
-                <Message /> Bình luận phim
-              </div>
-              <form className="mt-5 mb-6 flex flex-col items-end text-[#363636]">
-                <textarea
-                  name="comment"
-                  id="comment_box"
-                  rows={3}
-                  className="w-full rounded p-3 mb-[.75rem]"
-                  placeholder="Nhập bình luận"
-                />
-                <Button
-                  className="border-white px-3 py-[6px] gap-[10px] w-fit rounded-sm text-xs"
-                  onClick={() => console.log('first')}
-                  title="Gửi"
-                />
-              </form>
+            <div className="w-full max-w-[720px]">
+              <Comment media_type={media_type} id={detail?.id} />
             </div>
-            <Comment media_type={media_type} id={detail?.id} />
           </div>
         </section>
       </div>

@@ -4,7 +4,7 @@ interface ButtonProps {
   to?: string;
   href?: string;
   title: string;
-  onClick: (event: MouseEvent<HTMLElement>) => void;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
   className: string;
   iconLeft?: ReactNode;
   iconRight?: ReactNode;

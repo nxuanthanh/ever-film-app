@@ -15,6 +15,7 @@ export { default as UnLike } from './UnLike';
 export { default as Message } from './Message';
 export { default as Google } from './Google';
 export { default as Play } from './Play';
+export { default as Sort } from './Sort';
 export { default as Imdb } from './Imdb';
 export { default as Add } from './Add';
 export { default as FacebookShare } from './FacebookShare';

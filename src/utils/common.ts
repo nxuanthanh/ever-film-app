@@ -17,22 +17,22 @@ export const embedTV = (id: number, season: number, episode: number): string =>
 
 export const calculateTimePassed = (time: number): string => {
   const unit = {
-    year: 12 * 30 * 7 * 24 * 60 * 60 * 1000,
-    month: 30 * 7 * 24 * 60 * 60 * 1000,
-    week: 7 * 24 * 60 * 60 * 1000,
-    day: 24 * 60 * 60 * 1000,
-    hour: 60 * 60 * 1000,
-    minute: 60 * 1000,
+    năm: 12 * 30 * 7 * 24 * 60 * 60 * 1000,
+    tháng: 30 * 7 * 24 * 60 * 60 * 1000,
+    tuần: 7 * 24 * 60 * 60 * 1000,
+    ngày: 24 * 60 * 60 * 1000,
+    giờ: 60 * 60 * 1000,
+    phút: 60 * 1000,
   };
   const diff = Date.now() - time;
   for (const key in unit) {
     if (diff > unit[key as keyof typeof unit]) {
       const timePassed = Math.floor(diff / unit[key as keyof typeof unit]);
-      return `${timePassed} ${key}${timePassed > 1 ? 's' : ''} ago`;
+      return `${timePassed} ${key} trước`;
     }
   }
 
-  return 'Just now';
+  return 'Vừa xong';
 };
 
 export const convertErrorCodeToMessage = (errorCode: string) => {

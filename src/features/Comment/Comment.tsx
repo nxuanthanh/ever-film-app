@@ -1,20 +1,11 @@
-import {
-  addDoc,
-  collection,
-  doc,
-  getDocs,
-  orderBy,
-  query,
-  serverTimestamp,
-  setDoc,
-  Timestamp,
-} from 'firebase/firestore';
+import { Message, Sort } from 'assets/icons';
+import { Button } from 'components';
+import { addDoc, collection, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { useAppSelector, useCollectionQuery } from 'hooks';
 import { db } from 'models';
-import { FormEvent, useEffect, useState } from 'react';
-import { MdSend } from 'react-icons/md';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link, useLocation } from 'react-router-dom';
+import { FormEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
+import CommentUserData from './CommentUserData';
 
 interface CommentProps {
   id?: number;
@@ -23,14 +14,13 @@ interface CommentProps {
 
 function Comment({ id, media_type }: CommentProps) {
   const currentUser = useAppSelector((state) => state.auth.user);
-  const location = useLocation();
 
   const [commentInputValue, setCommentInputValue] = useState('');
   const [isSendingComment, setIsSendingComment] = useState(false);
   const [commentLimit, setCommentLimit] = useState(5);
   const [sortType, setSortType] = useState('latest');
 
-  const commentSubmitHandler = (e: FormEvent) => {
+  const handlerSubmitComment = (e: FormEvent) => {
     e.preventDefault();
 
     if (!commentInputValue) return;
@@ -56,135 +46,89 @@ function Comment({ id, media_type }: CommentProps) {
     query(collection(db, `${media_type}-${id}`), orderBy('createdAt', 'desc'))
   );
 
-  // Auto comment
-  useEffect(() => {
-    if (!media_type || !id) return;
-    getDocs(collection(db, `${media_type}-${id as number}`)).then((docSnapshot) => {
-      if (
-        !docSnapshot.docs.some((doc) => doc.data()?.user.uid === 'CZGmXpePYsd1YryQR3C8xA5YOzb2')
-      ) {
-        setDoc(doc(db, `${media_type}-${id as number}`, 'admin'), {
-          user: {
-            displayName:
-              'Anh có thể làm tính năng reaction nhưng sẽ không bao giờ có được em react story',
-            email: 'huuphuoc@gmail.com',
-            emailVerified: false,
-            photoURL: 'https://i.ibb.co/CJqGvY6/satthudatinh.jpg',
-            uid: 'CZGmXpePYsd1YryQR3C8xA5YOzb2',
-          },
-          value:
-            'Ngoài bình luận, trang web còn có chức năng thả cảm xúc, xem thông tin những người thả cảm xúc, (cảm xúc được nhiều người thả sẽ được ưu tiên hiện đầu), trả lời bình luận, chỉnh sửa, xóa, ẩn bình luận, sắp xếp bình luận, tải thêm bình luận.',
-          reactions: {
-            '3RkuRS4zSqadAkKDqSfTjCzwzF92': 'haha',
-            GMaGmpy8ZaRBEhtaoZJdd9pNNXz1: 'love',
-            UNuwtFtu69YHDGTs2emT6O8ClSG3: 'love',
-            Z3eRARZ9jlftBLA6u0g8MWABkwo2: 'like',
-            nj99GDXzPwNhcfUpk5PkyNFiwPt1: 'sad',
-            ufw994VFRnQDCL0f6ISXpeIBTFX2: 'haha',
-            vOV472eiPwf1GT8YPjiXs4xfYxt1: 'haha',
-          },
-          // reactions: {
-          //   "6Lg5V78TSEWckhcLAh2DVwq5uBQ2": "haha",
-          //   "7heoxozOe1W14I5sYUgAPr50Zj52": "love",
-          //   DyXuUkhd9aTbJIeUn8Sgagoiv042: "love",
-          //   PxxS9XDYd3RgU2Dgjq63MwdCvvn1: "angry",
-          //   SUzdiwRMrNcRVJaKOJP3YH5hg7n1: "haha",
-          //   aRoVaCH1MeakCx6Hnx6nRKmVwrt2: "haha",
-          //   cn9xgPSUVlNzGasKyxoTTvFnVWk1: "wow",
-          // },
-          createdAt: Timestamp.fromDate(
-            new Date('Sat Aug 03 2022 10:10:32 GMT+0700 (Indochina Time)')
-          ),
-          isEdited: true,
-        });
-      }
-    });
-  }, [media_type, id]);
-
   return (
     <div className="mb-16">
-      <div className="flex items-center justify-between mb-6">
-        <div className="relative w-[140px]">
-          <p className="md:text-2xl text-xl text-white font-medium">Comments</p>
-          {commentData && commentData.size > 0 && (
-            <p className="absolute md:-top-1 md:-right-1 -top-2 right-5 bg-dark-lighten w-6 h-6 text-sm rounded-full tw-flex-center">
-              {commentData.size}
-            </p>
-          )}
-        </div>
-        <div className="flex">
-          <button
-            onClick={() => setSortType('latest')}
-            className={`border border-dark-lighten px-2 py-1 rounded-l-xl transition duration-300   hover:text-white ${
-              sortType === 'latest' && 'bg-dark-lighten-2 text-white'
-            }`}
+      {currentUser ? (
+        <div className="border-t-[#4a4a4a] border-t-solid border-t">
+          <div className="flex pl-10 gap-3 pt-5 text-xl font-merriweather">
+            <Message /> Bình luận phim
+          </div>
+          <form
+            className="mt-5 mb-6 flex flex-col items-end text-[#363636]"
+            onSubmit={handlerSubmitComment}
           >
-            Latest
-          </button>
-          <button
-            onClick={() => setSortType('popular')}
-            className={`border border-dark-lighten px-2 py-1 rounded-r-xl transition duration-300   hover:text-white ${
-              sortType === 'popular' && 'bg-dark-lighten-2 text-white'
-            }`}
-          >
-            Popular
-          </button>
-        </div>
-      </div>
-
-      <div className="md:px-4 px-1">
-        <div className="mb-12">
-          {!currentUser && (
-            <p className="text-lg text-center">
-              You need to
-              <Link
-                to={`/auth?redirect=${encodeURIComponent(location.pathname)}`}
-                className="text-primary font-medium"
-              >
-                {' login '}
-              </Link>
-              to comment.
-            </p>
-          )}
-          {currentUser && (
-            <form onSubmit={commentSubmitHandler} className="flex gap-4 items-center">
-              <LazyLoadImage
+            <div className="flex w-full">
+              {/* <LazyLoadImage
                 src={currentUser.photoURL as string}
                 alt=""
                 effect="opacity"
-                className="w-12 h-12 rounded-full object-cover shrink-0"
+                className="w-10 h-10 mr-4 rounded-full object-cover shrink-0"
                 referrerPolicy="no-referrer"
-              />
-              <input
+              /> */}
+              <textarea
                 value={commentInputValue}
                 onChange={(e) => setCommentInputValue(e.target.value)}
-                type="text"
-                className="py-3 flex-1 bg-dark-lighten outline-none rounded-full px-4 text-white"
-                placeholder="Write comment..."
+                name="comment"
+                id="comment_box"
+                rows={2}
+                className="w-full rounded p-3 mb-[.75rem] flex-1 block"
+                placeholder="Nhập bình luận"
               />
-              {isSendingComment ? (
-                <div className="w-10 h-10 rounded-full border-[3px] border-t-transparent border-primary animate-spin"></div>
-              ) : (
-                <button>
-                  <MdSend size={30} className="text-primary " />
-                </button>
-              )}
-            </form>
-          )}
+            </div>
+            {isSendingComment ? (
+              <div className="w-10 h-10 rounded-full border-[3px] border-t-transparent border-primary animate-spin"></div>
+            ) : (
+              <Button
+                className="border-white px-3 py-[6px] gap-[10px] w-fit rounded-sm text-xs"
+                title="Gửi"
+              />
+            )}
+          </form>
         </div>
-
-        {/* <><CommentUserData
-          isLoading={isLoading}
-          isError={isError}
-          sortType={sortType}
-          // @ts-ignore
-          commentData={commentData}
-          commentLimit={commentLimit}
-          media_type={media_type}
-          id={id}
-          role="comment"
-        /></> */}
+      ) : (
+        <p className="text-[#b5b5b5]">
+          Để gửi bình luận phim, vui lòng
+          <Link to={`/login`} className="text-Link hover:text-hover-link">
+            {' đăng nhập '}
+          </Link>
+        </p>
+      )}
+      <div className="flex items-center justify-between mb-6">
+        <div className="relative w-[140px] flex">
+          <p className="text-white font-medium">{commentData?.size} bình luận</p>
+        </div>
+        <div className="flex relative text-white group">
+          <Sort className="mr-2" />
+          <p className="uppercase font-normal">Sắp xếp theo</p>
+          <div className="absolute transition duration-300 top-8 z-10 left-0 hidden bg-white group-hover:block min-w-max rounded">
+            <div className="flex flex-col py-2 after:content-[''] after:w-40 after:h-3 after:bg-transparent after:-top-3 after:absolute ">
+              <button
+                onClick={() => setSortType('latest')}
+                className={`px-4 py-1 transition duration-300 text-[#4a4a4a] hover:bg-[#f5f5f5] hover:text-[#0a0a0a] w-full text-start`}
+              >
+                Mới nhất
+              </button>
+              <button
+                onClick={() => setSortType('popular')}
+                className={`px-4 py-1 transition duration-300 text-[#4a4a4a] hover:bg-[#f5f5f5] hover:text-[#0a0a0a] w-full text-start`}
+              >
+                Bình luận hàng đầu
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <CommentUserData
+        isLoading={isLoading}
+        isError={isError}
+        sortType={sortType}
+        commentData={commentData}
+        commentLimit={commentLimit}
+        media_type={media_type}
+        id={id}
+        role="comment"
+      />
 
       {commentData && commentData.size > commentLimit && (
         <button className="font-medium" onClick={() => setCommentLimit((prev) => prev + 5)}>
@@ -196,106 +140,3 @@ function Comment({ id, media_type }: CommentProps) {
 }
 
 export default Comment;
-
-// useEffect(()=>{
-//   onSnapshot(collection(db, `${media_type}-${id as number}`))
-// },[])
-
-// const isLoading = false;
-// const isError = false;
-
-// const commentData = {
-//   size: 6,
-//   docs: [
-//     {
-//       id: "1",
-
-//       data: () => ({
-//         user: {
-//           displayName: "Pupc",
-
-//           photoURL: "/me.jpg",
-//         },
-//         value: "phim hay quá xá quá đã quá xịn vip hehe",
-//         reactions: {},
-//         createdAt: { seconds: 5, nanoseconds: 5000000000 },
-//       }),
-//     },
-//     {
-//       id: "2",
-
-//       data: () => ({
-//         user: {
-//           displayName: "Pupc",
-
-//           photoURL: "/me.jpg",
-//         },
-//         value: "phim hay quá xá quá đã quá xịn vip hehe",
-//         reactions: {},
-//         createdAt: { seconds: 5, nanoseconds: 5000000000 },
-//       }),
-//     },
-//     {
-//       id: "3",
-
-//       data: () => ({
-//         user: {
-//           displayName: "Pupc",
-
-//           photoURL: "/me.jpg",
-//         },
-//         value: "phim hay quá xá quá đã quá xịn vip hehe",
-//         reactions: {},
-//         createdAt: { seconds: 5, nanoseconds: 5000000000 },
-//       }),
-//     },
-//     {
-//       id: "4",
-
-//       data: () => ({
-//         user: {
-//           displayName: "Pupc",
-
-//           photoURL: "/me.jpg",
-//         },
-//         value: "phim hay quá xá quá đã quá xịn vip hehe",
-//         reactions: {
-//           "10": "sad",
-//           "3": "haha",
-//           "2": "sad",
-//           "4": "love",
-//           "5": "love",
-//         },
-//         createdAt: { seconds: 5, nanoseconds: 5000000000 },
-//       }),
-//     },
-//     {
-//       id: "5",
-
-//       data: () => ({
-//         user: {
-//           displayName: "Pupc",
-
-//           photoURL: "/me.jpg",
-//         },
-//         value: "phim hay quá xá quá đã quá xịn vip hehe",
-//         reactions: {},
-//         createdAt: { seconds: 5, nanoseconds: 5000000000 },
-//       }),
-//     },
-//     {
-//       id: "6",
-
-//       data: () => ({
-//         user: {
-//           displayName: "Pupc",
-
-//           photoURL: "/me.jpg",
-//         },
-//         value: "phim hay quá xá quá đã quá xịn vip hehe",
-//         reactions: {},
-//         createdAt: { seconds: 5, nanoseconds: 5000000000 },
-//       }),
-//     },
-//   ],
-// };
