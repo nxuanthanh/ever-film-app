@@ -37,12 +37,12 @@ const EditComment: FunctionComponent<EditCommentProps> = ({
               ? setShowOptionFor(undefined)
               : setShowOptionFor(singleDoc.id)
           }
-          className="transition duration-300 mt-4 h-8 w-8 bg-transparent rounded-full tw-flex-center hover:bg-dark-lighten-2"
+          className="transition duration-300 bg-transparent"
         >
           <BsThreeDotsVertical size={20} />
         </button>
         {showOptionFor === singleDoc.id && (
-          <div className=" bg-white py-2 rounded w-max">
+          <div className=" bg-white py-2 w-36 rounded absolute top-13 right-0 z-20">
             {currentUser && currentUser.uid === singleDoc.data()?.user.uid && (
               <div className="flex flex-col">
                 <button
@@ -50,7 +50,7 @@ const EditComment: FunctionComponent<EditCommentProps> = ({
                     setEditingCommentFor(singleDoc.id);
                     setShowOptionFor(undefined);
                   }}
-                  className="transition duration-300 hover:text-white text-[#4a4a4a] text-left px-4"
+                  className="transition duration-300 hover:bg-slate-200 text-[#4a4a4a] text-left px-4"
                 >
                   Chỉnh sửa
                 </button>
@@ -59,7 +59,7 @@ const EditComment: FunctionComponent<EditCommentProps> = ({
                     setIsShowPrompt(true);
                     setShowOptionFor(undefined);
                   }}
-                  className="transition duration-300 hover:text-white text-[#4a4a4a] text-left px-4"
+                  className="transition duration-300 hover:bg-slate-200 text-[#4a4a4a] text-left px-4"
                 >
                   Xoá
                 </button>
@@ -85,17 +85,13 @@ const EditComment: FunctionComponent<EditCommentProps> = ({
       <div ref={show}>
         {isShowPrompt && (
           <>
-            <div className="fixed top-[30%] md:left-[40%] md:right-auto left-[5%] right-[5%] md:w-[400px] z-50 bg-dark-lighten rounded-md min-h-[100px] shadow-md px-3 py-5">
-              <div className="mx-auto mb-7 h-16 w-16 rounded-full border-[3px] border-red-500 tw-flex-center">
-                <AiOutlineDelete size={40} className="text-red-500 " />
+            <div className="fixed w-[520px] -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 z-50  bg-[#06121e] rounded-md min-h-[100px] shadow-md px-6 py-5">
+              <div className="mx-auto mb-6 h-12 w-12 rounded-full border-[3px] border-primary tw-flex-center">
+                <AiOutlineDelete size={32} className="text-primary " />
               </div>
               <p className="text-white text-xl text-center font-medium mb-4">
-                Bạn sắp xóa bình luận này
+                Bạn có chắc muốn xóa bình luận này không
               </p>
-              <p className="text-center mb-[2px]">
-                Thao tác này sẽ xóa phim của bạn và không thể khôi phục
-              </p>
-              <p className="text-center ">Bạn có chắc không?</p>
               <div className="flex mt-8 justify-end">
                 <button
                   onClick={() => setIsShowPrompt(false)}
@@ -105,7 +101,7 @@ const EditComment: FunctionComponent<EditCommentProps> = ({
                 </button>
                 <button
                   onClick={() => deleteDoc(doc(db, `${media_type}-${id}`, singleDoc.id))}
-                  className="px-6 py-1 rounded-md text-white bg-red-500 hover:bg-red-600 transition duration-300"
+                  className="px-4 py-1 rounded text-white bg-primary hover:opacity-80 transition duration-300"
                 >
                   Đồng ý
                 </button>

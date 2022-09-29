@@ -1,15 +1,16 @@
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useAppSelector } from 'hooks';
 import { db, User } from 'models';
-import { FormEvent, FunctionComponent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { MdSend } from 'react-icons/md';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface ReplyBoxProps {
   commendId: string;
+  setIsReplyingFor: Function;
 }
 
-const ReplyBox: FunctionComponent<ReplyBoxProps> = ({ commendId }) => {
+function ReplyBox({ commendId, setIsReplyingFor }: ReplyBoxProps) {
   const currentUser = useAppSelector((state) => state.auth.user);
 
   const [commentInputValue, setCommentInputValue] = useState('');
@@ -42,6 +43,7 @@ const ReplyBox: FunctionComponent<ReplyBoxProps> = ({ commendId }) => {
         referrerPolicy="no-referrer"
       />
       <input
+        onBlur={() => setIsReplyingFor(undefined)}
         value={commentInputValue}
         onChange={(e) => setCommentInputValue(e.target.value)}
         type="text"
@@ -57,6 +59,6 @@ const ReplyBox: FunctionComponent<ReplyBoxProps> = ({ commendId }) => {
       )}
     </form>
   );
-};
+}
 
 export default ReplyBox;

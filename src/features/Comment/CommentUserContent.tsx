@@ -64,7 +64,7 @@ function CommentUserContent({
 
   const determineReactionText = (reactions: { [key: string]: string }) => {
     if (!Object.keys(reactions).includes((currentUser as User).uid)) {
-      return 'Reaction';
+      return 'default';
     }
 
     // @ts-ignore
@@ -119,17 +119,19 @@ function CommentUserContent({
           return (
             <Fragment key={doc.id}>
               {!commentHiden.includes(doc.id) && (
-                <li className="mb-6 flex gap-4 items-start last:mb-0 font-roboto">
+                <li className="relative mb-6 flex gap-4 items-start font-roboto max-w-full">
                   <div className="shrink-0">
                     <LazyLoadImage
                       src={docData.user.photoURL as string}
                       alt=""
                       effect="opacity"
-                      className="rounded-full w-10 h-10 object-cover "
+                      className={`${
+                        role === 'comment' ? 'w-10 h-10' : 'w-6 h-6'
+                      } rounded-full object-cover`}
                       referrerPolicy="no-referrer"
                     />
                   </div>
-                  <div className={'peer flex-1'}>
+                  <div className="peer flex-1">
                     <div
                       className={`relative ${
                         editingCommentFor === doc.id ? 'block' : 'inline-block'
@@ -148,12 +150,7 @@ function CommentUserContent({
                         </div>
                       </div>
                       {editingCommentFor !== doc.id && (
-                        <p
-                          style={{ wordWrap: 'break-word' }}
-                          className="text-sm mt-[6px] max-w-[62vw] md:max-w-none"
-                        >
-                          {docData.value}
-                        </p>
+                        <p className="text-sm mt-[6px] break-all">{docData.value}</p>
                       )}
                       {editingCommentFor === doc.id && (
                         <>
@@ -162,7 +159,7 @@ function CommentUserContent({
                               e.preventDefault();
                               handleEditComment(doc.id);
                             }}
-                            className="flex gap-2 items-center"
+                            className="flex mt-3 gap-2 items-center"
                           >
                             <input
                               onKeyDown={(e) => {
@@ -171,23 +168,23 @@ function CommentUserContent({
                               ref={editValueRef}
                               defaultValue={docData.value}
                               type="text"
-                              className="w-full bg-dark-lighten-2 outline-none py-1 px-2 rounded-md mt-1 text-lg text-white"
+                              className="w-full bg-transparent outline-none text-sm border-b-[1px] border-b-solid border-b-inherit"
                               autoFocus
                             />
                             <button type="submit">
                               <MdSend size={25} className="text-primary" />
                             </button>
                           </form>
-                          <p className="mt-1 text-sm">Press Esc to cancel</p>
+                          <p className="mt-1 text-sm">Nhấn phím Esc để thoát</p>
                         </>
                       )}
                     </div>
-                    <div className="flex gap-3 mt-3 items-center">
+                    <div className="flex gap-3 mt-1 items-center">
                       {currentUser && (
                         <div className="relative group text-xs">
                           <>
                             <button>
-                              {determineReactionText(docData.reactions) === 'Reaction' && (
+                              {determineReactionText(docData.reactions) === 'default' && (
                                 <p>Thích</p>
                               )}
                             </button>
@@ -282,7 +279,9 @@ function CommentUserContent({
                       {docData.isEdited && <p className="text-xs">Đã chỉnh sửa</p>}
                     </div>
 
-                    {isReplyingFor === doc.id && <ReplyBox commendId={doc.id} />}
+                    {isReplyingFor === doc.id && (
+                      <ReplyBox setIsReplyingFor={setIsReplyingFor} commendId={doc.id} />
+                    )}
 
                     <Reply commendId={doc.id} />
 

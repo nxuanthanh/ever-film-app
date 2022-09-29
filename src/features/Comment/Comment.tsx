@@ -100,7 +100,7 @@ function Comment({ id, media_type }: CommentProps) {
         <div className="flex relative text-white group">
           <Sort className="mr-2" />
           <p className="uppercase font-normal">Sắp xếp theo</p>
-          <div className="absolute transition duration-300 top-8 z-10 left-0 hidden bg-white group-hover:block min-w-max rounded">
+          <div className="absolute transition duration-300 top-8 z-30 left-0 hidden bg-white group-hover:block min-w-max rounded">
             <div className="flex flex-col py-2 after:content-[''] after:w-40 after:h-3 after:bg-transparent after:-top-3 after:absolute ">
               <button
                 onClick={() => setSortType('latest')}

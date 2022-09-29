@@ -48,7 +48,7 @@ function CommentUserData({
           ))}
         </ul>
       ) : commentData?.size === 0 && role === 'comment' ? (
-        <div className="text-white text-center text-lg">Không có bình luận nào.</div>
+        <div className="text-white text-center text-base">Không có bình luận nào.</div>
       ) : (
         <CommentUserContent
           commentData={commentData}

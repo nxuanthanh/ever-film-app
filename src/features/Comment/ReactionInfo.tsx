@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react';
+import { useState } from 'react';
 import { AiFillHeart, AiTwotoneLike } from 'react-icons/ai';
 import { BsEmojiLaughingFill } from 'react-icons/bs';
 import { FaAngry, FaSadTear, FaSurprise } from 'react-icons/fa';
@@ -8,7 +8,7 @@ interface ReactionInfoProps {
   docData: any;
 }
 
-const ReactionInfo: FunctionComponent<ReactionInfoProps> = ({ docData }) => {
+function ReactionInfo({ docData }: ReactionInfoProps) {
   const [isShowReactionData, setIsShowReactionData] = useState(false);
 
   const convertReaction = (reactions: { [key: string]: string }) => {
@@ -170,6 +170,6 @@ const ReactionInfo: FunctionComponent<ReactionInfoProps> = ({ docData }) => {
       )}{' '}
     </>
   );
-};
+}
 
 export default ReactionInfo;
