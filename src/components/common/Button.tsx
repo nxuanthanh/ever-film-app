@@ -1,4 +1,4 @@
-import { MouseEvent, ReactElement, ReactNode } from 'react';
+import { forwardRef, MouseEvent, ReactElement, ReactNode } from 'react';
 
 interface ButtonProps {
   to?: string;
@@ -12,21 +12,25 @@ interface ButtonProps {
   children?: ReactElement;
 }
 
-function Button({
-  to,
-  href,
-  title,
-  onClick,
-  className,
-  iconLeft,
-  iconRight,
-  disabled,
-  children,
-  ...passProps
-}: ButtonProps) {
+function Button(
+  {
+    to,
+    href,
+    title,
+    onClick,
+    className,
+    iconLeft,
+    iconRight,
+    disabled,
+    children,
+    ...passProps
+  }: ButtonProps,
+  ref: any
+) {
   return (
     <button
-      className={`inline-flex items-center justify-center hover:opacity-80 transition-all duration-200 text-white font-normal py-2 px-4 rounded border-[1px] cursor-pointer ${className}`}
+      ref={ref}
+      className={`inline-flex items-center justify-center transition-all duration-200 text-white font-normal py-2 px-4 rounded border-[1px] cursor-pointer ${className}`}
       title={title}
       onClick={onClick}
       disabled={disabled}
@@ -38,4 +42,4 @@ function Button({
   );
 }
 
-export default Button;
+export default forwardRef(Button);

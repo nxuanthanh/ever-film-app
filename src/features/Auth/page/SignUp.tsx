@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Google } from 'assets/icons';
-import { Button } from 'components';
+import { Button } from 'components/common';
 import { createUserWithEmailAndPassword, GoogleAuthProvider } from 'firebase/auth';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { auth, db } from 'models';

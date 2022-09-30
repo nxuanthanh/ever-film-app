@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Loading } from 'components';
+import { Loading } from 'components/common';
 import { FilterSection } from 'components/Slider';
 import { Item } from 'models';
 import { LazyLoadImage } from 'react-lazy-load-image-component';

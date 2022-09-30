@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Loading } from 'components';
+import { Loading } from 'components/common';
 import { Error } from 'components/common';
 import WatchFilm from 'features/WatchFilm';
 import { getWatchReturnedType } from 'models';

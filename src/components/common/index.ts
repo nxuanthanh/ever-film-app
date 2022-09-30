@@ -1,2 +1,9 @@
 export { default as Error } from './Error';
 export { default as Protected } from './Protected';
+export { default as NotFound } from './NotFound';
+export { default as Loading } from './Loading';
+export { default as Header } from './Header';
+export { default as Footer } from './Footer';
+export { default as Button } from './Button';
+export { default as Title } from './Title';
+export { default as Skeleton } from './Skeleton';

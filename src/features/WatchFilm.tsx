@@ -8,9 +8,9 @@ import {
   Tick,
   UnLike,
 } from 'assets/icons';
-import { Button } from 'components';
+import { Button } from 'components/common';
 import Skeleton from 'components/common/Skeleton';
-import Title from 'components/Title';
+import Title from 'components/common/Title';
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useAppSelector } from 'hooks';
 import {
@@ -110,7 +110,7 @@ function WatchFilm({
       <div>
         <div className="relative h-0 pb-[56.25%]">
           {!detail && <Skeleton className="absolute top-0 left-0 w-full h-full rounded-sm" />}
-          {/* {detail && (
+          {detail && (
             <iframe
               className="absolute w-full h-full top-0 left-0"
               src={
@@ -122,7 +122,7 @@ function WatchFilm({
               frameBorder="0"
               allowFullScreen
             ></iframe>
-          )} */}
+          )}
         </div>
         <p className="mt-3 text-center text-xs text-white">
           Phim không có tiếng / mất tiếng nhân vật / âm thanh bị rè?

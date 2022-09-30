@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Grid, List } from 'assets/icons';
-import { Loading } from 'components';
+import { Loading } from 'components/common';
 import { useState } from 'react';
 import { getRegions } from 'services';
 

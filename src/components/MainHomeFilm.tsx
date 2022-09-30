@@ -1,5 +1,4 @@
 import { HomeFilms } from 'models';
-import { FC } from 'react';
 import SectionSlider from './Slider/SectionSlider';
 
 interface MainHomeFilmsProps {

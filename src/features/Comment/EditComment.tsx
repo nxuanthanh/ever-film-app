@@ -50,7 +50,7 @@ const EditComment: FunctionComponent<EditCommentProps> = ({
                     setEditingCommentFor(singleDoc.id);
                     setShowOptionFor(undefined);
                   }}
-                  className="transition duration-300 hover:bg-slate-200 text-[#4a4a4a] text-left px-4"
+                  className="transition duration-300 hover:bg-[#f5f5f5] text-[#4a4a4a] text-left px-4"
                 >
                   Chỉnh sửa
                 </button>
@@ -59,7 +59,7 @@ const EditComment: FunctionComponent<EditCommentProps> = ({
                     setIsShowPrompt(true);
                     setShowOptionFor(undefined);
                   }}
-                  className="transition duration-300 hover:bg-slate-200 text-[#4a4a4a] text-left px-4"
+                  className="transition duration-300 hover:bg-[#f5f5f5] text-[#4a4a4a] text-left px-4"
                 >
                   Xoá
                 </button>

@@ -1,5 +1,6 @@
 import { Chat, Collection, Donate, Logout, User } from 'assets/icons';
 import images from 'assets/images';
+import Menu from 'components/Popper/Menu';
 import { signOut } from 'firebase/auth';
 import { useAppSelector } from 'hooks/useRedux';
 import { auth } from 'models';
@@ -9,7 +10,6 @@ import { IoMdSearch } from 'react-icons/io';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Button from './Button';
-import Menu from './Popper/Menu';
 
 interface HeaderProps {
   currentTab: string;
@@ -42,19 +42,19 @@ function Header({ currentTab, onChange }: HeaderProps) {
   ];
 
   const userMenu = [
-    { title: 'Tài khoản', to: '/settings', icon: <User />, onClick: () => console.log('first') },
-    { title: 'Donate', to: '/donate', icon: <Donate />, onClick: handleOnLogout },
+    { title: 'Tài khoản', to: '/settings', icon: <User />, onClick: () => navigate('/settings') },
+    { title: 'Donate', to: '/donate', icon: <Donate />, onClick: () => navigate('/donate') },
     {
       title: 'Bộ sưu tập',
-      to: '/collection',
+      to: '/bookmarked',
       icon: <Collection />,
-      onClick: () => console.log('first'),
+      onClick: () => navigate('/bookmarked'),
     },
     {
       title: 'Cặp câu song ngữ',
       to: '/pairs',
       icon: <Chat />,
-      onClick: () => console.log('first'),
+      onClick: () => navigate('/pairs'),
     },
     { title: 'Thoát', to: '/logout', icon: <Logout />, onClick: handleOnLogout },
   ];
@@ -121,20 +121,15 @@ function Header({ currentTab, onChange }: HeaderProps) {
 
       <div>
         {currentUser ? (
-          <Menu items={userMenu}>
-            <div
-              className={`${
-                currentUser ? 'h-[52px]' : 'h-14'
-              } hover:bg-[#102c48] hover:text-Link inline-flex items-center justify-center transition-all duration-200 text-white text-base font-normal py-2 pl-4 pr-3 cursor-pointer`}
-            >
-              <span>Thành Xuân</span>
-              <span>
-                <GoChevronDown size={20} className="text-Link mt-1 ml-[6px]" />
-              </span>
-            </div>
+          <Menu items={userMenu} placement={'bottom-end'} offset={[0, 0]}>
+            <Button
+              title={currentUser.displayName || ''}
+              iconRight={<GoChevronDown size={20} className="text-Link mt-1 ml-[6px]" />}
+              className="h-[52px] hover:bg-[#102c48] hover:text-Link rounded-none pr-3 border-transparent"
+            />
           </Menu>
         ) : (
-          <div className={` ${currentUser ? 'h-[52px]' : 'h-14'} py-2 px-3`}>
+          <div className={`h-14 py-2 px-3`}>
             <Button
               to="login"
               title="Đăng nhâp"

@@ -59,10 +59,19 @@ export const getRandomAvatar = (): string => {
   return avatars[Math.floor(Math.random() * avatars.length)];
 };
 
-export const notifySuccess = (message: string) => {
+export const notifySuccess = (
+  message: string,
+  position:
+    | 'top-right'
+    | 'top-center'
+    | 'top-left'
+    | 'bottom-right'
+    | 'bottom-center'
+    | 'bottom-left' = 'top-center'
+) => {
   toast.success(message, {
-    position: 'top-center',
-    autoClose: 5000,
+    position: position,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -71,10 +80,19 @@ export const notifySuccess = (message: string) => {
   });
 };
 
-export const notifyError = (message: string) => {
+export const notifyError = (
+  message: string,
+  position:
+    | 'top-right'
+    | 'top-center'
+    | 'top-left'
+    | 'bottom-right'
+    | 'bottom-center'
+    | 'bottom-left' = 'top-center'
+) => {
   toast.error(message, {
-    position: 'top-center',
-    autoClose: 5000,
+    position: position,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

@@ -1,6 +1,5 @@
 import { setCurrentUser } from 'app/authSlice';
-import { Footer, Header } from 'components';
-import { Protected } from 'components/common';
+import { Footer, Header } from 'components/common';
 import { Forgot, SignIn, SignUp } from 'features/Auth/page';
 import { Bookmarked } from 'features/Bookmark';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -98,14 +97,7 @@ function App() {
 
         <Route path="person/:personId" element={<PeopleDetail />} />
         <Route path="forgot" element={<Forgot />} />
-        <Route
-          path="bookmarked"
-          element={
-            <Protected isSignedIn={true}>
-              <Bookmarked />
-            </Protected>
-          }
-        />
+        <Route path="bookmarked" element={<Bookmarked />} />
       </Routes>
 
       <Footer />

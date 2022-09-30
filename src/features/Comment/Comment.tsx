@@ -1,5 +1,5 @@
 import { Message, Sort } from 'assets/icons';
-import { Button } from 'components';
+import { Button } from 'components/common';
 import { addDoc, collection, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { useAppSelector, useCollectionQuery } from 'hooks';
 import { db } from 'models';

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Loading } from 'components';
+import { Loading } from 'components/common';
 import MainHomeFilms from 'components/MainHomeFilm';
 import { FilterSection } from 'components/Slider';
 import { HomeFilms, Item } from 'models';

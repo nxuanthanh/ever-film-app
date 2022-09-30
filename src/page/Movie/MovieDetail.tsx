@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { Add, FacebookShare, Imdb, Play } from 'assets/icons';
-import { Button, Loading } from 'components';
+import { Imdb, Play } from 'assets/icons';
+import { Button, Loading } from 'components/common';
 import Modal from 'components/Modal';
 import { ModalContent } from 'components/Modal/ModalContent';
 import { Slide } from 'components/Slider';
+import { FilmDetailButton } from 'layouts';
 import { Cast, DetailMovie, FilmInfo, Item, Video } from 'models';
 import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -109,34 +110,7 @@ function MovieDetail() {
                   </span>
                   <div className="font-bold  text-white">{detail.vote_average.toFixed(1)}</div>
                 </div>
-                <div className="flex items-center justify-between mb-14">
-                  <div className="flex items-center">
-                    <Button
-                      className="bg-[#485fc7] px-4 py-[7px] mr-3 gap-[14.4px] rounded border-transparent"
-                      onClick={() => console.log('first')}
-                      iconLeft={<FacebookShare />}
-                      title="Chia sẻ"
-                    />
-
-                    <Button
-                      className="bg-transparent border-lam px-4 py-[7px] gap-2 text-lam rounded mr-0 hover:bg-lam hover:text-white"
-                      onClick={() => console.log('first')}
-                      iconLeft={<Add className="text-white" />}
-                      title="Bộ sưu tập"
-                    />
-                  </div>
-                  <div className="flex items-center">
-                    {detail.genres.map((genre, idx) => (
-                      <Button
-                        className="bg-transparent hover:bg-white hover:text-[#485fc7] border-white text-white text-xs rounded-full mr-2 px-[15px] py-[5px]"
-                        onClick={() => console.log('first')}
-                        title={genre.name}
-                        key={idx}
-                        to={`/genre/${genre.name}`}
-                      />
-                    ))}
-                  </div>
-                </div>
+                <FilmDetailButton genres={detail.genres} detail={detail} />
 
                 <div className="mb-6">
                   <div className="flex">

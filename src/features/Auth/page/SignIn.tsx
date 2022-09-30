@@ -1,5 +1,5 @@
 import { Google } from 'assets/icons';
-import { Button } from 'components';
+import { Button } from 'components/common';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, googleProvider } from 'models';
 import { useEffect } from 'react';
