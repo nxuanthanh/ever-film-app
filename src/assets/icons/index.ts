@@ -18,5 +18,6 @@ export { default as Play } from './Play';
 export { default as Sort } from './Sort';
 export { default as Imdb } from './Imdb';
 export { default as Add } from './Add';
+export { default as Eye } from './Eye';
 export { default as FacebookShare } from './FacebookShare';
 export { default as ArrowShare } from './ArrowShare';

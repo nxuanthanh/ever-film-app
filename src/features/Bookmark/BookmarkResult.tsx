@@ -1,3 +1,4 @@
+import FilmItem from 'components/common/FilmItem';
 import { Item } from 'models';
 import { HiCheck } from 'react-icons/hi';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -23,9 +24,6 @@ function BookmarkResult({
     <>
       {films.length === 0 && !isLoading && (
         <div className="text-white text-2xl text-center col-span-full mt-10">
-          <div className="flex justify-center ">
-            <LazyLoadImage src="/error.png" alt="" className="w-[600px] object-cover" />
-          </div>
           <p className="mt-5">
             {pageType === 'bookmark'
               ? "Your bookmark list for this type is empty. Let's bookmark some!"
@@ -33,12 +31,13 @@ function BookmarkResult({
           </p>
         </div>
       )}
-      {films.length > 0 &&
-        films.map((item) => (
-          <li key={item.id} className="relative">
-            {/* <FilmItem item={item} /> */}
+      <ul className="grid grid-cols-5 gap-4">
+        {films.length > 0 &&
+          films.map((item) => (
+            <li key={item.id} className="list-none">
+              <FilmItem film={item} />
 
-            {isEditing && (
+              {/* {isEditing && (
               <button
                 onClick={() =>
                   setSelections((prev: number[]) =>
@@ -56,9 +55,10 @@ function BookmarkResult({
                   } transition duration-300 text-white`}
                 />
               </button>
-            )}
-          </li>
-        ))}
+            )} */}
+            </li>
+          ))}
+      </ul>
     </>
   );
 }

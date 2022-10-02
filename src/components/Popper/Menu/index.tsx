@@ -24,6 +24,7 @@ function Menu({ children, items, offset, className, placement, layout = 'header'
         interactive
         placement={placement}
         offset={offset}
+        // onHide={() => setHistory((prev) => prev.slice(0, prev.length - 1))}
         render={(attrs) => (
           <div tabIndex={-1} {...attrs}>
             {layout === 'header' ? (
@@ -60,7 +61,7 @@ function Menu({ children, items, offset, className, placement, layout = 'header'
                             item.onClick();
                             setHistory((prev) => [...prev, item.children]);
                           } else {
-                            item.onClick ?? item.onClick();
+                            item.onClick();
                           }
                         }}
                         className="text-[#4a4a4a] text-[0.875rem] hover:text-[#0a0a0a] leading-5 pr-12"

@@ -15,3 +15,12 @@ export interface IconProps {
   width?: string;
   height?: string;
 }
+
+export interface FilmItemModel {
+  bookmark_type?: string;
+  id: number;
+  media_type: string;
+  poster_path: string;
+  title: string;
+  vote_average: number;
+}

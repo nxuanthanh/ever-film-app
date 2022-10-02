@@ -1,4 +1,4 @@
-import { Skeleton, Title } from 'components/common';
+import { Title } from 'components/common';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { useAppSelector } from 'hooks';
 import { db, Item } from 'models';
@@ -35,6 +35,9 @@ function Bookmarked() {
     return () => unsubDoc();
   }, [currentUser]);
 
+  const wantWatchList = bookmarkedFilms.filter((item) => item.bookmark_type === 'expected');
+  const watchedList = bookmarkedFilms.filter((item) => item.bookmark_type === 'watched');
+
   if (isError) return <div>ERROR</div>;
 
   return (
@@ -47,22 +50,40 @@ function Bookmarked() {
             Bộ sưu tập phim của bạn
           </h1>
           <h2 className="text-white font-semibold text-2xl mb-6">Các phim bạn muốn xem:</h2>
-          <div className="text-[#7a7a7a]">
-            Bạn chưa thêm phim nào vào danh sách này <br />
-            <br />
-            <br />
-          </div>
+          {wantWatchList.length > 0 ? (
+            <BookmarkResult
+              films={wantWatchList}
+              isEditing={isEditing}
+              selections={selections}
+              setSelections={setSelections}
+              isLoading={isLoading}
+            />
+          ) : (
+            <div className="text-[#7a7a7a]">
+              Bạn chưa thêm phim nào vào danh sách này <br />
+              <br />
+              <br />
+            </div>
+          )}
 
           <hr className="border-t-2 border-t-white my-6" />
 
           <h2 className="text-white font-semibold text-2xl mb-6">Các phim bạn đã xem:</h2>
-          <BookmarkResult
-            films={bookmarkedFilms}
-            isEditing={isEditing}
-            selections={selections}
-            setSelections={setSelections}
-            isLoading={isLoading}
-          />
+          {watchedList.length > 0 ? (
+            <BookmarkResult
+              films={watchedList}
+              isEditing={isEditing}
+              selections={selections}
+              setSelections={setSelections}
+              isLoading={isLoading}
+            />
+          ) : (
+            <div className="text-[#7a7a7a]">
+              Bạn chưa thêm phim nào vào danh sách này <br />
+              <br />
+              <br />
+            </div>
+          )}
         </div>
       </div>
     </>

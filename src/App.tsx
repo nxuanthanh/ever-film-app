@@ -21,19 +21,19 @@ import {
   WatchMovie,
   WatchTV,
 } from 'page';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import { notifyError } from 'utils';
 
 function App() {
-  const [tab, setTab] = useState('movie');
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         dispatch(setCurrentUser(null));
-        console.log('user is not logged in');
+        notifyError('user is not logged in');
         return;
       }
 
@@ -74,7 +74,7 @@ function App() {
 
   return (
     <div>
-      <Header currentTab={tab} onChange={setTab} />
+      <Header />
 
       <Outlet />
       <Routes>

@@ -23,6 +23,7 @@ export interface Item {
   original_name?: string;
   origin_country?: string[];
   name?: string;
+  bookmark_type?: string;
 }
 
 export interface DetailMovie {
