@@ -288,6 +288,23 @@ export interface People {
   homepage: null | string;
 }
 
+export interface PeopleImage {
+  aspect_ratio: number;
+  file_path: string;
+  height: number;
+
+  iso_639_1: null;
+  vote_average: number | number;
+  vote_count: number;
+  width: number;
+}
+
+export interface PeopleFull {
+  detail: People;
+  images: PeopleImage[];
+  credits: Item[];
+}
+
 export interface CommentDataType {
   user: User;
   value: string;

@@ -29,6 +29,7 @@ function MovieDetail() {
   const credits = data?.credits as Cast[];
   const videos = data?.videos as Video[];
   const similar = data?.similar as Item[];
+  console.log(credits);
 
   if (isError) return <div>ERROR: ${error.message}</div>;
   if (isLoading) return <Loading />;
@@ -162,7 +163,7 @@ function MovieDetail() {
                       <SwiperSlide key={credit.id}>
                         <div className="flex flex-col items-center justify-start">
                           <Link
-                            to={`/person/${credit.credit_id}`}
+                            to={`/person/${credit.id}`}
                             className="w-[120px] h-[120px] block overflow-hidden rounded-full hover:shadow-[0_0_0_2px_#cc7b19] mt-[2px] mb-[.5em] mx-[2px]"
                           >
                             <LazyLoadImage
@@ -170,7 +171,7 @@ function MovieDetail() {
                               className="object-cover"
                             />
                           </Link>
-                          <Link to={`/person/${credit.credit_id}`}>
+                          <Link to={`/person/${credit.id}`}>
                             <p className="text-[#dbdbdb] text-[0.9em] font-bold hover:underline">
                               {credit.original_name}
                             </p>

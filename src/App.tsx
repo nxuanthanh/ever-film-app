@@ -1,5 +1,6 @@
 import { setCurrentUser } from 'app/authSlice';
 import { Footer, Header } from 'components/common';
+import config from 'config';
 import { Forgot, SignIn, SignUp } from 'features/Auth/page';
 import { Bookmarked } from 'features/Bookmark';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -33,7 +34,6 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         dispatch(setCurrentUser(null));
-        notifyError('user is not logged in');
         return;
       }
 
@@ -78,26 +78,28 @@ function App() {
 
       <Outlet />
       <Routes>
-        <Route path="login" element={<SignIn />} />
-        <Route path="signup" element={<SignUp />} />
         <Route index element={<Home />} />
-        <Route path="faq" element={<FAQ />} />
-        <Route path="search" element={<Search />} />
-        <Route path="top" element={<HotMovies />} />
-        <Route path="browse" element={<NewMovies />} />
 
-        <Route path="type/movie" element={<Movies />} />
-        <Route path="movie/:movieId" element={<MovieDetail />} />
-        <Route path="movie/watch/:filmId" element={<WatchMovie />} />
+        <Route path={config.routes.login} element={<SignIn />} />
+        <Route path={config.routes.signup} element={<SignUp />} />
 
-        <Route path="type/show" element={<SeriesMovie />} />
-        <Route path="tv/:tvId" element={<TVDetail />} />
-        <Route path="tv/:tvId/season/:season_number" element={<TVSeasonDetail />} />
-        <Route path="tv/watch/:filmId" element={<WatchTV />} />
+        <Route path={config.routes.FAQ} element={<FAQ />} />
+        <Route path={config.routes.search} element={<Search />} />
+        <Route path={config.routes.hot} element={<HotMovies />} />
+        <Route path={config.routes.new} element={<NewMovies />} />
 
-        <Route path="person/:personId" element={<PeopleDetail />} />
-        <Route path="forgot" element={<Forgot />} />
-        <Route path="bookmarked" element={<Bookmarked />} />
+        <Route path={config.routes.movie} element={<Movies />} />
+        <Route path={config.routes.detailMovie} element={<MovieDetail />} />
+        <Route path={config.routes.watchMovie} element={<WatchMovie />} />
+
+        <Route path={config.routes.TVSeries} element={<SeriesMovie />} />
+        <Route path={config.routes.DetailTV} element={<TVDetail />} />
+        <Route path={config.routes.DetailTVSeason} element={<TVSeasonDetail />} />
+        <Route path={config.routes.watchTV} element={<WatchTV />} />
+
+        <Route path={config.routes.peopleDetail} element={<PeopleDetail />} />
+        <Route path={config.routes.forgot} element={<Forgot />} />
+        <Route path={config.routes.bookmarked} element={<Bookmarked />} />
       </Routes>
 
       <Footer />

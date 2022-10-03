@@ -3,11 +3,19 @@ const routes = {
   search: 'search',
   hot: 'top',
   movie: 'type/movie',
-  tv: 'type/show',
+  TVSeries: 'type/show',
   new: 'browse',
-  detailMovie: 'movie/:filmId',
-  DetailTV: 'tv/:filmId',
+  detailMovie: 'movie/:movieId',
+  DetailTV: 'tv/:tvId',
   FAQ: 'faq',
+  login: '/login',
+  signup: '/signup',
+  DetailTVSeason: 'tv/:tvId/season/:season_number',
+  watchTV: 'tv/watch/:filmId',
+  watchMovie: 'movie/watch/:filmId',
+  forgot: 'forgot',
+  peopleDetail: 'person/:personId',
+  bookmarked: '/bookmarked',
 };
 
 export default routes;

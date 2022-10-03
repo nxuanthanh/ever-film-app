@@ -5,9 +5,10 @@ import { resizeImage } from 'utils';
 
 interface FilmItemProps {
   film: Item;
+  className?: string;
 }
 
-function FilmItem({ film }: FilmItemProps) {
+function FilmItem({ film, className }: FilmItemProps) {
   return (
     <div>
       <Link to={film.media_type === 'movie' ? `/movie/${film.id}` : `/tv/${film.id}`}>
@@ -18,7 +19,9 @@ function FilmItem({ film }: FilmItemProps) {
             effect="blur"
           />
           <div>
-            <p className="text-left whitespace-nowrap overflow-hidden text-ellipsis text-base text-gray-300 group-hover:text-white transition duration-300">
+            <p
+              className={`text-left whitespace-nowrap overflow-hidden text-ellipsis text-base text-gray-300 group-hover:text-white transition duration-300 ${className}`}
+            >
               {film.title || film.name}
             </p>
           </div>

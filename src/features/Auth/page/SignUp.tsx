@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Google } from 'assets/icons';
 import { Button } from 'components/common';
+import config from 'config';
 import { createUserWithEmailAndPassword, GoogleAuthProvider } from 'firebase/auth';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { auth, db } from 'models';
@@ -160,7 +161,7 @@ function SignUp() {
               />
             </div>
             <p className="text-right text-Link">
-              <Link to="/login" className="hover:text-hover-link">
+              <Link to={config.routes.login} className="hover:text-hover-link">
                 Đăng nhập
               </Link>
             </p>

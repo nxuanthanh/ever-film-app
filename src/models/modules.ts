@@ -1,13 +1,13 @@
-import { MouseEventHandler, ReactElement } from 'react';
+import { ReactElement } from 'react';
 
 export interface MenuItemModel {
   title: string;
   icon?: ReactElement;
   to?: string;
   children?: {
-    data: { title: string; onClick: MouseEventHandler<HTMLButtonElement> }[];
+    data: { title: string; onClick: Function }[];
   };
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClick: Function;
 }
 
 export interface IconProps {
@@ -17,7 +17,7 @@ export interface IconProps {
 }
 
 export interface FilmItemModel {
-  bookmark_type?: string;
+  bookmark_type: string;
   id: number;
   media_type: string;
   poster_path: string;

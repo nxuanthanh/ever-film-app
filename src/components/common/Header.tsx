@@ -1,6 +1,7 @@
 import { Chat, Collection, Donate, Logout, User } from 'assets/icons';
 import images from 'assets/images';
 import Menu from 'components/Popper/Menu';
+import config from 'config';
 import { signOut } from 'firebase/auth';
 import { useAppSelector } from 'hooks/useRedux';
 import { auth } from 'models';
@@ -41,9 +42,9 @@ function Header() {
     { title: 'Donate', to: '/donate', icon: <Donate />, onClick: () => navigate('/donate') },
     {
       title: 'Bộ sưu tập',
-      to: '/bookmarked',
+      to: `${config.routes.bookmarked}`,
       icon: <Collection />,
-      onClick: () => navigate('/bookmarked'),
+      onClick: () => navigate(config.routes.bookmarked),
     },
     {
       title: 'Cặp câu song ngữ',
@@ -51,7 +52,7 @@ function Header() {
       icon: <Chat />,
       onClick: () => navigate('/pairs'),
     },
-    { title: 'Thoát', to: '/logout', icon: <Logout />, onClick: handleOnLogout },
+    { title: 'Thoát', icon: <Logout />, onClick: handleOnLogout },
   ];
 
   const handleOnScroll = () => {
@@ -76,7 +77,7 @@ function Header() {
   };
 
   const handleOnSignInClick = () => {
-    navigate('/login');
+    navigate(config.routes.login);
   };
 
   useEffect(() => {
@@ -119,7 +120,7 @@ function Header() {
         ) : (
           <div className={`h-14 py-2 px-3`}>
             <Button
-              to="login"
+              to={config.routes.login}
               title="Đăng nhâp"
               onClick={handleOnSignInClick}
               className="bg-secondary h-full border-transparent"

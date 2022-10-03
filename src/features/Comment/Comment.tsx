@@ -1,5 +1,6 @@
 import { Message, Sort } from 'assets/icons';
 import { Button } from 'components/common';
+import config from 'config';
 import { addDoc, collection, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { useAppSelector, useCollectionQuery } from 'hooks';
 import { db } from 'models';
@@ -88,7 +89,7 @@ function Comment({ id, media_type }: CommentProps) {
       ) : (
         <p className="text-[#b5b5b5]">
           Để gửi bình luận phim, vui lòng
-          <Link to={`/login`} className="text-Link hover:text-hover-link">
+          <Link to={config.routes.login} className="text-Link hover:text-hover-link">
             {' đăng nhập '}
           </Link>
         </p>
