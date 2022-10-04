@@ -25,9 +25,8 @@ function SignIn() {
       remember: currentUser.password,
     },
   });
-  const onSubmit: SubmitHandler<FormInput> = (data) => handleFormSubmit(data);
 
-  const handleFormSubmit = (data: FormInput) => {
+  const handleFormSubmit: SubmitHandler<FormInput> = (data: FormInput) => {
     const email = data.email as string;
     const password = data.password as string;
     const remember = data.remember;
@@ -75,7 +74,7 @@ function SignIn() {
             Đăng nhập
           </h1>
           <div className="flex flex-col items-start p-5 mb-6 shadow-[0_0.5em_1em_-0.125em_#0a0a0a1a] bg-[#363636] rounded-md border-[#dbdbdb]">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleFormSubmit)}>
               <input
                 placeholder="Email"
                 {...register('email')}

@@ -10,6 +10,8 @@ const routes = {
   FAQ: 'faq',
   login: '/login',
   signup: '/signup',
+  profile: '/profile',
+  donate: '/donate',
   DetailTVSeason: 'tv/:tvId/season/:season_number',
   watchTV: 'tv/watch/:filmId',
   watchMovie: 'movie/watch/:filmId',

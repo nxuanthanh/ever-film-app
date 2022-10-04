@@ -22,10 +22,10 @@ import {
   WatchMovie,
   WatchTV,
 } from 'page';
+import Profile from 'page/Profile';
 import { useEffect } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-import { notifyError } from 'utils';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -82,6 +82,7 @@ function App() {
 
         <Route path={config.routes.login} element={<SignIn />} />
         <Route path={config.routes.signup} element={<SignUp />} />
+        <Route path={config.routes.profile} element={<Profile />} />
 
         <Route path={config.routes.FAQ} element={<FAQ />} />
         <Route path={config.routes.search} element={<Search />} />

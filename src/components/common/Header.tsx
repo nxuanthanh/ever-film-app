@@ -38,11 +38,21 @@ function Header() {
   ];
 
   const userMenu = [
-    { title: 'Tài khoản', to: '/settings', icon: <User />, onClick: () => navigate('/settings') },
-    { title: 'Donate', to: '/donate', icon: <Donate />, onClick: () => navigate('/donate') },
+    {
+      title: 'Tài khoản',
+      to: config.routes.profile,
+      icon: <User />,
+      onClick: () => navigate(config.routes.profile),
+    },
+    {
+      title: 'Donate',
+      to: config.routes.donate,
+      icon: <Donate />,
+      onClick: () => navigate(config.routes.donate),
+    },
     {
       title: 'Bộ sưu tập',
-      to: `${config.routes.bookmarked}`,
+      to: config.routes.bookmarked,
       icon: <Collection />,
       onClick: () => navigate(config.routes.bookmarked),
     },
