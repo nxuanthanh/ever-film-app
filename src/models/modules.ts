@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { ConfigType } from './types';
 
 export interface MenuItemModel {
   title: string;
@@ -23,4 +24,28 @@ export interface FilmItemModel {
   poster_path: string;
   title: string;
   vote_average: number;
+}
+
+// export interface QueryModel {
+//   type: [];
+//   genre: [];
+//   country: [];
+//   year: [];
+//   duration: [];
+//   sort_by: [];
+// }
+
+export interface FilterProps {
+  filters?: ConfigType;
+  onChange?: Function;
+}
+
+export interface OptionModel {
+  readonly value: string;
+  readonly label: string;
+}
+
+export interface GroupedOption {
+  readonly label: string;
+  readonly options: readonly OptionModel[];
 }

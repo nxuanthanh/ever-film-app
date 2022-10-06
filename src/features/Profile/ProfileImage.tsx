@@ -1,10 +1,11 @@
-import axios from 'axios';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useAppSelector } from 'hooks';
 import { db } from 'models';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { HiOutlineUpload } from 'react-icons/hi';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import axiosClient from 'services/axiosClient';
+import { notifySuccess } from 'utils';
 
 // interface ProfileImageProps {}
 
@@ -14,7 +15,7 @@ function ProfileImage() {
   const currentUser = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
-    axios.get('https://api.quotable.io/random').then((res) => setQuote(res.data.content));
+    axiosClient.get('https://api.quotable.io/random').then((res) => setQuote(res.data.content));
   }, []);
 
   const changeProfileImage = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +26,8 @@ function ProfileImage() {
       const form = new FormData();
       // @ts-ignore
       form.append('image', e.target.files[0]);
-      const res = await axios({
+
+      const res = await axiosClient({
         method: 'post',
         url: `https://api.imgbb.com/1/upload?key=02efec2c3808e9fdeb329eaca6ba30e0`,
         data: form,
@@ -36,7 +38,11 @@ function ProfileImage() {
 
       updateDoc(doc(db, 'users', currentUser.uid), {
         photoUrl: res.data.data.display_url,
-      }).finally(() => setIsUpdatingImg(false));
+      })
+        .then(() => {
+          notifySuccess('Update profile picture successfully', 'top-right');
+        })
+        .finally(() => setIsUpdatingImg(false));
     } catch (error) {
       console.log(error);
     }

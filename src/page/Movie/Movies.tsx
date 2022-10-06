@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from 'components/common';
-import { FilterSection } from 'components/Slider';
+import { FilterSection } from 'features/Filter';
 import { Item } from 'models';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ function Movies() {
       <div className="container">
         <h1 className="text-white text-[2rem] font-semibold leading-[1.125]">Phim lẻ</h1>
         <div className="mb-3 mt-3">
-          <FilterSection hasSortType={true} />
+          <FilterSection />
         </div>
 
         <div>

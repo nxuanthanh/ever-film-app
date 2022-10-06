@@ -45,10 +45,10 @@ function App() {
           dispatch(
             setCurrentUser({
               uid: user.uid,
-              displayName: user.displayName,
+              displayName: doc.data()?.displayName,
+              photoURL: doc.data()?.photoUrl || '',
               email: user.email,
               emailVerified: user.emailVerified,
-              photoURL: user.photoURL || '',
               // user.photoURL + "?access_token=" + doc.data()?.token || "",
               // doc.data()?.photoUrl.startsWith("https://i.ibb.co") ?
             })

@@ -193,8 +193,8 @@ function Profile() {
       )}
 
       <section className="container">
-        <div className="flex p-12 pt-24">
-          <div className="flex-grow pt-7 md:pl-10 px-3">
+        <div className="flex pt-24 mb-12">
+          <div className="flex-grow p-3">
             <div className="pb-4 border-b border-dark-lighten-2">
               <h1 className="text-[35px] text-white font-semibold uppercase">Account settings</h1>
             </div>

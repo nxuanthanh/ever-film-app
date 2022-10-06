@@ -98,3 +98,7 @@ html {
 .navbar-bg {
     background-color: rgba(51, 10, 103, 0.93);
 }
+
+.css-1okebmr-indicatorSeparator {
+    display: none;
+}

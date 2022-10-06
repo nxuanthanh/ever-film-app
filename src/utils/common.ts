@@ -100,3 +100,26 @@ export const notifyError = (
     progress: undefined,
   });
 };
+
+export const customStyles = {
+  control: (styles: any) => ({
+    ...styles,
+    height: '40px',
+    border: 0,
+    boxShadow: 'none',
+  }),
+  option: (styles: any, { data, isDisabled, isFocused, isSelected }: any) => ({
+    ...styles,
+    color: isSelected ? 'white' : '#363636',
+    padding: '0 0 0 10px',
+  }),
+
+  singleValue: (provided: any) => {
+    return { ...provided };
+  },
+
+  menu: (styles: any) => ({
+    ...styles,
+    zIndex: 5,
+  }),
+};
