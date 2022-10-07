@@ -1,4 +1,3 @@
-import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { sortOptions } from 'docs/data';
 import { useCurrentParams } from 'hooks';
 import { FilterProps } from 'models';
@@ -7,8 +6,6 @@ import Select from 'react-select';
 import { customStyles } from 'utils';
 
 function SortBy({ filters, onChange }: FilterProps) {
-  const [parent] = useAutoAnimate();
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [currentSearchParams] = useCurrentParams();
@@ -21,14 +18,11 @@ function SortBy({ filters, onChange }: FilterProps) {
       sort_by: sortValue,
     });
   };
+
   const sortType = searchParams.get('sort_by') || 'popularity.desc';
 
   return (
-    <div
-      // @ts-ignore
-      ref={parent}
-      className="flex flex-col items-start justify-center p-3 w-full"
-    >
+    <div className="flex flex-col items-start justify-center p-3 w-full">
       <label htmlFor="sort_by" className="mb-2 text-base text-white font-bold">
         Sắp xếp:
       </label>

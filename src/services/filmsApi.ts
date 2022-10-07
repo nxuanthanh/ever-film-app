@@ -1,8 +1,34 @@
-import { DetailMovie, DetailTV, Item } from 'models';
+import { HomeFilms, Item, OptionModel } from 'models';
 import axiosClient from './axiosClient';
 
+export const getHomeFilms = async (): Promise<HomeFilms> => {
+  const endpoints: { [key: string]: string } = {
+    'PHIM ĐỀ CỬ': '/trending/all/week?page=1',
+    'PHIM LẺ MỚI CẬP NHẬT': '/movie/now_playing',
+    'PHIM BỘ MỚI CẬP NHẬT': '/tv/on_the_air',
+  };
+
+  const responses = await Promise.all(
+    Object.entries(endpoints).map((endpoint) => axiosClient.get(endpoint[1]))
+  );
+
+  const data = responses.reduce((final, current, index) => {
+    final[Object.entries(endpoints)[index][0]] = current.data.results.map((item: Item) => ({
+      ...item,
+    }));
+
+    return final;
+  }, {} as HomeFilms);
+
+  return data;
+};
+
 export const getTrendingNow = async (): Promise<Item[]> => {
-  return (await axiosClient.get('/trending/all/day?page=1')).data.results;
+  return (await axiosClient.get('/trending/all/week?page=1')).data.results;
+};
+
+export const getHomeFilmsUpdate = async (): Promise<any> => {
+  return (await axiosClient.get('/tv/on_the_air')).data;
 };
 
 export const getDiscoverMovie = async (): Promise<any> => {
@@ -17,26 +43,35 @@ export const getDiscoverTV = async (): Promise<any> => {
   return (await axiosClient.get('/discover/tv')).data.results;
 };
 
-export const getRegions = async (): Promise<any> => {
-  return (await axiosClient.get('/watch/providers/regions')).data.results;
+export const getRegions = async (): Promise<OptionModel[]> => {
+  const regionOptions = (await axiosClient.get('/watch/providers/regions')).data.results.map(
+    (regions: any) => ({
+      value: regions.iso_3166_1,
+      label: regions.english_name,
+    })
+  );
+
+  return [{ value: '', label: '- Tất cả -' }, ...regionOptions];
 };
 
-export const getDetailMovie = async (params: string): Promise<DetailMovie> => {
-  return (await axiosClient.get(`movie/${params}`)).data;
+export const getGenreTVList = async (): Promise<OptionModel[]> => {
+  const genreTVOptions = (await axiosClient.get('/genre/tv/list')).data.genres.map(
+    (genre: any) => ({
+      value: genre.id,
+      label: genre.name,
+    })
+  );
+
+  return [{ value: '', label: '- Tất cả -' }, ...genreTVOptions];
 };
 
-export const getDetailTV = async (params: string): Promise<DetailTV> => {
-  return (await axiosClient.get(`tv/${params}`)).data;
+export const getGenreMovieList = async (): Promise<OptionModel[]> => {
+  const genreMovieOptions = (await axiosClient.get('/genre/movie/list')).data.genres.map(
+    (genre: any) => ({
+      value: genre.id,
+      label: genre.name,
+    })
+  );
+
+  return [{ value: '', label: '- Tất cả -' }, ...genreMovieOptions];
 };
-
-// export const getAccount = async (): Promise<any> => {
-//   return (await axiosClient.get(`/authentication/token/new`)).data;
-// };
-
-// export const getPermission = async (): Promise<any> => {
-//   return (await axiosClient.get(`/authenticate/${process.env.REACT_APP_REQUEST_TOKEN}`)).data;
-// };
-
-// export const createSession = async (): Promise<any> => {
-//   return (await axiosClient.post(`/authentication/session/new`)).data;
-// };

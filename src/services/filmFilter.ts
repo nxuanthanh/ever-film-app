@@ -1,23 +1,23 @@
-import { ConfigType } from 'models';
+import { ConfigType, ItemsPage } from 'models';
 import axiosClient from './axiosClient';
 
-export const getFilterTV = async (config?: ConfigType): Promise<ConfigType> => {
+export const getFilterTV = async (page: number, config?: ConfigType): Promise<ItemsPage> => {
   return (
-    await axiosClient.get('/discover/tv/', {
+    await axiosClient.get('/discover/tv', {
       params: {
         ...config,
-        //   page,
+        page,
       },
     })
   ).data;
 };
 
-export const getFilterMovie = async (config?: ConfigType): Promise<ConfigType> => {
+export const getFilterMovie = async (page: number, config?: ConfigType): Promise<ItemsPage> => {
   return (
-    await axiosClient.get('/discover/movie/', {
+    await axiosClient.get('/discover/movie', {
       params: {
         ...config,
-        //   page,
+        page,
       },
     })
   ).data;

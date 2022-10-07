@@ -26,22 +26,13 @@ export interface FilmItemModel {
   vote_average: number;
 }
 
-// export interface QueryModel {
-//   type: [];
-//   genre: [];
-//   country: [];
-//   year: [];
-//   duration: [];
-//   sort_by: [];
-// }
-
 export interface FilterProps {
   filters?: ConfigType;
   onChange?: Function;
 }
 
 export interface OptionModel {
-  readonly value: string;
+  readonly value: string | number;
   readonly label: string;
 }
 

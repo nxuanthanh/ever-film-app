@@ -19,49 +19,21 @@ interface FilmFilterProps {
 
 function FilmFilter({ filters, onChange, loading }: FilmFilterProps) {
   const { pathname } = useLocation();
-  // const handleCategoryChange = (newCategoryId: string | number) => {
-  //   if (!onChange) return;
+  const handleCategoryChange = (newCategoryId: string | number) => {
+    if (!onChange) return;
 
-  //   const newFilters = {
-  //     'category.id': newCategoryId,
-  //   };
-
-  //   onChange(newFilters);
-  // };
-
-  // function handleChange(values: any) {
-  //   if (!onChange) return;
-
-  //   onChange(values);
-  // }
-
-  const [currentTab, setCurrentTab] = useState(localStorage.getItem('currentTab') || 'tv');
-  const { isMobile } = useMediaQueryService();
-
-  const [isShowScrollUpBtn, setIsShowScrollUpBtn] = useState(false);
-  const [isSidebarActive, setIsSidebarActive] = useState(false);
-
-  useEffect(() => {
-    const checkIfShowScrollUpBtn = () => {
-      const scrollOffset = document.documentElement.scrollTop;
-      if (scrollOffset > 1000) {
-        setIsShowScrollUpBtn(true);
-      } else {
-        setIsShowScrollUpBtn(false);
-      }
+    const newFilters = {
+      'category.id': newCategoryId,
     };
 
-    window.addEventListener('scroll', checkIfShowScrollUpBtn);
-
-    return () => window.removeEventListener('scroll', checkIfShowScrollUpBtn);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    onChange(newFilters);
   };
+
+  function handleChange(values: any) {
+    if (!onChange) return;
+
+    onChange(values);
+  }
 
   const [searchParams, setSearchParams] = useSearchParams();
   // const initialConfig = {} as { [key: string]: string };

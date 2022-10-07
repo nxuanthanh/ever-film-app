@@ -3,7 +3,7 @@ import { Loading } from 'components/common';
 import MainHomeFilms from 'components/MainHomeFilm';
 import { FilterSection } from 'features/Filter';
 import { HomeFilms, Item } from 'models';
-import { getDetailMovies, getHomeMovies } from 'services';
+import { getDetailMovies, getHomeFilms, getTrendingNow } from 'services';
 
 // interface HomeProps {
 //   currentTab: string;
@@ -15,7 +15,9 @@ export function Home() {
     isLoading: isLoadingMovie,
     isError: isErrorMovie,
     error: errorMovie,
-  } = useQuery<HomeFilms, Error>(['home-movies'], getHomeMovies);
+  } = useQuery<HomeFilms, Error>(['home-movies'], getHomeFilms);
+
+  const { data } = useQuery<any, Error>(['home'], getTrendingNow);
 
   const {
     data: dataMovieDetail,
@@ -27,6 +29,8 @@ export function Home() {
     () => getDetailMovies(dataMovie?.Trending as Item[]),
     { enabled: !!dataMovie?.Trending }
   );
+
+  console.log(data);
 
   // MOVIE
   if (isErrorMovie) return <p>ERROR: ${errorMovie.message}</p>;
