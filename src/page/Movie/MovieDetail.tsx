@@ -3,7 +3,7 @@ import { Imdb, Play } from 'assets/icons';
 import { Button, Loading } from 'components/common';
 import Modal from 'components/Modal';
 import { ModalContent } from 'components/Modal/ModalContent';
-import { Slide } from 'components/Slider';
+import { SectionSlider } from 'components/Slider';
 import { FilmDetailButton } from 'layouts';
 import { Cast, DetailMovie, FilmInfo, Item, Video } from 'models';
 import { useState } from 'react';
@@ -224,9 +224,7 @@ function MovieDetail() {
                     <h3 className="text-white uppercase font-bold mt-[2em] mb-[1.2em] text-[.9em]">
                       Phim tương tự
                     </h3>
-                    <div>
-                      <Slide data={similar} />
-                    </div>
+                    <SectionSlider data={similar} className="w-[992px]" />
                   </>
                 )}
               </div>

@@ -10,8 +10,6 @@ import BookmarkResult from './BookmarkResult';
 function Bookmarked() {
   const currentUser = useAppSelector((state) => state.auth.user);
   const [bookmarkedFilms, setBookmarkedFilms] = useState<Item[]>([]);
-  const [isEditing, setIsEditing] = useState(false);
-  const [selections, setSelections] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState(!Boolean(bookmarkedFilms.length));
   const [isError, setIsError] = useState(false);
 
@@ -51,13 +49,7 @@ function Bookmarked() {
           </h1>
           <h2 className="text-white font-semibold text-2xl mb-6">Các phim bạn muốn xem:</h2>
           {wantWatchList.length > 0 ? (
-            <BookmarkResult
-              films={wantWatchList}
-              isEditing={isEditing}
-              selections={selections}
-              setSelections={setSelections}
-              isLoading={isLoading}
-            />
+            <BookmarkResult films={wantWatchList} isLoading={isLoading} />
           ) : (
             <div className="text-[#7a7a7a]">
               Bạn chưa thêm phim nào vào danh sách này <br />
@@ -70,13 +62,7 @@ function Bookmarked() {
 
           <h2 className="text-white font-semibold text-2xl mb-6">Các phim bạn đã xem:</h2>
           {watchedList.length > 0 ? (
-            <BookmarkResult
-              films={watchedList}
-              isEditing={isEditing}
-              selections={selections}
-              setSelections={setSelections}
-              isLoading={isLoading}
-            />
+            <BookmarkResult films={watchedList} isLoading={isLoading} />
           ) : (
             <div className="text-[#7a7a7a]">
               Bạn chưa thêm phim nào vào danh sách này <br />

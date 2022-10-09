@@ -3,21 +3,11 @@ import { Item } from 'models';
 
 interface BookmarkResultProps {
   films: Item[];
-  isEditing: boolean;
-  selections: number[];
-  setSelections: any;
   isLoading: boolean;
   pageType?: string;
 }
 
-function BookmarkResult({
-  films,
-  isEditing,
-  selections,
-  setSelections,
-  isLoading,
-  pageType,
-}: BookmarkResultProps) {
+function BookmarkResult({ films, isLoading, pageType }: BookmarkResultProps) {
   return (
     <>
       {films.length === 0 && !isLoading && (

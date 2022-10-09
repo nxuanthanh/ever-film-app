@@ -1,4 +1,4 @@
-import { HomeFilms, Item, OptionModel } from 'models';
+import { ConfigType, HomeFilms, Item, ItemsPage, OptionModel } from 'models';
 import axiosClient from './axiosClient';
 
 export const getHomeFilms = async (): Promise<HomeFilms> => {
@@ -25,10 +25,6 @@ export const getHomeFilms = async (): Promise<HomeFilms> => {
 
 export const getTrendingNow = async (): Promise<Item[]> => {
   return (await axiosClient.get('/trending/all/week?page=1')).data.results;
-};
-
-export const getHomeFilmsUpdate = async (): Promise<any> => {
-  return (await axiosClient.get('/tv/on_the_air')).data;
 };
 
 export const getDiscoverMovie = async (): Promise<any> => {
@@ -74,4 +70,26 @@ export const getGenreMovieList = async (): Promise<OptionModel[]> => {
   );
 
   return [{ value: '', label: '- Tất cả -' }, ...genreMovieOptions];
+};
+
+export const getFilterTV = async (page: number, config?: ConfigType): Promise<ItemsPage> => {
+  return (
+    await axiosClient.get('/discover/tv', {
+      params: {
+        ...config,
+        page,
+      },
+    })
+  ).data;
+};
+
+export const getFilterMovie = async (page: number, config?: ConfigType): Promise<ItemsPage> => {
+  return (
+    await axiosClient.get('/discover/movie', {
+      params: {
+        ...config,
+        page,
+      },
+    })
+  ).data;
 };

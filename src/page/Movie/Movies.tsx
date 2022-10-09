@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from 'components/common';
 import { FilterSection } from 'features/Filter';
+import { Pagination } from 'layouts';
 import { Item } from 'models';
+import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { getDiscoverMovie } from 'services';
@@ -10,6 +12,7 @@ import { resizeImage } from 'utils';
 // interface MoviesProps {}
 
 function Movies() {
+  const [sortLayout, setSortLayout] = useState('grid');
   const { data, isLoading, isError, error } = useQuery<Item[], Error>(['movie'], getDiscoverMovie);
 
   if (isError) return <div>ERROR: ${error.message}</div>;
@@ -20,7 +23,7 @@ function Movies() {
       <div className="container">
         <h1 className="text-white text-[2rem] font-semibold leading-[1.125]">Phim lẻ</h1>
         <div className="mb-3 mt-3">
-          <FilterSection />
+          <FilterSection setSortLayout={setSortLayout} sortLayout={sortLayout} />
         </div>
 
         <div>
@@ -46,6 +49,7 @@ function Movies() {
             ))}
           </ul>
         </div>
+        <Pagination total_pages={1} page={0} results={[]} total_results={0} />
       </div>
     </div>
   );

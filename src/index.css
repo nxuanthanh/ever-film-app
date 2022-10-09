@@ -36,23 +36,6 @@ html {
 }
 
 /* CUSTOM UTILITIES */
-.tw-flex-center {
-    @apply flex justify-center items-center;
-}
-.tw-black-backdrop {
-    background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.85) 65%);
-}
-
-.tw-black-backdrop-2 {
-    background: linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.6) 0%,
-        rgba(179, 179, 193, 0) 7%,
-        rgba(107, 107, 115, 0) 93%,
-        rgba(0, 0, 0, 0.6) 100%
-    );
-}
-
 .tw-multiline-ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -97,6 +80,10 @@ html {
 
 .navbar-bg {
     background-color: rgba(51, 10, 103, 0.93);
+}
+
+.wrapper + .wrapper {
+    margin-left: 8px;
 }
 
 .css-1okebmr-indicatorSeparator {

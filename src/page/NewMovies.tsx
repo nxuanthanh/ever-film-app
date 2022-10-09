@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Loading } from 'components/common';
 import { FilterSection } from 'features/Filter';
 import { Item } from 'models';
+import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { getMovieUpcoming } from 'services';
@@ -10,6 +11,7 @@ import { resizeImage } from 'utils';
 // interface NewMoviesProps {}
 
 function NewMovies() {
+  const [sortLayout, setSortLayout] = useState('grid');
   const { data, isLoading, isError, error } = useQuery<Item[], Error>(
     ['upcoming'],
     getMovieUpcoming
@@ -22,7 +24,7 @@ function NewMovies() {
     <div className="mt-[100px] mb-12">
       <div className="container">
         <div className="mb-3 mt-3">
-          <FilterSection />
+          <FilterSection setSortLayout={setSortLayout} sortLayout={sortLayout} />
         </div>
 
         <div>

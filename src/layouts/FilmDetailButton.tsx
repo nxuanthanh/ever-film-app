@@ -259,7 +259,7 @@ function FilmDetailButton({ genres, detail }: FilmDetailButtonProps) {
       <div className="flex items-center">
         {genres.map((genre, idx) => (
           <Button
-            className="bg-transparent hover:bg-white hover:text-[#485fc7] border-white text-white text-xs !rounded-full mr-2 !px-[15px] !py-[6px] transition-none"
+            className="bg-transparent hover:bg-white hover:text-[#485fc7] border-white text-white text-xs !rounded-full !px-[15px] !py-[6px] transition-none"
             title={genre.name}
             key={idx}
             to={`/genre/${genre.name}`}

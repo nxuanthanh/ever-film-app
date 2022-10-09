@@ -2,44 +2,21 @@ import { useQuery } from '@tanstack/react-query';
 import { Loading } from 'components/common';
 import MainHomeFilms from 'components/MainHomeFilm';
 import { FilterSection } from 'features/Filter';
-import { HomeFilms, Item } from 'models';
-import { getDetailMovies, getHomeFilms, getTrendingNow } from 'services';
+import { HomeFilms } from 'models';
+import { getHomeFilms } from 'services';
 
-// interface HomeProps {
-//   currentTab: string;
-// }
+// interface HomeProps {}
 
 export function Home() {
-  const {
-    data: dataMovie,
-    isLoading: isLoadingMovie,
-    isError: isErrorMovie,
-    error: errorMovie,
-  } = useQuery<HomeFilms, Error>(['home-movies'], getHomeFilms);
-
-  const { data } = useQuery<any, Error>(['home'], getTrendingNow);
-
-  const {
-    data: dataMovieDetail,
-    isLoading: isLoadingMovieDetail,
-    isError: isErrorMovieDetail,
-    error: errorMovieDetail,
-  } = useQuery<any, Error>(
-    ['detailMovies', dataMovie?.Trending],
-    () => getDetailMovies(dataMovie?.Trending as Item[]),
-    { enabled: !!dataMovie?.Trending }
+  const { data, isLoading, isError, error } = useQuery<HomeFilms, Error>(
+    ['home-films'],
+    getHomeFilms
   );
 
-  console.log(data);
-
   // MOVIE
-  if (isErrorMovie) return <p>ERROR: ${errorMovie.message}</p>;
+  if (isError) return <p>ERROR: ${error.message}</p>;
 
-  if (isLoadingMovie) return <Loading />;
-
-  if (isErrorMovieDetail) return <p>ERROR: ${errorMovieDetail.message}</p>;
-
-  if (isLoadingMovieDetail) return <Loading />;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="container">
@@ -47,7 +24,7 @@ export function Home() {
         <FilterSection />
       </div>
       <div className="flex-grow min-h-screen mb-14">
-        <MainHomeFilms data={dataMovie} dataDetail={dataMovieDetail} />
+        <MainHomeFilms data={data} />
       </div>
     </div>
   );
