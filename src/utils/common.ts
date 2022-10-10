@@ -42,6 +42,37 @@ export const convertErrorCodeToMessage = (errorCode: string) => {
   else return 'Something weird happened.';
 };
 
+export const convertGenreIdToGenreName = (genreId: number) => {
+  if (genreId === 28) return 'Action';
+  else if (genreId === 12) return 'Adventure';
+  else if (genreId === 16) return 'Animation';
+  else if (genreId === 35) return 'Comedy';
+  else if (genreId === 80) return 'Crime';
+  else if (genreId === 99) return 'Documentary';
+  else if (genreId === 18) return 'Drama';
+  else if (genreId === 10751) return 'Family';
+  else if (genreId === 14) return 'Fantasy';
+  else if (genreId === 36) return 'History';
+  else if (genreId === 27) return 'Horror';
+  else if (genreId === 10402) return 'Music';
+  else if (genreId === 9648) return 'Mystery';
+  else if (genreId === 10749) return 'Romance';
+  else if (genreId === 878) return 'Science Fiction';
+  else if (genreId === 10770) return 'TV Movie';
+  else if (genreId === 53) return 'Thriller';
+  else if (genreId === 10752) return 'War';
+  else if (genreId === 37) return 'Western';
+  else if (genreId === 10759) return 'Action & Adventure';
+  else if (genreId === 10762) return 'Kids';
+  else if (genreId === 10763) return 'News';
+  else if (genreId === 10764) return 'Reality';
+  else if (genreId === 10765) return 'Sci-Fi & Fantasy';
+  else if (genreId === 10766) return 'Soap';
+  else if (genreId === 10767) return 'Talk';
+  else if (genreId === 10768) return 'War & Politics';
+  else return 'Nothing';
+};
+
 export const getRandomAvatar = (): string => {
   const avatars = [
     'https://i.ibb.co/zrXfKsJ/catface-7.jpg',
@@ -121,5 +152,6 @@ export const customStyles = {
   menu: (styles: any) => ({
     ...styles,
     zIndex: 5,
+    marginTop: '2px',
   }),
 };

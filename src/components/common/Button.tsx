@@ -30,7 +30,9 @@ function Button(
   return (
     <button
       ref={ref}
-      className={`wrapper inline-flex items-center justify-center transition-all duration-200 text-white font-normal py-2 px-4 rounded border-[1px] cursor-pointer ${className}`}
+      className={`wrapper inline-flex items-center justify-center transition-all duration-200 text-white font-normal py-2 px-4 rounded border-[1px] cursor-pointer ${className} ${
+        disabled ? 'opacity-60 pointer-events-none' : ''
+      }`}
       title={title}
       onClick={onClick}
       disabled={disabled}

@@ -35,7 +35,7 @@ function FilterByGenre({ filters, onChange }: FilterProps) {
           options={genres}
           styles={customStyles}
           defaultValue={defaultOptions}
-          // value={categoryOptions.find((option) => option.value === sortType)}
+          // value={genres.find((option) => option.value === sortType)}
           // onChange={chooseSort}
           className="w-full"
         />
