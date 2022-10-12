@@ -17,7 +17,7 @@ export const getTVFullDetail = async (id: string): Promise<FilmInfo> => {
         break;
 
       case 1:
-        final.credits = current.data.cast.slice(0, 8);
+        final.credits = current.data;
         break;
 
       case 2:
@@ -95,11 +95,6 @@ export const getTVDetailSeasons = async (
         break;
       case 3:
         final.videos = current.data.results;
-        // .filter((item: Video) => item.site === 'YouTube')
-        // .reduce((acc: any, current: Video) => {
-        //   if (current.type === 'Trailer') return [current, ...acc];
-        //   else return [...acc, current];
-        // }, [] as Video[]);
         break;
     }
 

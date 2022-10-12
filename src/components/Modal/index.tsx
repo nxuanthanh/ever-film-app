@@ -1,4 +1,5 @@
-import { MouseEventHandler, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { ModalContent } from './ModalContent';
 
 interface ModalProps {
   id: string;
@@ -13,7 +14,7 @@ function Modal({ id, onClose, children }: ModalProps) {
       onClick={onClose}
       className="fixed flex items-center justify-center w-full h-full inset-0 bg-[#0a0a0adb] z-20"
     >
-      {children}
+      <ModalContent onClose={onClose}>{children}</ModalContent>
     </div>
   );
 }

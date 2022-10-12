@@ -2,18 +2,21 @@ import { useQuery } from '@tanstack/react-query';
 import { Loading } from 'components/common';
 import MainHomeFilms from 'components/MainHomeFilm';
 import { FilterSection } from 'features/Filter';
-import { HomeFilms } from 'models';
+import { ConfigType, HomeFilms } from 'models';
+import { useState } from 'react';
 import { getHomeFilms } from 'services';
 
 // interface HomeProps {}
 
 export function Home() {
+  const [config, setConfig] = useState<ConfigType>({});
   const { data, isLoading, isError, error } = useQuery<HomeFilms, Error>(
     ['home-films'],
     getHomeFilms
   );
 
-  // MOVIE
+  console.log(data);
+
   if (isError) return <p>ERROR: ${error.message}</p>;
 
   if (isLoading) return <Loading />;
@@ -21,7 +24,7 @@ export function Home() {
   return (
     <div className="container">
       <div className="mt-[88px]">
-        <FilterSection />
+        <FilterSection setConfig={setConfig} />
       </div>
       <div className="flex-grow min-h-screen mb-14">
         <MainHomeFilms data={data} />

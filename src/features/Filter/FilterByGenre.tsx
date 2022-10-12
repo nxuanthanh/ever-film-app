@@ -1,29 +1,42 @@
 import { useQuery } from '@tanstack/react-query';
 import { defaultOptions } from 'docs/data';
-import { FilterProps, OptionModel } from 'models';
-import { useLocation } from 'react-router-dom';
+import { useCurrentParams } from 'hooks';
+import { OptionModel } from 'models';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
 import { getGenreMovieList, getGenreTVList } from 'services';
 import { customStyles } from 'utils';
 
-function FilterByGenre({ filters, onChange }: FilterProps) {
+function FilterByGenre() {
   const { pathname } = useLocation();
+
+  const [currentSearchParams] = useCurrentParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { data: genreMovie } = useQuery<OptionModel[], Error>(['home-movie'], getGenreMovieList);
   const { data: genreTV } = useQuery<OptionModel[], Error>(['home-tv'], getGenreTVList);
 
-  // eslint-disable-next-line array-callback-return
-  const genreCombined =
-    genreMovie?.concat(genreTV ? genreTV : [])?.reduce((acc: any, curr) => {
-      if (!acc?.some((x: OptionModel) => x.value === curr.value)) {
-        acc?.push(curr);
-      }
+  const genreCombined = genreMovie?.concat(genreTV ? genreTV : [])?.reduce((acc: any, curr) => {
+    if (!acc?.some((x: OptionModel) => x.value === curr.value)) {
+      acc?.push(curr);
+    }
 
-      return acc;
-    }, []) || [];
+    return acc;
+  }, []);
 
   const genres =
-    pathname === '/type/movie' ? genreTV : pathname === '/type/show' ? genreMovie : genreCombined;
+    pathname === '/type/movie' ? genreMovie : pathname === '/type/show' ? genreTV : genreCombined;
+
+  const chooseGenres = (option: any) => {
+    const genresValue = option?.value;
+
+    setSearchParams({
+      ...currentSearchParams,
+      genre: genresValue,
+    });
+  };
+
+  const genresType = searchParams.get('genre') || '';
 
   return (
     <>
@@ -35,8 +48,8 @@ function FilterByGenre({ filters, onChange }: FilterProps) {
           options={genres}
           styles={customStyles}
           defaultValue={defaultOptions}
-          // value={genres.find((option) => option.value === sortType)}
-          // onChange={chooseSort}
+          value={genres?.find((option: OptionModel) => option.value === genresType)}
+          onChange={chooseGenres}
           className="w-full"
         />
       </div>

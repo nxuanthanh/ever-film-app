@@ -1,12 +1,10 @@
+import { FilmItem } from 'components/common';
 import { Item } from 'models';
 import { FormEvent, useEffect, useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getSearchMovie } from 'services';
-import { resizeImage } from 'utils';
 
 function Search() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [searchResult, setSearchResult] = useState<Item[]>([]);
   const [searchValue, setSearchValue] = useState('');
 
@@ -67,21 +65,7 @@ function Search() {
           <ul className="grid grid-cols-5 gap-6">
             {searchResult.map((item: Item, idx) => (
               <li key={idx} className="">
-                <Link to={item.media_type === 'movie' ? `/movie/${item.id}` : `/tv/${item.id}`}>
-                  <div className="flex flex-col justify-between shadow-sm pb-2 overflow-hidden hover:brightness-110 transition duration-300 relative group min-h-full">
-                    <LazyLoadImage
-                      src={resizeImage(item.poster_path)}
-                      className="object-cover h-[371px]"
-                      effect="blur"
-                    />
-
-                    <div>
-                      <p className="text-left whitespace-nowrap overflow-hidden text-ellipsis text-base text-gray-300 group-hover:text-white transition duration-300">
-                        {item.title || item.name}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
+                <FilmItem film={item} />
               </li>
             ))}
           </ul>

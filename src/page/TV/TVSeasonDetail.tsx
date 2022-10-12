@@ -13,17 +13,16 @@ import { resizeImage } from 'utils';
 
 function TVSeasonDetail() {
   const navigate = useNavigate();
-  const { tvId, season_number } = useParams();
+  const { filmId, season_number } = useParams();
 
   const { data, isLoading, isError, error } = useQuery<any, Error>(
     ['detailTV', season_number],
-    () => getTVDetailSeasons(tvId as string, season_number as string)
+    () => getTVDetailSeasons(filmId as string, season_number as string)
   );
 
   const detail = data?.detail as DetailTV;
   const detailSeason = data?.detailSeason as DetailSeason;
   const credits = data?.credits as Cast[];
-  // const videos = data?.videos as Video[];
 
   if (isError) return <div>ERROR: ${error.message}</div>;
   if (isLoading) return <Loading />;
@@ -50,7 +49,7 @@ function TVSeasonDetail() {
                     className="w-full py-[10px] px-5 gap-4 bg-primary hover:bg-[#f03a5f] hover:opacity-100 uppercase text-xl border-transparent"
                     title="Xem phim"
                     iconLeft={<Play />}
-                    onClick={() => navigate(`/tv/watch/${tvId}`)}
+                    onClick={() => navigate(`/tv/watch/${filmId}`)}
                   />
                 </div>
               </div>
@@ -166,7 +165,7 @@ function TVSeasonDetail() {
                         )}
                         <div className="flex gap-4 items-start">
                           <Link
-                            to={`/tv/${tvId}/season/${season.season_number}`}
+                            to={`/tv/${filmId}/season/${season.season_number}`}
                             className="shrink-0 max-w-[154px] w-full"
                           >
                             <LazyLoadImage

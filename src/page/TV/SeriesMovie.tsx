@@ -1,24 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
-import { FilmItem, ListLayoutFilmItem, Loading } from 'components/common';
+import { FilmItem, Loading } from 'components/common';
+import { ListLayoutFilmItem } from 'components/Films';
 import { FilterSection } from 'features/Filter';
-import { useAppSelector } from 'hooks';
 import { Pagination } from 'layouts';
 
-import { Item, ItemsPage } from 'models';
+import { ConfigType, Item, ItemsPage } from 'models';
 import { useState } from 'react';
 import { getFilterTV } from 'services';
 
 function SeriesMovie() {
   const [sortLayout, setSortLayout] = useState('grid');
   const [currentPage, setCurrentPage] = useState(1);
-  const filterConfig = useAppSelector((state) => state.filter.filterConfig);
+  const [config, setConfig] = useState<ConfigType>({});
 
-  // console.log('filmFilter', filterConfig);
   const { data, isLoading, isError, error } = useQuery<ItemsPage, Error>(
-    ['filter-tv', filterConfig, currentPage],
-    () => getFilterTV(currentPage, filterConfig)
+    ['filter-tv', config, currentPage],
+    () => getFilterTV(currentPage, config)
   );
-
+  console.log('tv', data);
   if (isError) return <div>ERROR: ${error.message}</div>;
   if (isLoading) return <Loading />;
 
@@ -28,7 +27,11 @@ function SeriesMovie() {
         <div className="container">
           <h1 className="text-white text-[2rem] font-semibold leading-[1.125]">Phim bộ</h1>
           <div className="mb-3 mt-3">
-            <FilterSection setSortLayout={setSortLayout} sortLayout={sortLayout} />
+            <FilterSection
+              setConfig={setConfig}
+              setSortLayout={setSortLayout}
+              sortLayout={sortLayout}
+            />
           </div>
 
           {sortLayout === 'grid' ? (

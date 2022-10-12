@@ -1,10 +1,9 @@
 import { Imdb } from 'assets/icons';
+import { Button } from 'components/common';
 import { Item } from 'models';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { convertGenreIdToGenreName, resizeImage } from 'utils';
-import Button from './Button';
-
 interface ListLayoutFilmItemProps {
   film: Item;
 }

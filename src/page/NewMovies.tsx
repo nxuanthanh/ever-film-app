@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { FilmItem, ListLayoutFilmItem, Loading } from 'components/common';
+import { FilmItem, Loading } from 'components/common';
+import { ListLayoutFilmItem } from 'components/Films';
 import { FilterSection } from 'features/Filter';
-import { Pagination } from 'layouts';
-import { Item } from 'models';
+import { ConfigType, Item } from 'models';
 import { useState } from 'react';
 import { getMovieUpcoming } from 'services';
 
@@ -10,6 +10,7 @@ import { getMovieUpcoming } from 'services';
 
 function NewMovies() {
   const [sortLayout, setSortLayout] = useState('grid');
+  const [config, setConfig] = useState<ConfigType>({});
   const { data, isLoading, isError, error } = useQuery<Item[], Error>(
     ['upcoming'],
     getMovieUpcoming
@@ -22,7 +23,11 @@ function NewMovies() {
     <div className="mt-[100px] mb-12">
       <div className="container">
         <div className="mb-3 mt-3">
-          <FilterSection setSortLayout={setSortLayout} sortLayout={sortLayout} />
+          <FilterSection
+            setConfig={setConfig}
+            setSortLayout={setSortLayout}
+            sortLayout={sortLayout}
+          />
         </div>
 
         <div>

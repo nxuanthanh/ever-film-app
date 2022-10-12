@@ -9,7 +9,7 @@ export { default as NewMovies } from './NewMovies';
 export { default as PeopleDetail } from './PeopleDetail';
 export { default as Profile } from './Profile';
 export { default as Search } from './Search';
-export { default as SeasonList } from './TV/SeasonLists';
+export { default as SeasonList } from './TV/SeasonList';
 export { default as SeriesMovie } from './TV/SeriesMovie';
 export { default as TVDetail } from './TV/TVDetail';
 export { default as TVSeasonDetail } from './TV/TVSeasonDetail';

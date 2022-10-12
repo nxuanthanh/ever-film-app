@@ -1,8 +1,13 @@
-import { FilterProps } from 'models';
+import { defaultOptions } from 'docs/data';
+import { useCurrentParams } from 'hooks';
+import { useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
 import { customStyles } from 'utils';
 
-function FilterByYear({ filters, onChange }: FilterProps) {
+function FilterByYear() {
+  const [currentSearchParams] = useCurrentParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const yearOptions = [
     { value: 'all', label: '- Tất cả -' },
     { value: '2022', label: '2022' },
@@ -19,6 +24,17 @@ function FilterByYear({ filters, onChange }: FilterProps) {
     { value: 'before 2012', label: 'Trước 2012' },
   ];
 
+  const chooseYear = (option: any) => {
+    const yearValue = option?.value;
+
+    setSearchParams({
+      ...currentSearchParams,
+      year: yearValue,
+    });
+  };
+
+  const yearType = searchParams.get('year') || '';
+
   return (
     <>
       <div className="flex flex-col items-start justify-center p-3 w-full">
@@ -29,9 +45,9 @@ function FilterByYear({ filters, onChange }: FilterProps) {
           name="year"
           options={yearOptions}
           styles={customStyles}
-          defaultValue={yearOptions[0]}
-          // value={durationOptions.find((option) => option.value === sortType)}
-          // onChange={chooseSort}
+          defaultValue={defaultOptions}
+          value={yearOptions.find((option) => option.value === yearType)}
+          onChange={chooseYear}
           className="w-full"
         />
       </div>

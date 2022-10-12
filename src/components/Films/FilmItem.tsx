@@ -11,7 +11,9 @@ interface FilmItemProps {
 function FilmItem({ film, className }: FilmItemProps) {
   return (
     <div>
-      <Link to={film.media_type === 'movie' ? `/movie/${film.id}` : `/tv/${film.id}`}>
+      <Link
+        to={film.original_name ? `/tv/${film.id}` : film.original_title ? `/movie/${film.id}` : '/'}
+      >
         <div className="shadow-sm pb-2 overflow-hidden transition duration-300 relative group">
           <LazyLoadImage
             src={resizeImage(film.poster_path)}

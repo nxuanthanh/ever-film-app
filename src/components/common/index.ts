@@ -7,5 +7,4 @@ export { default as Footer } from './Footer';
 export { default as Button } from './Button';
 export { default as Title } from './Title';
 export { default as Skeleton } from './Skeleton';
-export { default as FilmItem } from './FilmItem';
-export { default as ListLayoutFilmItem } from './ListLayoutFilmItem';
+export { default as FilmItem } from '../Films/FilmItem';

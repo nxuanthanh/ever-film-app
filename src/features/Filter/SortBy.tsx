@@ -6,9 +6,8 @@ import Select from 'react-select';
 import { customStyles } from 'utils';
 
 function SortBy({ filters, onChange }: FilterProps) {
-  const [searchParams, setSearchParams] = useSearchParams();
-
   const [currentSearchParams] = useCurrentParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const chooseSort = (option: any) => {
     const sortValue = option?.value || '';

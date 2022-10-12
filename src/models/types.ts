@@ -146,6 +146,25 @@ export interface Cast {
   order: number;
 }
 
+export interface Crew {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+  credit_id: number;
+  department: string;
+  job: number;
+}
+
+export interface Credits {
+  cast: Cast[];
+  crew: Crew[];
+}
+
 export interface Image {
   id: number;
   backdrops: {
@@ -205,7 +224,7 @@ export interface HomeFilms {
 export interface FilmInfo {
   detail: DetailMovie | DetailTV;
   detailSeason: DetailSeason;
-  credits: Cast[];
+  credits: Credits;
   images: Image;
   reviews: Reviews[];
   similar: Item[];

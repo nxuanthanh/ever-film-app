@@ -1,15 +1,28 @@
 import { useQuery } from '@tanstack/react-query';
+import { defaultOptions } from 'docs/data';
+import { useCurrentParams } from 'hooks';
 import { FilterProps, OptionModel } from 'models';
+import { useSearchParams } from 'react-router-dom';
+import Select from 'react-select';
 import { getRegions } from 'services';
 import { customStyles } from 'utils';
-import Select from 'react-select';
-import { defaultOptions } from 'docs/data';
 
 function FilterByCountry({ filters, onChange }: FilterProps) {
-  const { data } = useQuery<OptionModel[], Error>(['regions'], getRegions);
+  const [currentSearchParams] = useCurrentParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const countryOptions = data;
+  const { data: countryOptions } = useQuery<OptionModel[], Error>(['regions'], getRegions);
 
+  const chooseCountry = (option: any) => {
+    const countryValue = option?.value;
+
+    setSearchParams({
+      ...currentSearchParams,
+      country: countryValue,
+    });
+  };
+
+  const countryType = searchParams.get('country') || '';
   return (
     <>
       <div className="flex flex-col items-start justify-center p-3 w-full">
@@ -20,8 +33,8 @@ function FilterByCountry({ filters, onChange }: FilterProps) {
           options={countryOptions}
           styles={customStyles}
           defaultValue={defaultOptions}
-          // value={durationOptions.find((option) => option.value === sortType)}
-          // onChange={chooseSort}
+          value={countryOptions?.find((option) => option.value === countryType)}
+          onChange={chooseCountry}
           className="w-full"
         />
       </div>

@@ -1,17 +1,29 @@
-import { FilterProps } from 'models';
+import { defaultOptions } from 'docs/data';
+import { useCurrentParams } from 'hooks';
 import { useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
 import { customStyles } from 'utils';
 
-function FilterByCategory({ filters, onChange }: FilterProps) {
+function FilterByCategory() {
+  const [currentSearchParams] = useCurrentParams();
   const [searchParams, setSearchParams] = useSearchParams();
+
   const typeOptions = [
     { value: '', label: '- Tất cả -' },
     { value: 'movie', label: 'Phim Lẻ' },
     { value: 'tv', label: 'Phim Bộ' },
   ];
 
-  const sortType = searchParams.get('category') || 'popularity.desc';
+  const chooseCategory = (option: any) => {
+    const categoryValue = option?.value;
+
+    setSearchParams({
+      ...currentSearchParams,
+      category: categoryValue,
+    });
+  };
+
+  const categoryType = searchParams.get('category') || 'movie';
 
   return (
     <>
@@ -22,9 +34,9 @@ function FilterByCategory({ filters, onChange }: FilterProps) {
         <Select
           options={typeOptions}
           styles={customStyles}
-          defaultValue={typeOptions[0]}
-          value={typeOptions.find((option) => option.value === sortType)}
-          // onChange={chooseSort}
+          defaultValue={defaultOptions}
+          value={typeOptions.find((option) => option.value === categoryType)}
+          onChange={chooseCategory}
           className="w-full"
         />
       </div>

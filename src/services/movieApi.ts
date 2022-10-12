@@ -50,7 +50,7 @@ export const getMovieDetail = async (id: number): Promise<FilmInfo> => {
         break;
 
       case 1:
-        final.credits = current.data.cast.slice(0, 10);
+        final.credits = current.data;
         break;
 
       case 2:

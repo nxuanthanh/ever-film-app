@@ -1,7 +1,5 @@
-import { setFilterConfig } from 'app/filterSlice';
 import { useAppDispatch } from 'hooks';
-import { ConfigType } from 'models';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import {
   FilterByCategory,
@@ -12,43 +10,42 @@ import {
   SortBy,
 } from '../Filter';
 
-// interface FilmFilterProps {}
+interface FilmFilterProps {
+  setConfig: Function;
+}
 
-function FilmFilter() {
+function FilmFilter({ setConfig }: FilmFilterProps) {
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
 
-  const [config, setConfig] = useState<ConfigType>({});
-
-  const dispatch = useAppDispatch();
-
   useEffect(() => {
     const changeConfig = (key: string, value: string | number) => {
-      setConfig((prevConfig) => ({
+      setConfig((prevConfig: any) => ({
         ...prevConfig,
         [key]: value,
       }));
     };
 
+    // const categoryType = searchParams.get('category') || '';
+    // changeConfig('with_type', categoryType);
+
     const sortType = searchParams.get('sort_by') || 'popularity.desc';
     changeConfig('sort_by', sortType);
 
-    // const genreType = searchParams.getAll('genre') || [];
-    // changeConfig('with_genres', genreType.toString());
+    const genreType = searchParams.get('genre') || '';
+    changeConfig('with_genres', genreType);
 
-    // const minRuntime = Number(searchParams.get('minRuntime')) || 0;
-    // const maxRuntime = Number(searchParams.get('maxRuntime')) || 200;
-    // changeConfig('with_runtime.gte', minRuntime);
-    // changeConfig('with_runtime.lte', maxRuntime);
+    const countryType = searchParams.get('country') || '';
+    changeConfig('watch_region', countryType);
 
-    // const releaseFrom = searchParams.get('from') || '2002-11-04';
-    // const releaseTo = searchParams.get('to') || '2022-07-28';
-    // changeConfig('primary_release_date.gte', releaseFrom);
-    // changeConfig('primary_release_date.lte', releaseTo);
-    // changeConfig('air_date.gte', releaseFrom);
-    // changeConfig('air_date.lte', releaseTo);
+    const duration = searchParams.get('duration')?.split('-') || [0, 180];
 
-    dispatch(setFilterConfig(config));
+    changeConfig('with_runtime.gte', Number(duration[0]));
+    changeConfig('with_runtime.lte', Number(duration[1]));
+
+    const releaseDate = searchParams.get('year') || '';
+    changeConfig('first_air_date_year', Number(releaseDate));
+
     // eslint-disable-next-line
   }, [location.search]);
 

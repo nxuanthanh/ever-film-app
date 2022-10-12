@@ -1,4 +1,4 @@
-import FilmItem from 'components/common/FilmItem';
+import FilmItem from 'components/Films/FilmItem';
 import { Item } from 'models';
 
 interface BookmarkResultProps {
