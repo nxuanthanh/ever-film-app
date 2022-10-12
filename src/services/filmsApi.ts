@@ -23,8 +23,8 @@ export const getHomeFilms = async (): Promise<HomeFilms> => {
   return data;
 };
 
-export const getTrendingNow = async (): Promise<Item[]> => {
-  return (await axiosClient.get('/trending/all/week?page=1')).data.results;
+export const getTrendingNow = async (time: string): Promise<Item[]> => {
+  return (await axiosClient.get(`/trending/all/${time}?page=1`)).data.results;
 };
 
 export const getDiscoverMovie = async (): Promise<any> => {

@@ -1,42 +1,26 @@
-import { useMediaQueryService } from 'hooks';
-import { Link } from 'react-router-dom';
-
-// interface ErrorProps {}
-
 function Error() {
-  const { isMobile } = useMediaQueryService();
-  return (
-    <>
-      {!isMobile && (
-        <video
-          autoPlay
-          muted
-          loop
-          id="myVideo"
-          className="fixed top-0 left-0 min-h-screen min-w-full -z-10 object-cover"
-        >
-          <source
-            src="https://raw.githubusercontent.com/fuocy/video/master/Studio%20Project%20%E2%80%94%20Kapwing.mp4"
-            type="video/mp4"
-          />
-        </video>
-      )}
+  const ref: HTMLDivElement = document.querySelector('.torch') as HTMLDivElement;
+  document.addEventListener('mousemove', (e) => {
+    if (!ref) return;
 
-      <div className="md:bg-black/60 bg-dark min-h-screen tw-flex-center">
-        <div>
-          <p className="text-[150px] text-white font-semibold leading-none">404</p>
-          <p className="mt-6 text-white text-2xl text-center">There is nothing here</p>
-          <div className="flex justify-center">
-            <Link
-              to="/"
-              className="px-8 py-2 bg-primary rounded-md text-white text-xl mt-8 inline-block hover:bg-blue-600 transition duration-300"
-            >
-              Go to Homepage
-            </Link>
-          </div>
-        </div>
+    ref.style.top = `${e.pageY}`;
+    ref.style.left = `${e.pageX}`;
+  });
+
+  return (
+    <div
+      className="h-screen w-full bg-cover bg-left-top bg-no-repeat overflow-hidden flex flex-col flex-wrap items-center justify-center"
+      style={{
+        backgroundImage: `url(https://wallpapercave.com/wp/6SLzBEY.jpg)`,
+      }}
+    >
+      <div className="text">
+        <h1>404</h1>
+        <h2>Uh, Ohh</h2>
+        <h3>Sorry we cant find what you are looking for 'cuz its so dark in here</h3>
       </div>
-    </>
+      <div className="torch" />
+    </div>
   );
 }
 

@@ -1,20 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import { Loading } from 'components/common';
+import { Error, FilmItem, Loading } from 'components/common';
 import { Item } from 'models';
 import { useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link } from 'react-router-dom';
 import { getTrendingNow } from 'services';
-import { resizeImage } from 'utils';
 
 // interface HotMoviesProps {}
 
 function HotMovies() {
   const [moviesTab, setMovieTab] = useState('day');
 
-  const { data, isLoading, isError, error } = useQuery<Item[], Error>(['trending'], getTrendingNow);
+  const { data, isLoading, isError } = useQuery<Item[], Error>(['trending', moviesTab], () =>
+    getTrendingNow(moviesTab)
+  );
 
-  if (isError) return <div>ERROR: ${error.message}</div>;
+  if (isError) return <Error />;
   if (isLoading) return <Loading />;
 
   function handleOnTabClick(time: string) {
@@ -56,7 +55,7 @@ function HotMovies() {
           >
             Tuần
           </button>
-          <button
+          {/* <button
             tabIndex={-1}
             type="button"
             role="tab"
@@ -67,28 +66,14 @@ function HotMovies() {
             }`}
           >
             Tháng
-          </button>
+          </button> */}
         </div>
 
         <div>
           <ul className="grid grid-cols-5 gap-x-4 gap-y-6 row-g">
             {data.map((item: Item, idx) => (
               <li key={idx} className="">
-                <Link to={item.media_type === 'movie' ? `/movie/${item.id}` : `/tv/${item.id}`}>
-                  <div className="flex flex-col justify-between shadow-sm pb-2 overflow-hidden hover:brightness-110 transition duration-300 relative group min-h-full">
-                    <LazyLoadImage
-                      src={resizeImage(item.poster_path)}
-                      className="object-cover min-h-[371px]"
-                      effect="blur"
-                    />
-
-                    <div>
-                      <p className="text-left pt-[6px] whitespace-nowrap overflow-hidden text-ellipsis text-base text-gray-300 group-hover:text-white transition duration-300">
-                        {item.title || item.name}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
+                <FilmItem film={item} />
               </li>
             ))}
           </ul>

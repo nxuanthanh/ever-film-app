@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Loading } from 'components/common';
+import { Error, Loading } from 'components/common';
 import { FilmBackgroundDrop, FilmDetailContent } from 'components/Films';
 import Modal from 'components/Modal';
 import { Credits, DetailMovie, FilmInfo } from 'models';
@@ -13,16 +13,15 @@ function MovieDetail() {
   const [videoKey, setVideoKey] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  const { data, isLoading, isError, error } = useQuery<FilmInfo, Error>(
-    ['movieDetail', filmId],
-    () => getMovieDetail(Number(filmId as string))
+  const { data, isLoading, isError } = useQuery<FilmInfo, Error>(['movieDetail', filmId], () =>
+    getMovieDetail(Number(filmId as string))
   );
 
   const detail = data?.detail as DetailMovie;
   const credits = data?.credits as Credits;
 
   console.log(credits);
-  if (isError) return <div>ERROR: ${error.message}</div>;
+  if (isError) return <Error />;
   if (isLoading) return <Loading />;
 
   const handleOnVideoClick = (key: string) => {

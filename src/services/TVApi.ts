@@ -91,7 +91,7 @@ export const getTVDetailSeasons = async (
         break;
 
       case 2:
-        final.credits = current.data.cast;
+        final.credits = current.data;
         break;
       case 3:
         final.videos = current.data.results;

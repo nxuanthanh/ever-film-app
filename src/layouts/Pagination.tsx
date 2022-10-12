@@ -66,8 +66,6 @@ function Pagination({ total_pages, currentPage, setCurrentPage }: PaginationProp
           className="h-10 !px-3 min-w-[40px]"
           onClick={() => setCurrentPage(total_pages)}
         />
-        {/* {currentPage < total_pages - 1 && (
-        )} */}
       </div>
 
       <div>

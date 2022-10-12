@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Loading } from 'components/common';
+import { Error, Loading, Title } from 'components/common';
 import { FilmBackgroundDrop, FilmDetailContent, TVSeasonListPopup } from 'components/Films';
 import Modal from 'components/Modal';
 import { DetailTV, FilmInfo } from 'models';
@@ -15,13 +15,13 @@ function TVDetail() {
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [showSeasonModal, setShowSeasonModal] = useState(false);
 
-  const { data, isLoading, isError, error } = useQuery<FilmInfo, Error>(['detailTV', filmId], () =>
+  const { data, isLoading, isError } = useQuery<FilmInfo, Error>(['detailTV', filmId], () =>
     getTVFullDetail(filmId as string)
   );
 
   const detail = data?.detail as DetailTV;
 
-  if (isError) return <div>ERROR: ${error.message}</div>;
+  if (isError) return <Error />;
   if (isLoading) return <Loading />;
 
   const handleOnVideoClick = (key: string) => {
@@ -48,6 +48,11 @@ function TVDetail() {
 
   return (
     <>
+      {detail && (
+        <Title
+          value={`${detail.name} (${new Date(detail.first_air_date).getFullYear()}) | Xem phim`}
+        />
+      )}
       <div className="mb-14">
         <FilmBackgroundDrop image={detail.backdrop_path} />
 

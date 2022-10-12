@@ -22,9 +22,10 @@ import {
   getWatchReturnedType,
   Item,
 } from 'models';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { embedMovie, embedTV } from 'utils';
+import { ToastContainer } from 'react-toastify';
+import { embedMovie, embedTV, notifySuccess } from 'utils';
 import { Comment } from './Comment';
 
 interface WatchFilmProps {
@@ -37,8 +38,6 @@ interface WatchFilmProps {
 
 function WatchFilm({
   detail,
-  recommendations,
-  detailSeasons,
   media_type,
   seasonId,
   episodeId,
@@ -46,8 +45,7 @@ function WatchFilm({
   currentSeason,
 }: WatchFilmProps & getWatchReturnedType) {
   const currentUser = useAppSelector((state) => state.auth.user);
-  // const { isMobile } = useMediaQueryService();
-
+  const [episode, setEpisode] = useState(episodeId);
   useEffect(() => {
     if (!currentUser) return;
     if (!detail) return; // prevent this code from storing undefined value to Firestore (which cause error)
@@ -102,7 +100,7 @@ function WatchFilm({
       {detail && (
         <Title
           value={`${(detail as DetailMovie).title || (detail as DetailTV).name} ${
-            media_type === 'tv' ? `- Season ${seasonId} - Ep ${episodeId}` : ''
+            media_type === 'tv' ? `- Season ${seasonId} - Ep ${episode}` : ''
           }`}
         />
       )}
@@ -116,7 +114,7 @@ function WatchFilm({
               src={
                 media_type === 'movie'
                   ? embedMovie(detail.id)
-                  : embedTV(detail.id, seasonId as number, episodeId as number)
+                  : embedTV(detail.id, seasonId as number, episode as number)
               }
               title="Film Video Player"
               frameBorder="0"
@@ -198,7 +196,7 @@ function WatchFilm({
                 <Button
                   key={index}
                   className="px-4 py-2  mr-2 mb-2 text-white bg-green border-none w-fit"
-                  onClick={() => console.log('first')}
+                  onClick={() => setEpisode(episode.episode_number)}
                   title={`Tập ${episode.episode_number}`}
                 />
               ))}
@@ -290,7 +288,7 @@ function WatchFilm({
               <br />
               <Button
                 className="bg-[#ffe08a] px-4 py-2 gap-[10px] text-[#000000b3] border-transparent w-fit rounded"
-                onClick={() => console.log('first')}
+                onClick={() => notifySuccess('Kích hoạt vip mode thành công', 'top-right')}
                 title="Kích hoạt VIP mode"
               />
             </div>
@@ -299,6 +297,7 @@ function WatchFilm({
             </div>
           </div>
         </section>
+        <ToastContainer theme="colored" />
       </div>
     </>
   );

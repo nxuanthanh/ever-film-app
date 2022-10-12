@@ -22,7 +22,6 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { convertErrorCodeToMessage, notifyError } from 'utils';
 
-// interface ProfileProps {}
 interface FormInput {
   password: string;
 }

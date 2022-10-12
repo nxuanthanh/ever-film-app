@@ -36,7 +36,7 @@ function FilterByCategory() {
           styles={customStyles}
           defaultValue={defaultOptions}
           value={typeOptions.find((option) => option.value === categoryType)}
-          onChange={chooseCategory}
+          // onChange={chooseCategory}
           className="w-full"
         />
       </div>

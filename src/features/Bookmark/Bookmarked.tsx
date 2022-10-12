@@ -1,4 +1,4 @@
-import { Title } from 'components/common';
+import { Error, Title } from 'components/common';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { useAppSelector } from 'hooks';
 import { db, Item } from 'models';
@@ -36,7 +36,7 @@ function Bookmarked() {
   const wantWatchList = bookmarkedFilms.filter((item) => item.bookmark_type === 'expected');
   const watchedList = bookmarkedFilms.filter((item) => item.bookmark_type === 'watched');
 
-  if (isError) return <div>ERROR</div>;
+  if (isError) return <Error />;
 
   return (
     <>

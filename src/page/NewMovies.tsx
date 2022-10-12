@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { FilmItem, Loading } from 'components/common';
+import { Error, FilmItem, Loading } from 'components/common';
 import { ListLayoutFilmItem } from 'components/Films';
 import { FilterSection } from 'features/Filter';
+import { Pagination } from 'layouts';
 import { ConfigType, Item } from 'models';
 import { useState } from 'react';
 import { getMovieUpcoming } from 'services';
@@ -10,13 +11,11 @@ import { getMovieUpcoming } from 'services';
 
 function NewMovies() {
   const [sortLayout, setSortLayout] = useState('grid');
+  const [currentPage, setCurrentPage] = useState(1);
   const [config, setConfig] = useState<ConfigType>({});
-  const { data, isLoading, isError, error } = useQuery<Item[], Error>(
-    ['upcoming'],
-    getMovieUpcoming
-  );
+  const { data, isLoading, isError } = useQuery<Item[], Error>(['upcoming'], getMovieUpcoming);
 
-  if (isError) return <div>ERROR: ${error.message}</div>;
+  if (isError) return <Error />;
   if (isLoading) return <Loading />;
 
   return (
@@ -50,11 +49,7 @@ function NewMovies() {
           )}
         </div>
 
-        {/* <Pagination
-            total_pages={data.total_pages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          /> */}
+        <Pagination total_pages={20} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </div>
     </div>
   );

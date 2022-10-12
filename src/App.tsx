@@ -101,6 +101,7 @@ function App() {
         <Route path={config.routes.peopleDetail} element={<PeopleDetail />} />
         <Route path={config.routes.forgot} element={<Forgot />} />
         <Route path={config.routes.bookmarked} element={<Bookmarked />} />
+        {/* <Route path={'/error'} element={<Error />} /> */}
       </Routes>
 
       <Footer />

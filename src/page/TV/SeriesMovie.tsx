@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FilmItem, Loading } from 'components/common';
+import { Error, FilmItem, Loading } from 'components/common';
 import { ListLayoutFilmItem } from 'components/Films';
 import { FilterSection } from 'features/Filter';
 import { Pagination } from 'layouts';
@@ -13,12 +13,12 @@ function SeriesMovie() {
   const [currentPage, setCurrentPage] = useState(1);
   const [config, setConfig] = useState<ConfigType>({});
 
-  const { data, isLoading, isError, error } = useQuery<ItemsPage, Error>(
+  const { data, isLoading, isError } = useQuery<ItemsPage, Error>(
     ['filter-tv', config, currentPage],
     () => getFilterTV(currentPage, config)
   );
   console.log('tv', data);
-  if (isError) return <div>ERROR: ${error.message}</div>;
+  if (isError) return <Error />;
   if (isLoading) return <Loading />;
 
   return (

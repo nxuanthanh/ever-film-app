@@ -12,6 +12,8 @@ interface FilmTraillerListProps {
 function FilmTraillerList({ videos, onClick }: FilmTraillerListProps) {
   return (
     <>
+      <h3 className="text-white uppercase font-bold mt-[2em] mb-[1.2em] text-[.9em]">Trailer</h3>
+
       <Swiper modules={[Navigation]} navigation slidesPerView={4} className="w-[992px] ml-[1px]">
         {videos.map((video) => (
           <SwiperSlide key={video.id}>

@@ -1,5 +1,4 @@
 import { DetailTV } from 'models';
-import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useParams } from 'react-router-dom';
 import { resizeImage } from 'utils';

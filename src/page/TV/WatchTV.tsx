@@ -27,8 +27,6 @@ function WatchTV() {
     (episode) => episode.episode_number === episodeId
   );
 
-  // I check data is truthy because I want to show 404 only when invalid episode or season are accessed, NOT when data is fetching
-  //   if (!currentEpisode && data) return <div>ERROR: 404</div>;
   if (!currentEpisode && data) return <Error />;
 
   return (

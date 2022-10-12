@@ -1,12 +1,13 @@
 import { Imdb } from 'assets/icons';
-import { DetailMovie, DetailTV } from 'models';
+import { DetailMovie, DetailSeason, DetailTV, FilmInfo } from 'models';
 import { Link } from 'react-router-dom';
 
-type FilmHeaderProps = { detail: DetailMovie | DetailTV };
+type FilmHeaderProps = { data: FilmInfo };
 
-function FilmHeader({ detail }: FilmHeaderProps) {
-  const detailMovie = detail as DetailMovie;
-  const detailTV = detail as DetailTV;
+function FilmHeader({ data }: FilmHeaderProps) {
+  const detailMovie = data.detail as DetailMovie;
+  const detailTV = data.detail as DetailTV;
+  const detailSeason = data.detailSeason as DetailSeason;
 
   return (
     <>
@@ -27,8 +28,8 @@ function FilmHeader({ detail }: FilmHeaderProps) {
           )
         </span>
       </h2>
-      <div className="mb-4 text-white">
-        {detailMovie.release_date && (
+      {detailMovie.release_date && (
+        <div className="mb-4 text-white">
           <>
             <span className="text-base mr-[18px]">{`${Math.trunc(detailMovie.runtime / 60)} giờ ${
               detailMovie.runtime % 60
@@ -37,13 +38,23 @@ function FilmHeader({ detail }: FilmHeaderProps) {
               R
             </span>
           </>
-        )}
-      </div>
+        </div>
+      )}
+
+      {detailSeason?.episodes?.length && (
+        <div className="mb-4 text-white">
+          <>
+            <span className="text-base mr-[18px]">{detailSeason.episodes.length} tập</span>
+          </>
+        </div>
+      )}
       <div className="mb-4 flex items-center h-[35.2px]">
         <span className="w-[40px] mr-[0.6rem] ">
           <Imdb />
         </span>
-        <div className="font-bold  text-white">{detail.vote_average.toFixed(1)}</div>
+        <div className="font-bold  text-white">
+          {detailMovie.vote_average.toFixed(1) || detailTV.vote_average.toFixed(1)}
+        </div>
       </div>
     </>
   );

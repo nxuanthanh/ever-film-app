@@ -8,3 +8,4 @@ export { default as FilmHeader } from './FilmHeader';
 export { default as FilmDetailContent } from './FilmDetailContent';
 export { default as TVSeasonList } from './TVSeasonList';
 export { default as TVSeasonListPopup } from './TVSeasonListPopup';
+export { default as TVSeasonEpisodesList } from './TVSeasonEpisodesList';
