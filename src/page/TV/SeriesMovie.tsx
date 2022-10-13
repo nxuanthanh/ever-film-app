@@ -17,7 +17,7 @@ function SeriesMovie() {
     ['filter-tv', config, currentPage],
     () => getFilterTV(currentPage, config)
   );
-  console.log('tv', data);
+
   if (isError) return <Error />;
   if (isLoading) return <Loading />;
 

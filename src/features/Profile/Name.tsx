@@ -46,7 +46,6 @@ function Name({ setIsUpdating }: NameProps) {
         notifySuccess('Updating username successfully', 'top-right');
       })
       .catch((error: any) => {
-        console.log(error);
         notifyError(convertErrorCodeToMessage(error.code), 'top-right');
       })
       .finally(() => setIsUpdating(false));

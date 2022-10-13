@@ -112,14 +112,13 @@ export const handleRemoveFromBookmark = async (
   setBookmarkedType: Function,
   bookmarkType: string
 ) => {
-  console.log(bookmarkType, 'string');
   if (!detail) return;
 
   if (!currentUser) {
     notifyError('You need to sign in to bookmark films', 'top-right');
     return;
   }
-  console.log(bookmarkType, 'bookmarkType');
+
   await updateDoc(doc(db, 'users', currentUser.uid), {
     bookmarks: arrayRemove({
       poster_path: detail?.poster_path,
@@ -131,20 +130,6 @@ export const handleRemoveFromBookmark = async (
       ...(detail?.media_type === 'tv' && { name: detail?.name }),
     }),
   });
-  //   console.log(2);
-
-  //   console.log({
-  //     poster_path: detail?.poster_path,
-  //     id: detail?.id,
-  //     vote_average: detail?.vote_average,
-  //     media_type: detail?.media_type,
-  //     bookmark_type: bookmarkType,
-  //     ...(detail?.media_type === 'movie' && { title: detail?.title }),
-  //     ...(detail?.media_type === 'tv' && { name: detail?.name }),
-  //   });
-
   setBookmarkedType('');
-  console.log(bookmarkType);
   notifySuccess('xoa roi ne', 'top-right');
-  console.log(3);
 };

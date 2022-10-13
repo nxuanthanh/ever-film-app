@@ -10,9 +10,6 @@ interface SectionSliderProps {
 function SectionSlider({ data, className }: SectionSliderProps) {
   return (
     <>
-      <h3 className="text-white uppercase font-bold mt-[2em] mb-[1.2em] text-[.9em]">
-        Phim tương tự
-      </h3>
       <div className="mt-2">
         <Swiper slidesPerView={5} spaceBetween={16} loop className={className}>
           {data.map((item) => (

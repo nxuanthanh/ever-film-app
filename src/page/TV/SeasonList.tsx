@@ -1,7 +1,6 @@
 import { DetailSeason } from 'models';
 
 function SeasonLists(data: DetailSeason[]) {
-  //   console.log(data);
   return (
     <div className="max-h-[calc(100vh-40px)] min-w-[400px] bg-white">
       <h4>Chọn một phần để xem:</h4>

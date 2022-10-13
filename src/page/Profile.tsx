@@ -71,7 +71,6 @@ function Profile() {
         setIsShowPromptReAuthFor('');
       })
       .catch((error) => {
-        console.log(error);
         notifyError(convertErrorCodeToMessage(error.code), 'top-right');
       });
   };
@@ -89,7 +88,6 @@ function Profile() {
         window.location.reload();
       })
       .catch((error) => {
-        console.log(error);
         notifyError(convertErrorCodeToMessage(error.code), 'top-right');
       })
       .finally(() => setIsUpdating(false));
@@ -109,7 +107,6 @@ function Profile() {
         setNewPasswordValue('');
       })
       .catch((error) => {
-        console.log(error);
         notifyError(convertErrorCodeToMessage(error.code), 'top-right');
       })
       .finally(() => setIsUpdating(false));

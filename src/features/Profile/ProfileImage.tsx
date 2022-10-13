@@ -5,7 +5,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { HiOutlineUpload } from 'react-icons/hi';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import axiosClient from 'services/axiosClient';
-import { notifySuccess } from 'utils';
+import { convertErrorCodeToMessage, notifyError, notifySuccess } from 'utils';
 
 // interface ProfileImageProps {}
 
@@ -43,8 +43,8 @@ function ProfileImage() {
           notifySuccess('Update profile picture successfully', 'top-right');
         })
         .finally(() => setIsUpdatingImg(false));
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      notifyError(convertErrorCodeToMessage(error.code), 'top-right');
     }
   };
 

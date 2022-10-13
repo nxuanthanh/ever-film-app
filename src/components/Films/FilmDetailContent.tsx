@@ -42,7 +42,12 @@ function FilmDetailContent({ data, onVideoClick, onWatchButtonClick }: FilmDetai
         )}
 
         {detail.media_type === 'movie' && similar.length > 0 && (
-          <SectionSlider data={similar} className="w-[992px]" />
+          <>
+            <h3 className="text-white uppercase font-bold mt-[2em] mb-[1.2em] text-[.9em]">
+              Phim tương tự
+            </h3>
+            <SectionSlider data={similar} className="w-[992px]" />
+          </>
         )}
 
         {!detailSeason && detail.media_type === 'tv' && detail.seasons.length && (

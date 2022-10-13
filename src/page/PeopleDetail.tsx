@@ -17,7 +17,6 @@ function PeopleDetail() {
   const peopleCredits = data?.credits as Item[];
   const peopleImages = data?.images as PeopleImage[];
 
-  // console.log(data);
   return (
     <section className="p-12 mt-12">
       <div className="container">

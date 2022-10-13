@@ -19,8 +19,6 @@ function Movies() {
     () => getFilterMovie(currentPage, config)
   );
 
-  console.log(data);
-
   if (isError) return <Error />;
   if (isLoading) return <Loading />;
 

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Error, Loading } from 'components/common';
 import { FilmBackgroundDrop, FilmDetailContent } from 'components/Films';
 import Modal from 'components/Modal';
-import { Credits, DetailMovie, FilmInfo } from 'models';
+import { DetailMovie, FilmInfo } from 'models';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getMovieDetail } from 'services';
@@ -18,9 +18,7 @@ function MovieDetail() {
   );
 
   const detail = data?.detail as DetailMovie;
-  const credits = data?.credits as Credits;
 
-  console.log(credits);
   if (isError) return <Error />;
   if (isLoading) return <Loading />;
 

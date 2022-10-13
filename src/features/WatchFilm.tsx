@@ -24,8 +24,9 @@ import {
 } from 'models';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FacebookShareButton } from 'react-share';
 import { ToastContainer } from 'react-toastify';
-import { embedMovie, embedTV, notifySuccess } from 'utils';
+import { convertErrorCodeToMessage, embedMovie, embedTV, notifyError, notifySuccess } from 'utils';
 import { Comment } from './Comment';
 
 interface WatchFilmProps {
@@ -90,8 +91,7 @@ function WatchFilm({
         }
       })
       .catch((error) => {
-        const errorCode = error.code;
-        console.log(errorCode);
+        notifyError(convertErrorCodeToMessage(error.code), 'top-right');
       });
   }, [currentUser, detail, media_type]);
 
@@ -113,8 +113,8 @@ function WatchFilm({
               className="absolute w-full h-full top-0 left-0"
               src={
                 media_type === 'movie'
-                  ? embedMovie(detail.id)
-                  : embedTV(detail.id, seasonId as number, episode as number)
+                  ? embedMovie(detail?.id)
+                  : embedTV(detail?.id, seasonId as number, episode as number)
               }
               title="Film Video Player"
               frameBorder="0"
@@ -152,12 +152,21 @@ function WatchFilm({
                   )
                 </h2>
                 <div className="flex">
-                  <Button
-                    className="bg-[#485fc7] px-[12px] py-[5px] mr-3 mb-2 gap-[10px] rounded-[2px] text-xs border-transparent"
-                    onClick={() => console.log('first')}
-                    iconLeft={<FacebookShare width="14" height="14" />}
-                    title="Chia sẻ"
-                  />
+                  <FacebookShareButton
+                    url={`https://ever-film-app-wneh.vercel.app/${
+                      media_type === 'movie' ? 'movie' : 'tv'
+                    }/watch/${detail?.id}`}
+                    quote={`${(detail as DetailMovie).title || (detail as DetailTV).name} ${
+                      media_type === 'tv' ? `- Season ${seasonId} - Ep ${episode}` : ''
+                    }`}
+                    hashtag={'#hashtag'}
+                  >
+                    <Button
+                      className="bg-[#485fc7] px-[12px] py-[5px] mr-3 mb-2 gap-[10px] rounded-[2px] text-xs border-transparent"
+                      iconLeft={<FacebookShare width="14" height="14" />}
+                      title="Chia sẻ"
+                    />
+                  </FacebookShareButton>
                   {media_type === 'movie' && (
                     <>
                       <Button
@@ -235,6 +244,7 @@ function WatchFilm({
                       iconLeft={<Tick />}
                       title={''}
                     />
+
                     <div className="flex">
                       <div className="ml-2">
                         <span className="text-green font-semibold text-[14.4px]">8</span>

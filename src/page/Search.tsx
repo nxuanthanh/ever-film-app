@@ -3,6 +3,7 @@ import { Item } from 'models';
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getSearchMovie } from 'services';
+import { convertErrorCodeToMessage, notifyError } from 'utils';
 
 function Search() {
   const [searchResult, setSearchResult] = useState<Item[]>([]);
@@ -28,8 +29,8 @@ function Search() {
         if (!searchValue.trim()) return;
         const movies = await getSearchMovie(searchValue.trim());
         setSearchResult(movies);
-      } catch (error) {
-        console.log('something went wrong when trying to search', error);
+      } catch (error: any) {
+        notifyError(convertErrorCodeToMessage(error.code), 'top-right');
       }
     })();
   }, [searchValue]);
