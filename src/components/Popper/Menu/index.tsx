@@ -41,7 +41,16 @@ function Menu({ children, items, offset, className, placement, layout = 'header'
                       <MenuItem
                         key={idx}
                         data={item}
-                        onClick={item.onClick}
+                        onClick={() => {
+                          const isParent = !!item.children;
+
+                          if (isParent) {
+                            item.onClick();
+                            setHistory((prev) => [...prev, item.children]);
+                          } else {
+                            item.onClick();
+                          }
+                        }}
                         className="text-white hover:text-[#0a0a0a]"
                       />
                     );
@@ -54,13 +63,13 @@ function Menu({ children, items, offset, className, placement, layout = 'header'
               >
                 <div className={`py-2`}>
                   {current.data.map((item: any, idx: any) => {
-                    const isParent = !!item.children;
-
                     return (
                       <MenuItem
                         key={idx}
                         data={item}
                         onClick={() => {
+                          const isParent = !!item.children;
+
                           if (isParent) {
                             item.onClick();
                             setHistory((prev) => [...prev, item.children]);

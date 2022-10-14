@@ -1,10 +1,13 @@
 import { defaultOptions } from 'docs/data';
 import { useCurrentParams } from 'hooks';
+import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
 import { customStyles } from 'utils';
 
 function FilterByYear() {
+  const { t } = useTranslation();
+
   const [currentSearchParams] = useCurrentParams();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -39,7 +42,7 @@ function FilterByYear() {
     <>
       <div className="flex flex-col items-start justify-center p-3 w-full">
         <label htmlFor="year" className="mb-2 text-base text-white font-bold">
-          Năm:
+          {t('filter.filterTypeList.year')}
         </label>
         <Select
           name="year"

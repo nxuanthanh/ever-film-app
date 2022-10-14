@@ -2,12 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { defaultOptions } from 'docs/data';
 import { useCurrentParams } from 'hooks';
 import { OptionModel } from 'models';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
 import { getGenreMovieList, getGenreTVList } from 'services';
 import { customStyles } from 'utils';
 
 function FilterByGenre() {
+  const { t } = useTranslation();
   const { pathname } = useLocation();
 
   const [currentSearchParams] = useCurrentParams();
@@ -42,7 +44,7 @@ function FilterByGenre() {
     <>
       <div className="flex flex-col items-start justify-center p-3 w-full">
         <label htmlFor="genre" className="mb-2 text-base text-white font-bold">
-          Thể loại:
+          {t('filter.filterTypeList.genres')}
         </label>
         <Select
           options={genres}

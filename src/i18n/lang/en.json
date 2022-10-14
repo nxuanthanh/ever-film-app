@@ -1,0 +1,29 @@
+{
+    "header": {
+        "headerList": {
+            "search": "Search",
+            "hot_film": "Hot Movie",
+            "movie": "Movie",
+            "series_movie": "Series Movie",
+            "new_movie": "New Movie",
+            "faq": "FAQ"
+        },
+        "headerMenuList": {
+            "account": "Account",
+            "donate": "Donate",
+            "collection": "Collection",
+            "language": "Language",
+            "exit": "Logout"
+        }
+    },
+    "filter": {
+        "filterTypeList": {
+            "category": "Category:",
+            "genres": "Genres:",
+            "country": "Country:",
+            "year": "Year:",
+            "duration": "Duration:",
+            "sort": "Sort:"
+        }
+    }
+}

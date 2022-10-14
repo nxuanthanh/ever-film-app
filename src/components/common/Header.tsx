@@ -6,6 +6,7 @@ import { signOut } from 'firebase/auth';
 import { useAppSelector } from 'hooks/useRedux';
 import { auth } from 'models';
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { GoChevronDown } from 'react-icons/go';
 import { IoMdSearch } from 'react-icons/io';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -15,6 +16,7 @@ import Button from './Button';
 function Header() {
   const navigate = useNavigate();
   const headerRef = useRef<HTMLDivElement>(null);
+  const { t, i18n } = useTranslation();
   const currentUser = useAppSelector((state) => state.auth.user);
 
   const handleOnLogout = () => {
@@ -28,41 +30,51 @@ function Header() {
       });
   };
 
+  const handleChangeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+  };
+
   const headerItems = [
-    { title: 'Tìm kiếm', to: '/search', icon: <IoMdSearch size={20} /> },
-    { title: 'Phim Hot', to: '/top' },
-    { title: 'Phim Lẻ', to: '/type/movie' },
-    { title: 'Phim Bộ', to: '/type/show' },
-    { title: 'Phim Mới', to: '/browse' },
-    { title: 'FAQ', to: '/faq' },
+    { title: `${t('header.headerList.search')}`, to: '/search', icon: <IoMdSearch size={20} /> },
+    { title: `${t('header.headerList.hot_film')}`, to: '/top' },
+    { title: `${t('header.headerList.movie')}`, to: '/type/movie' },
+    { title: `${t('header.headerList.series_movie')}`, to: '/type/show' },
+    { title: `${t('header.headerList.new_movie')}`, to: '/browse' },
+    { title: `${t('header.headerList.faq')}`, to: '/faq' },
   ];
 
   const userMenu = [
     {
-      title: 'Tài khoản',
+      title: `${t('header.headerMenuList.account')}`,
       to: config.routes.profile,
       icon: <User />,
       onClick: () => navigate(config.routes.profile),
     },
     {
-      title: 'Donate',
+      title: `${t('header.headerMenuList.language')}`,
+      icon: <Chat />,
+      children: {
+        data: [
+          { title: 'Tiếng Việt', onClick: () => handleChangeLanguage('vi') },
+          { title: 'Tiếng Anh', onClick: () => handleChangeLanguage('en') },
+        ],
+      },
+      onClick: () => {},
+    },
+    {
+      title: `${t('header.headerMenuList.donate')}`,
       to: config.routes.donate,
       icon: <Donate />,
       onClick: () => navigate(config.routes.donate),
     },
     {
-      title: 'Bộ sưu tập',
+      title: `${t('header.headerMenuList.collection')}`,
       to: config.routes.bookmarked,
       icon: <Collection />,
       onClick: () => navigate(config.routes.bookmarked),
     },
-    {
-      title: 'Cặp câu song ngữ',
-      to: '/pairs',
-      icon: <Chat />,
-      onClick: () => navigate('/pairs'),
-    },
-    { title: 'Thoát', icon: <Logout />, onClick: handleOnLogout },
+
+    { title: `${t('header.headerMenuList.exit')}`, icon: <Logout />, onClick: handleOnLogout },
   ];
 
   const handleOnScroll = () => {
@@ -71,19 +83,6 @@ function Header() {
     } else {
       headerRef.current?.classList.remove('navbar-bg');
     }
-  };
-
-  const renderHeaderItem = () => {
-    return headerItems.map((item, idx) => (
-      <NavLink
-        to={item.to}
-        key={idx}
-        className="flex items-center text-base font-normal text-white justify-center py-2 px-3 hover:bg-[#102c48] hover:text-Link active:bg-[#102c48] active:text-Link transition-all duration-200 cursor-pointer"
-      >
-        {item.icon && <span>{item.icon}</span>}
-        <span>{item.title}</span>
-      </NavLink>
-    ));
   };
 
   const handleOnSignInClick = () => {
@@ -115,7 +114,18 @@ function Header() {
           </Link>
         </div>
 
-        <div className="flex item-center justify-start">{renderHeaderItem()}</div>
+        <div className="flex item-center justify-start">
+          {headerItems.map((item, idx) => (
+            <NavLink
+              to={item.to}
+              key={idx}
+              className="flex items-center text-base font-normal text-white justify-center py-2 px-3 hover:bg-[#102c48] hover:text-Link active:bg-[#102c48] active:text-Link transition-all duration-200 cursor-pointer"
+            >
+              {item.icon && <span>{item.icon}</span>}
+              <span>{item.title}</span>
+            </NavLink>
+          ))}
+        </div>
       </div>
 
       <div>

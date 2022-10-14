@@ -1,11 +1,12 @@
 import { sortOptions } from 'docs/data';
 import { useCurrentParams } from 'hooks';
-import { FilterProps } from 'models';
+import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
 import { customStyles } from 'utils';
 
-function SortBy({ filters, onChange }: FilterProps) {
+function SortBy() {
+  const { t } = useTranslation();
   const [currentSearchParams] = useCurrentParams();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -23,7 +24,7 @@ function SortBy({ filters, onChange }: FilterProps) {
   return (
     <div className="flex flex-col items-start justify-center p-3 w-full">
       <label htmlFor="sort_by" className="mb-2 text-base text-white font-bold">
-        Sắp xếp:
+        {t('filter.filterTypeList.sort')}
       </label>
       <Select
         options={sortOptions}

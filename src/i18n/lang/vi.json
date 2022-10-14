@@ -1,0 +1,29 @@
+{
+    "header": {
+        "headerList": {
+            "search": "Tìm kiếm",
+            "hot_film": "Phim Hot",
+            "movie": "Phim Lẻ",
+            "series_movie": "Phim Bộ",
+            "new_movie": "Phim Mới",
+            "faq": "FAQ"
+        },
+        "headerMenuList": {
+            "account": "Tài khoản",
+            "donate": "Donate",
+            "collection": "Bộ sưu tập",
+            "language": "Ngôn ngữ",
+            "exit": "Thoát"
+        }
+    },
+    "filter": {
+        "filterTypeList": {
+            "category": "Loại phim:",
+            "genres": "Thể loại:",
+            "country": "Quốc gia:",
+            "year": "Năm:",
+            "duration": "Thời lượng:",
+            "sort": "Sắp xếp:"
+        }
+    }
+}

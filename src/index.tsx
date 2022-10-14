@@ -12,6 +12,7 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/navigation';
 import './index.css';
+import 'i18n/config';
 
 const queryClient = new QueryClient();
 

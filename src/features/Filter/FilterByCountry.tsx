@@ -2,12 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { defaultOptions } from 'docs/data';
 import { useCurrentParams } from 'hooks';
 import { FilterProps, OptionModel } from 'models';
+import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
 import { getRegions } from 'services';
 import { customStyles } from 'utils';
 
 function FilterByCountry({ filters, onChange }: FilterProps) {
+  const { t } = useTranslation();
   const [currentSearchParams] = useCurrentParams();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -27,7 +29,7 @@ function FilterByCountry({ filters, onChange }: FilterProps) {
     <>
       <div className="flex flex-col items-start justify-center p-3 w-full">
         <label htmlFor="country" className="mb-2 text-base text-white font-bold">
-          Quốc gia:
+          {t('filter.filterTypeList.country')}
         </label>
         <Select
           options={countryOptions}
