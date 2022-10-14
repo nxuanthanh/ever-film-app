@@ -12,7 +12,13 @@ function FilmItem({ film, className }: FilmItemProps) {
   return (
     <div>
       <Link
-        to={film.original_name ? `/tv/${film.id}` : film.original_title ? `/movie/${film.id}` : '/'}
+        to={
+          film.original_name || film.media_type === 'tv'
+            ? `/tv/${film.id}`
+            : film.original_title || film.media_type === 'movie'
+            ? `/movie/${film.id}`
+            : '/'
+        }
       >
         <div className="shadow-sm pb-2 overflow-hidden transition duration-300 relative group">
           <LazyLoadImage

@@ -14,7 +14,7 @@ function Modal({ id, onClose, children }: ModalProps) {
       onClick={onClose}
       className="fixed flex items-center justify-center w-full h-full inset-0 bg-[#0a0a0adb] z-20"
     >
-      <ModalContent onClose={onClose}>{children}</ModalContent>
+      <ModalContent>{children}</ModalContent>
     </div>
   );
 }

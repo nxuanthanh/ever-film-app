@@ -50,8 +50,9 @@ export const handleAddToWantToWatchList = async (
       });
     }
   });
+
   setBookmarkedType('expected');
-  notifySuccess('muon xem ne', 'top-right');
+  notifySuccess('Đã thêm vào danh sách phim muốn xem', 'top-right');
 };
 
 export const handleAddToWatchedList = async (
@@ -103,7 +104,7 @@ export const handleAddToWatchedList = async (
   });
 
   setBookmarkedType('watched');
-  notifySuccess('xem roi ne', 'top-right');
+  notifySuccess('Đã thêm vào danh sách phim đã xem', 'top-right');
 };
 
 export const handleRemoveFromBookmark = async (
@@ -112,6 +113,7 @@ export const handleRemoveFromBookmark = async (
   setBookmarkedType: Function,
   bookmarkType: string
 ) => {
+  console.log(bookmarkType, 'bookmarkType');
   if (!detail) return;
 
   if (!currentUser) {
@@ -130,6 +132,7 @@ export const handleRemoveFromBookmark = async (
       ...(detail?.media_type === 'tv' && { name: detail?.name }),
     }),
   });
+
   setBookmarkedType('');
-  notifySuccess('xoa roi ne', 'top-right');
+  notifySuccess('Đã xoá phim khỏi bộ sưu tập', 'top-right');
 };

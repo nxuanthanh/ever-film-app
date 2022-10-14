@@ -36,7 +36,7 @@ function SeriesMovie() {
 
           {sortLayout === 'grid' ? (
             <ul className="grid grid-cols-5 gap-x-4 gap-y-6 row-g">
-              {data.results.map((item: Item, idx) => (
+              {data.results.map((item, idx) => (
                 <li key={idx}>
                   <FilmItem film={item} />
                 </li>

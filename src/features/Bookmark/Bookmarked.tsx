@@ -42,7 +42,7 @@ function Bookmarked() {
     <>
       <Title value="Bộ sưu tập phim" />
 
-      <div className="mt-24">
+      <div className="mt-24 mb-12">
         <div className="container">
           <h1 className="text-white font-semibold text-[32px] mb-6 text-center">
             Bộ sưu tập phim của bạn

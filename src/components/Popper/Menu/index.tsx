@@ -1,6 +1,6 @@
 import Tippy from '@tippyjs/react/headless';
 import { MenuItemModel } from 'models';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useState, useEffect } from 'react';
 import Popper from '..';
 import MenuItem from './MenuItem';
 
@@ -15,6 +15,10 @@ interface MenuProps {
 
 function Menu({ children, items, offset, className, placement, layout = 'header' }: MenuProps) {
   const [history, setHistory] = useState([{ data: items }]);
+
+  useEffect(() => {
+    setHistory([{ data: items }]);
+  }, [items]);
 
   const current = history[history.length - 1];
 

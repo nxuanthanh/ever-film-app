@@ -2,35 +2,8 @@ import { FilmInfo, getWatchReturnedType, Item, Video } from 'models';
 import axiosClient from './axiosClient';
 
 // Change any to real Type later //BUG
-export const getDetailMovies = async (movies: Item[]): Promise<any> => {
-  const detailRes = await Promise.all(movies.map((movie) => axiosClient.get(`/movie/${movie.id}`)));
-
-  const translationRes = await Promise.all(
-    movies.map((movie) => axiosClient.get(`/movie/${movie.id}/translations`))
-  );
-
-  const translations = translationRes.map((item: any) =>
-    item.data.translations
-      .filter((translation: any) =>
-        ['vi', 'fr', 'ja', 'pt', 'ru', 'es'].includes(translation.iso_639_1)
-      )
-      .reduce((acc: any, element: any) => {
-        if (element.iso_639_1 === 'vi') {
-          return [element, ...acc];
-        }
-        return [...acc, element];
-      }, [] as any)
-      .map((translation: any) => translation.data.title)
-  );
-
-  const genres = detailRes.map((item: any) =>
-    item.data.genres.filter((_: any, index: number) => index < 3)
-  );
-
-  return genres.map((genre, index) => ({
-    genre,
-    translation: translations[index],
-  }));
+export const getDetailMovies = async (movieId: string): Promise<any> => {
+  return (await axiosClient.get(`/movie/${movieId}`)).data;
 };
 
 export const getMovieDetail = async (id: number): Promise<FilmInfo> => {

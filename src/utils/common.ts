@@ -126,6 +126,27 @@ export const notifyError = (
   });
 };
 
+export const notifyWarning = (
+  message: string,
+  position:
+    | 'top-right'
+    | 'top-center'
+    | 'top-left'
+    | 'bottom-right'
+    | 'bottom-center'
+    | 'bottom-left' = 'top-center'
+) => {
+  toast.warning(message, {
+    position: position,
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
+
 export const customStyles = {
   control: (styles: any) => ({
     ...styles,

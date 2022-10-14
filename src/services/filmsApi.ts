@@ -39,6 +39,10 @@ export const getDiscoverTV = async (): Promise<any> => {
   return (await axiosClient.get('/discover/tv')).data.results;
 };
 
+export const getSimilarMovie = async (filmId: number): Promise<Item[]> => {
+  return (await axiosClient.get(`/movie/${filmId}/similar`)).data.results;
+};
+
 export const getRegions = async (): Promise<OptionModel[]> => {
   const regionOptions = (await axiosClient.get('/watch/providers/regions')).data.results.map(
     (regions: any) => ({
